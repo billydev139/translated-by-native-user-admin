@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-satoshi font-normal text-base text-body bg-whiten relative z-1;
+  }
+}
+
+.btn-primary {
+  @apply disabled:bg-primary disabled:opacity-60 disabled:text-white disabled:cursor-wait;
+}
+
+@layer components {
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* third-party libraries CSS */
+
+.tableCheckbox:checked ~ div span {
+  @apply opacity-100;
+}
+.tableCheckbox:checked ~ div {
+  @apply bg-primary border-primary;
+}
+
+.p-tabview-panels {
+  @apply p-0 mt-4;
+}
+
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  @apply bg-primary;
+}
+
+.rdt_TableRow {
+  min-height: 70px !important;
+}
+
+.rdt_TableCell {
+  font-size: 16px;
+}
+
+.rdt_TableHead {
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+/*======= Sweet Alert Style ======= */
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+  background-color: #9f020d !important;
+  color: #fff;
+  box-shadow: none !important;
+}
+
+@media (max-width: 992px) {
+  .rdt_TableRow {
+    min-height: 60px !important;
+  }
+
+  .rdt_TableHead {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 450px) {
+  .rdt_TableRow {
+    min-height: 50px !important;
+  }
+  .rdt_TableCell,
+  .rdt_TableHead {
+    font-size: 12px;
+  }
+}
