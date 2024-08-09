@@ -65,9 +65,7 @@ typings/
 # VuePress build output
 .vuepress/dist
 
-# Gatsby files
-.cache/
-public/
+
 
 # Comment out below if using a static folder instead of public
 # static/
