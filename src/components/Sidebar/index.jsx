@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
-import { MdOutlineDashboard } from 'react-icons/md';
 import logo from "../../assets/images/logo/logo.png";
 import { RiListOrdered2 } from 'react-icons/ri';
 import { CgUserList } from 'react-icons/cg';
 import { GrLanguage } from 'react-icons/gr';
+import { FaRegUser } from 'react-icons/fa';
+import { IoIosNotifications } from 'react-icons/io';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
@@ -75,7 +76,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           <div>
-            <ul className="mb-6 flex flex-col gap-1.5">
+            {/* <ul className="mb-6 flex flex-col gap-1.5">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -86,8 +87,32 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               >
                 <RiListOrdered2 size={22} /> Order List
               </NavLink>
+            </ul> */}
+            <ul className="mb-6 flex flex-col gap-1.5">
+              <NavLink
+                to="/order"
+                className={({ isActive }) =>
+                  `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
+                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                  }`
+                }
+              >
+                <RiListOrdered2 size={22} /> Order
+              </NavLink>
             </ul>
             <ul className="mb-6 flex flex-col gap-1.5">
+              <NavLink
+                to="/Notifications"
+                className={({ isActive }) =>
+                  `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
+                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                  }`
+                }
+              >
+                <IoIosNotifications size={22} /> Notifications
+              </NavLink>
+            </ul>
+            {/* <ul className="mb-6 flex flex-col gap-1.5">
               <NavLink
                 to="/user-list"
                 className={({ isActive }) =>
@@ -99,8 +124,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <CgUserList size={22} />
                 User List
               </NavLink>
-            </ul>
-            <ul className="mb-6 flex flex-col gap-1.5">
+            </ul> */}
+            {/* <ul className="mb-6 flex flex-col gap-1.5">
               <NavLink
                 to="/language-price"
                 className={({ isActive }) =>
@@ -111,6 +136,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               >
                 <GrLanguage size={22} />
                 Language/Price
+              </NavLink>
+            </ul> */}
+            <ul className="mb-6 flex flex-col gap-1.5">
+              <NavLink
+                to="/my-account"
+                className={({ isActive }) =>
+                  `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
+                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                  }`
+                }
+              >
+                <FaRegUser size={22} />
+                My Account
               </NavLink>
             </ul>
           </div>

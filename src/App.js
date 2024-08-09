@@ -3,6 +3,9 @@ import SignIn from "./pages/SignIn/SignIn";
 import OrderList from "./pages/OrderList/OrderList";
 import UserList from "./pages/UserList/UserList";
 import LanguagePrice from "./pages/language-price/LanguagePrice";
+import MyAccount from "./pages/MyAccount/MyAccount";
+import Order from "./pages/order/Order";
+import Notifications from "./pages/notifications/Notifications";
 
 function App() {
   return (
@@ -11,6 +14,9 @@ function App() {
         <Route path="/" element={<OrderList />} />
         <Route path="/user-list" element={<UserList />} />
         <Route path="/language-price" element={<LanguagePrice />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/Notifications" element={<Notifications />} />
+        <Route path="/my-account" element={<MyAccount />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Router>
