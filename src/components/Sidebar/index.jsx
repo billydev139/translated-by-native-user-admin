@@ -88,6 +88,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <RiListOrdered2 size={22} /> Order List
               </NavLink>
             </ul> */}
+              <ul className="mb-6 flex flex-col gap-1.5">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
+                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                  }`
+                }
+              >
+                <RiListOrdered2 size={22} /> Dashboard
+              </NavLink>
+            </ul>
             <ul className="mb-6 flex flex-col gap-1.5">
               <NavLink
                 to="/order"
