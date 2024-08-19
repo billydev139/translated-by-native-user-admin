@@ -6,12 +6,13 @@ import LanguagePrice from "./pages/language-price/LanguagePrice";
 import MyAccount from "./pages/MyAccount/MyAccount";
 import Order from "./pages/order/Order";
 import Notifications from "./pages/notifications/Notifications";
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<OrderList />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/user-list" element={<UserList />} />
         <Route path="/language-price" element={<LanguagePrice />} />
         <Route path="/order" element={<Order />} />
