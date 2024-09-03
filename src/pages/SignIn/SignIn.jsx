@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import { loginSchema } from "../../schema/auth.schema";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "../../redux/feature/auth/auth.service";
 
 const SignIn = () => {
+  const signInLoading = useSelector((state) => state?.loading[authLogin.typePrefix]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  // const isLoading = useSelector((state) => state?.auth?.isLoading);
+
+  const formik = useFormik({
+    
+    initialValues: {
+      email: "",
+      password: ""
+    },
+
+    validationSchema: loginSchema,
+
+    onSubmit: async (values) => {
+      console.log("Values inside onSubmit: ", values);
+
+      await dispatch(authLogin(values))
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error in authLogin: ", error);
+      })
+    }
+  })
+
   return (
     <div className="bg-[#305e73]">
       <div className=" m-auto  flex justify-center items-center h-screen">
-        <div className="px-16 py-12 rounded-md bg-white shadow-default ">
+        <div className="2xsm:px-4 xsm:px-10 sm:px-12 py-12 rounded-md bg-white shadow-default ">
           <div className="flex flex-wrap items-center justify-center ">
             <div className="w-full   ">
               <div className="w-full p-4 sm:p-12.5 xl:p-5">
@@ -13,7 +48,7 @@ const SignIn = () => {
                   Sign In to BigTranslation
                 </h2>
 
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                   <div className="mb-4">
                     <label className="mb-2.5 block font-medium text-black dark:text-white">
                       Email
@@ -21,10 +56,17 @@ const SignIn = () => {
                     <div className="relative">
                       <input
                         type="email"
+                        name="email"
                         placeholder="Enter your email"
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className={`w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary ${
+                          formik.touched.email && formik.errors.email
+                            ? 'border-red-500'
+                            : ''
+                        }`}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
                       />
-
                       <span className="absolute right-4 top-4">
                         <svg
                           className="fill-current"
@@ -43,6 +85,12 @@ const SignIn = () => {
                         </svg>
                       </span>
                     </div>
+                    {
+                      formik.touched.email && formik.errors.email ? (
+                        <div className="text-red-500 mt-2">{formik.errors.email}</div>
+                      ) 
+                      : (null)
+                    }
                   </div>
 
                   <div className="mb-6">
@@ -51,11 +99,18 @@ const SignIn = () => {
                     </label>
                     <div className="relative">
                       <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
+                        name="password"
                         placeholder="6+ Characters, 1 Capital letter"
-                        className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className={`w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary ${
+                          formik.touched.password && formik.errors.password
+                            ? 'border-red-500'
+                            : ''
+                        }`}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
                       />
-
                       <span className="absolute right-4 top-4">
                         <svg
                           className="fill-current"
@@ -64,6 +119,7 @@ const SignIn = () => {
                           viewBox="0 0 22 22"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                          onClick={() => setShowPassword(!showPassword)}
                         >
                           <g opacity="0.5">
                             <path
@@ -78,17 +134,14 @@ const SignIn = () => {
                         </svg>
                       </span>
                     </div>
+                    {
+                      formik.touched.password && formik.errors.password ? (
+                        <div className="text-red-500 mt-2">{formik.errors.password}</div>
+                      ) : (null)
+                    }
                   </div>
 
-                  <div className="mb-5">
-                    <input
-                      type="submit"
-                      value="Sign In"
-                      className="w-full cursor-pointer rounded-lg border border-[#305e73] bg-[#305e73] p-4 text-white transition hover:bg-opacity-90"
-                    />
-                  </div>
-
-                  <button className="flex w-full items-center text-[#305e73] justify-center gap-3.5 rounded-lg border border-[#305e73] bg-white p-4 ">
+                  {/* <button className="flex w-full items-center text-[#305e73] justify-center gap-3.5 rounded-lg border border-[#305e73] bg-white p-4 ">
                     <span>
                       <svg
                         width="20"
@@ -123,7 +176,16 @@ const SignIn = () => {
                       </svg>
                     </span>
                     Sign in with Google
-                  </button>
+                  </button> */}
+
+                  <div className="mb-5">
+                    <input
+                      type="submit"
+                      value={signInLoading ? 'Signing in...' : 'Sign In'}
+                      className="w-full cursor-pointer rounded-lg border border-[#305e73] bg-[#305e73] p-4 text-white transition hover:bg-opacity-90"
+                    />
+                  </div>
+
                 </form>
               </div>
             </div>

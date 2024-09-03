@@ -1,13 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CiLogout } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/feature/auth/auth.service';
 
 const DropdownUser = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+
+const handleLogout = () => {
+    dispatch(logout())
+      .unwrap() // Unwrap the promise to handle navigation
+      .then(() => {
+        // Clear the local storage
+        localStorage.clear();
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('Logout failed:', error);
+        // Handle any additional error logic if needed
+      });
+  }; 
 
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -65,7 +85,9 @@ const DropdownUser = () => {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <button className='flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base'>
+        <button className='flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out 
+          hover:text-primary lg:text-base'
+          onClick={handleLogout}>
           <CiLogout />
           Logout
         </button>

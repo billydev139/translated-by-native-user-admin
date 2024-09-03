@@ -1,0 +1,36 @@
+const config = {
+  BASE_URL: process.env.REACT_APP_BASE_URL,
+  
+  endPoints: {
+    authLogin: 'auth/login',
+    authLogout: 'auth/logOut',
+    myOrder: 'order/myOrder',
+    createPayment: 'payment/createPayment',
+    createPlan: 'plan/createPlan',
+    getPlans: 'plan/getPlans',
+    getSinglePlan: 'plan/getSinglePlan',
+    updatePlan: 'plan/updatePlan',
+    deleteSinglePlan: 'plan/deleteSinglePlan',
+    deletePlans: 'plan/deletePlans',
+    createService: 'service/createService',
+    getServices: 'service/getServices',
+    getSingleService: 'service/getSingleService',
+    updateService: 'service/updateService',
+    deleteSingleService: 'service/deleteSingleService',
+    deleteServices: 'service/deleteServices',
+    createTargetLanguage: 'targetLanguage/create',
+    getTargetLanguages: 'targetLanguage/get',
+    getTargetLanguageById: 'targetLanguage/get',
+    updateTargetLanguage: 'targetLanguage/update',
+    deleteTargetLanguageById: 'targetLanguage/delete',
+    deleteAllTargetLanguages: 'targetLanguage/delete',
+    createTopic: 'topic/createTopic',
+    getTopics: 'topic/getTopics',
+    getSingleTopic: 'topic/getSingleTopic',
+    updateTopic: 'topic/updateTopic',
+    deleteSingleTopic: 'topic/deleteSingleTopic',
+    deleteTopics: 'topic/deleteTopics',
+  },
+};
+
+export { config };
