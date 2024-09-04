@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import SignIn from "../pages/SignIn/SignIn";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";

@@ -1,124 +1,322 @@
-import React from 'react';
-import DropdownFour from '../../components/Dropdown/Dropdown';
-import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import DefaultLayout from '../../layout/DefaultLayout'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import Pagination from "../../components/Pagination";
+import Table from "../../components/Table/Table";
+import Spinner from "../../components/Spinner/Spinner";
 
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
-const data = [
-  {
-    name: 'Musharof Chowdhury',
-    position: 'Multidisciplinary Web Entrepreneur',
-    email: 'musharof@example.com',
-    role: 'Owner',
-  },
-  {
-    name: 'Naimur Rahman',
-    position: 'Website Front-end Developer',
-    email: 'naimurrahman@example.com',
-    role: 'Member',
-  },
-  {
-    name: 'Naimur Rahman',
-    position: 'Website Front-end Developer',
-    email: 'naimurrahman@example.com',
-    role: 'Member',
-  },
-  {
-    name: 'Naimur Rahman',
-    position: 'Website Front-end Developer',
-    email: 'naimurrahman@example.com',
-    role: 'Member',
-  },
-  {
-    name: 'Naimur Rahman',
-    position: 'Website Front-end Developer',
-    email: 'naimurrahman@example.com',
-    role: 'Member',
-  },
-  {
-    name: 'Naimur Rahman',
-    position: 'Website Front-end Developer',
-    email: 'naimurrahman@example.com',
-    role: 'Member',
-  },
-  {
-    name: 'Shafiq Hammad',
-    position: 'Regional Paradigm Technician',
-    email: 'shafiq.hd@example.com',
-    role: 'Moderator',
-  },
-  {
-    name: 'Alex Semuyel',
-    position: 'Applications Engineer',
-    email: 'alex.semuel@example.com',
-    role: 'Admin',
-  },
-];
+import DefaultLayout from "../../layout/DefaultLayout";
+import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
+
+import { getMyOrder } from "../../redux/feature/order/order.service";
+import axios from "axios";
 
 const OrderList = () => {
+
+  const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  //Data From Redux Store
+  const isLoading = useSelector((state) => state?.order?.isLoading);
+  const myOrderListData = useSelector((state) => state?.order?.myOrder?.orders?.orders);
+  console.log("orderData => ", myOrderListData);
+  
+  const totalPages = useSelector((state) => state?.order?.myOrder?.orders?.pages);
+  const totalRecords = useSelector((state) => state?.order?.myOrder?.orders?.total);
+  console.log("totalPages: ", totalPages + "\ntotalRecords: ", totalRecords);
+
+
+  // const Orders = useSelector((state) => state?.order?.orders?.orders?.orders);
+  // console.log("docData: ", Orders);
+  // const documentData = Orders.flatMap(obj => obj.docData);
+  // const documentData = Orders.docData;
+  // console.log("docData: ", documentData);
+
+
+  //Table Columns
+  const columns = [
+    { title: "Customer", field: "customer", span: 1 },
+    { title: "Source Language", field: "sourceLanguage", span: 1 },
+    { title: "Target Language", field: "targetLanguage", span: 1 },
+    { title: "Topic", field: "topic", span: 1 },
+    { title: "Status", field: "status", span: 1 },
+    { title: "Total Pricing", field: "totalPricing", span: 1 },
+    { title: "Action", field: "document", span: 1 },
+  ];
+
+  useEffect(() => {
+    console.log("INSIDE USEEFFECT")
+    if (searchQuery !== undefined && searchQuery.trim() !== "") {
+      
+      console.log("INSIDE USEEFFECT IF")
+
+      const handler = setTimeout(() => {
+        console.log("Dispatching with searchQuery:", searchQuery);
+        dispatch(
+          getMyOrder({ page: currentPage, limit: itemsPerPage, search: searchQuery })
+        );
+      }, 1000);
+
+      return () => clearTimeout(handler);
+
+    } else {
+      console.log("INSIDE USEEFFECT ELSE")
+      console.log("Fetching users without searchQuery");
+      dispatch(getMyOrder({ page: currentPage, limit: itemsPerPage }));
+    }
+
+  }, [dispatch, currentPage, itemsPerPage, searchQuery]);
+
+  const downloadFilesAsZip = async (docData) => {
+  
+    const zip = new JSZip();
+
+    // Fetch each file and add it to the ZIP
+    const fetchFiles = docData.map(async (fileObj) => {
+      
+      const url = `${process.env.REACT_APP_BASE_URL}/documents/${fileObj.fileName}`;
+
+      try {
+        const response = await axios.get(url, { responseType: 'blob' }); // Fetch the file using its URL
+        const blob = response.data; // Blob data from response
+        
+        const fileName = url.substring(url.lastIndexOf('/') + 1); // Extract the file name from URL
+        zip.file(fileName, blob); // Add file to the ZIP
+
+      } catch (error) {
+        console.error(`Failed to fetch ${url}:`, error);
+      }
+    });
+
+    // Once all files are processed, generate and download the ZIP file
+    try {
+      await Promise.all(fetchFiles);
+      const content = await zip.generateAsync({ type: 'blob' });
+      saveAs(content, 'documents.zip'); // Download the ZIP file
+
+    } catch (error) {
+      console.error('Failed to generate ZIP file:', error);
+      alert('An error occurred while generating the ZIP file.');
+    }
+  }
+
+  const handleFileDownload = (item) => {
+
+    const docData = item?.docData
+    if (docData.length === 1) {
+      // If there's only one file, download it directly
+      const file = docData[0];
+      const url = `${process.env.REACT_APP_BASE_URL}/documents/${file.fileName}`;
+      const fileName = url.substring(url.lastIndexOf('/') + 1); // Extract file name
+
+      axios.get(url, { responseType: 'blob' })
+        .then(response => saveAs(response.data, fileName))
+        .catch(error => {
+          console.error(`Failed to download file ${fileName}:`, error);
+        });
+    } 
+    else if (docData.length > 1) {
+      // If there are multiple files, download them as a ZIP
+      downloadFilesAsZip(docData);
+    }
+  }
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Order List" />
-      <div className="max-w-full overflow-x-auto">
-        <div className="min-w-[1070px]">
-          {/* table header start */}
-          <div className="grid grid-cols-12 rounded-t-[10px] bg-[#2E8F96] px-5 py-4 lg:px-7.5 2xl:px-11">
-            <div className="col-span-3">
-              <h5 className="font-medium text-white">Name</h5>
-            </div>
-
-            <div className="col-span-3">
-              <h5 className="font-medium text-white">Position</h5>
-            </div>
-
-            <div className="col-span-3">
-              <h5 className="font-medium text-white">Email</h5>
-            </div>
-
-            <div className="col-span-2">
-              <h5 className="font-medium text-white">Role</h5>
-            </div>
-
-            <div className="col-span-1">
-              <h5 className="text-right font-medium text-white">Edit</h5>
-            </div>
+      <div className="max-w-full overflow-auto bg-white p-5">
+        <div>
+          <div className="py-4 gap-3 flex flex-col sm:flex-row justify-between items-center space-x-4">
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              itemsPerPage={itemsPerPage}
+              setItemsPerPage={setItemsPerPage}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
-          {/* table header end */}
 
-          {/* table body start */}
-          <div className="bg-white bg-[#F3F6F9]">
-            {data.map((item, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-12 border-t border-[#EEEEEE] px-5 py-4 dark:border-strokedark lg:px-7.5 2xl:px-11"
-              >
-                <div className="col-span-3">
-                  <p className="text-[#464E5F] ">{item.name}</p>
-                </div>
-
-                <div className="col-span-3">
-                  <p className="text-[#464E5F] ">{item.position}</p>
-                </div>
-
-                <div className="col-span-3">
-                  <p className="text-[#464E5F] ">{item.email}</p>
-                </div>
-
-                <div className="col-span-2">
-                  <p className="text-[#464E5F] ">
-                    {item.role}</p>
-                </div>
-                <div className="col-span-1">
-                  <DropdownFour />
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* table body end */}
+          {isLoading ? (
+            <Spinner/>
+          ) : totalRecords > 0 ? (
+            <div className="min-h-[300px] md:min-h-[600px] bg-white overflow-x-auto">
+              <Table
+                columns={columns}
+                data={myOrderListData}
+                handleFileDownload={handleFileDownload}
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+              />
+            </div>
+          ) : (
+            <div className="bg-white flex justify-center items-center min-h-[300px] md:min-h-[600px]">
+              <p className="font-bold text-center"> No Record found </p>
+            </div>
+          )}
         </div>
       </div>
+      {totalPages > 1 && (
+        <div className="p-4 sm:p-6 xl:p-7.5 flex justify-end">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+      )}
     </DefaultLayout>
   );
 };
 
 export default OrderList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import DropdownFour from '../../components/Dropdown/Dropdown';
+// import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+// import DefaultLayout from '../../layout/DefaultLayout'
+
+
+// const data = [
+//   {
+//     name: 'Musharof Chowdhury',
+//     position: 'Multidisciplinary Web Entrepreneur',
+//     email: 'musharof@example.com',
+//     role: 'Owner',
+//   },
+//   {
+//     name: 'Naimur Rahman',
+//     position: 'Website Front-end Developer',
+//     email: 'naimurrahman@example.com',
+//     role: 'Member',
+//   },
+//   {
+//     name: 'Naimur Rahman',
+//     position: 'Website Front-end Developer',
+//     email: 'naimurrahman@example.com',
+//     role: 'Member',
+//   },
+//   {
+//     name: 'Naimur Rahman',
+//     position: 'Website Front-end Developer',
+//     email: 'naimurrahman@example.com',
+//     role: 'Member',
+//   },
+//   {
+//     name: 'Naimur Rahman',
+//     position: 'Website Front-end Developer',
+//     email: 'naimurrahman@example.com',
+//     role: 'Member',
+//   },
+//   {
+//     name: 'Naimur Rahman',
+//     position: 'Website Front-end Developer',
+//     email: 'naimurrahman@example.com',
+//     role: 'Member',
+//   },
+//   {
+//     name: 'Shafiq Hammad',
+//     position: 'Regional Paradigm Technician',
+//     email: 'shafiq.hd@example.com',
+//     role: 'Moderator',
+//   },
+//   {
+//     name: 'Alex Semuyel',
+//     position: 'Applications Engineer',
+//     email: 'alex.semuel@example.com',
+//     role: 'Admin',
+//   },
+// ];
+
+// const OrderList = () => {
+//   return (
+//     <DefaultLayout>
+//       <Breadcrumb pageName="Order List" />
+//       <div className="max-w-full overflow-x-auto">
+//         <div className="min-w-[1070px]">
+//           {/* table header start */}
+//           <div className="grid grid-cols-12 rounded-t-[10px] bg-[#2E8F96] px-5 py-4 lg:px-7.5 2xl:px-11">
+//             <div className="col-span-3">
+//               <h5 className="font-medium text-white">Name</h5>
+//             </div>
+
+//             <div className="col-span-3">
+//               <h5 className="font-medium text-white">Position</h5>
+//             </div>
+
+//             <div className="col-span-3">
+//               <h5 className="font-medium text-white">Email</h5>
+//             </div>
+
+//             <div className="col-span-2">
+//               <h5 className="font-medium text-white">Role</h5>
+//             </div>
+
+//             <div className="col-span-1">
+//               <h5 className="text-right font-medium text-white">Edit</h5>
+//             </div>
+//           </div>
+//           {/* table header end */}
+
+//           {/* table body start */}
+//           <div className="bg-white bg-[#F3F6F9]">
+//             {data.map((item, index) => (
+//               <div
+//                 key={index}
+//                 className="grid grid-cols-12 border-t border-[#EEEEEE] px-5 py-4 dark:border-strokedark lg:px-7.5 2xl:px-11"
+//               >
+//                 <div className="col-span-3">
+//                   <p className="text-[#464E5F] ">{item.name}</p>
+//                 </div>
+
+//                 <div className="col-span-3">
+//                   <p className="text-[#464E5F] ">{item.position}</p>
+//                 </div>
+
+//                 <div className="col-span-3">
+//                   <p className="text-[#464E5F] ">{item.email}</p>
+//                 </div>
+
+//                 <div className="col-span-2">
+//                   <p className="text-[#464E5F] ">
+//                     {item.role}</p>
+//                 </div>
+//                 <div className="col-span-1">
+//                   <DropdownFour />
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           {/* table body end */}
+//         </div>
+//       </div>
+//     </DefaultLayout>
+//   );
+// };
+
+// export default OrderList;
