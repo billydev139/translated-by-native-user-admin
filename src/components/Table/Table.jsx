@@ -8,6 +8,7 @@ import { FaUsers, FaCrown, FaUserTie } from 'react-icons/fa';
 // import SelectMenu from "../SelectMenu/SelectMenu";
 import { TbFileUpload } from "react-icons/tb";
 import { TfiDownload } from "react-icons/tfi";
+import Badge from "../Badge";
 
 const Table = ({
   columns,
@@ -131,11 +132,12 @@ const Table = ({
                           className="size-4 xl:size-6 text-blue-500 cursor-pointer"
                           onClick={() => handleFileDownload(item)}
                         />
-                        <TbFileUpload className="size-4 xl:size-6 text-green-500 cursor-pointer" />
+                        {/* <TbFileUpload className="size-4 xl:size-6 text-green-500 cursor-pointer" /> */}
                      </div>
                   ) : column.field === "status" ? (
                       // <SelectMenu optionValues={["PROCESSING", "TRANSLATED", "REJECTED"]}/>
-                      <p> {item.status} </p>
+                      // <p> {item.status} </p>
+                      <Badge status={item.status}/>
                   ) : column.field === "totalPricing" ? (
                       <div>
                         {`€ ${item[column.field].toFixed(2)}`}
