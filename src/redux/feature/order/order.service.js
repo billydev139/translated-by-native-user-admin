@@ -12,9 +12,9 @@ const getOrders = createAsyncThunk("order/getOrders", async (_, { rejectWithValu
   }
 });
 
-const getMyOrder = createAsyncThunk("order/getMyOrder", async (data, { rejectWithValue }) => {
+const getMyOrder = createAsyncThunk("order/getMyOrder", async ({page, search = "", limit}, { rejectWithValue }) => {
   try {
-    const response = await api.get(`${config.endPoints.myOrder}?page=${data.page}&limit=${data.limit}&search=${data.search}`);
+    const response = await api.get(`${config.endPoints.myOrder}?page=${page}&limit=${limit}&search=${search}`);
     return response.data;
 
   } catch (error) {

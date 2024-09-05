@@ -8,7 +8,7 @@ const Badge = ({ label, status }) => {
         return 'bg-red-100 text-red-600';
       case 'PROCESSING':
         return 'bg-yellow-100 text-yellow-600';
-      case 'PENDING':
+      case 'TRANSLATED':
         return 'bg-blue-100 text-blue-600';
       default:
         return 'bg-gray-100 text-gray-600';

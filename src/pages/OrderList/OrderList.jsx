@@ -28,7 +28,7 @@ const OrderList = () => {
   console.log("orderData => ", myOrderListData);
   
   const totalPages = useSelector((state) => state?.order?.myOrder?.orders?.pages);
-  const totalRecords = useSelector((state) => state?.order?.myOrder?.orders?.total);
+  const totalRecords = useSelector((state) => state?.order?.?.orders?.total);
   console.log("totalPages: ", totalPages + "\ntotalRecords: ", totalRecords);
 
 
