@@ -28,16 +28,8 @@ const OrderList = () => {
   console.log("orderData => ", myOrderListData);
   
   const totalPages = useSelector((state) => state?.order?.myOrder?.orders?.pages);
-  const totalRecords = useSelector((state) => state?.order?.?.orders?.total);
+  const totalRecords = useSelector((state) => state?.order?.myOrder?.orders?.total);
   console.log("totalPages: ", totalPages + "\ntotalRecords: ", totalRecords);
-
-
-  // const Orders = useSelector((state) => state?.order?.orders?.orders?.orders);
-  // console.log("docData: ", Orders);
-  // const documentData = Orders.flatMap(obj => obj.docData);
-  // const documentData = Orders.docData;
-  // console.log("docData: ", documentData);
-
 
   //Table Columns
   const columns = [
@@ -72,6 +64,7 @@ const OrderList = () => {
     }
 
   }, [dispatch, currentPage, itemsPerPage, searchQuery]);
+
 
   const downloadFilesAsZip = async (docData) => {
   
@@ -109,6 +102,7 @@ const OrderList = () => {
   const handleFileDownload = (item) => {
 
     const docData = item?.docData
+    
     if (docData.length === 1) {
       // If there's only one file, download it directly
       const file = docData[0];
@@ -150,8 +144,6 @@ const OrderList = () => {
                 columns={columns}
                 data={myOrderListData}
                 handleFileDownload={handleFileDownload}
-                currentPage={currentPage}
-                itemsPerPage={itemsPerPage}
               />
             </div>
           ) : (

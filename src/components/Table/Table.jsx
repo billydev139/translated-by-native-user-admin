@@ -5,8 +5,6 @@ import { MdEdit } from "react-icons/md";
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu, } from "../Dropdown/Dropdown";
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 import { FaUsers, FaCrown, FaUserTie } from 'react-icons/fa';
-// import SelectMenu from "../SelectMenu/SelectMenu";
-import { TbFileUpload } from "react-icons/tb";
 import { TfiDownload } from "react-icons/tfi";
 import Badge from "../Badge";
 
