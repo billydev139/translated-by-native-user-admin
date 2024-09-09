@@ -6,6 +6,7 @@ import Notifications from "../pages/notifications/Notifications";
 import OrderList from "../pages/OrderList/OrderList";
 import MyAccount from "../pages/MyAccount/MyAccount";
 import Dashboard from "../pages/dashboard";
+import Callback from "../components/Callback/Callback";
 
 
 const AppRouter = () => {
@@ -14,7 +15,7 @@ const AppRouter = () => {
   const accessToken = localStorage.getItem('accessToken');
   return (
       <Routes>
-        {/* <Route path="/auth/login" element={<SignIn />} /> */}
+        <Route path="/auth/callback" element={<Callback/>} />
         <Route
           path="/"
           element={
