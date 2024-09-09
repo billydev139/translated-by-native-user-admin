@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CiLogout } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/feature/auth/auth.service';
 
 const DropdownUser = () => {
@@ -15,7 +15,10 @@ const DropdownUser = () => {
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
-const handleLogout = () => {
+  const userDetails = useSelector((state) => state?.auth.user);
+  console.log("userDetails: ", userDetails)
+
+  const handleLogout = () => {
     dispatch(logout())
       .unwrap() // Unwrap the promise to handle navigation
       .then(() => {
@@ -62,7 +65,7 @@ const handleLogout = () => {
         to='#'
       >
         <span className='hidden text-right lg:block'>
-          <span className='block text-sm font-medium text-black'>Mr. Juan</span>
+          <span className='block text-sm font-medium text-black'> {userDetails.name + " " + userDetails.surname} </span>
           <span className='block text-xs'>Admin</span>
         </span>
 
