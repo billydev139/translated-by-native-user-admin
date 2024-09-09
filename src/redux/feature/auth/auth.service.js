@@ -17,7 +17,8 @@ import { config } from '../../../utils/EndPoints';
           timer: 2000,
         });
       }
-      return response.data
+      console.log(response.data)
+      return response?.data
       
     } catch (error) {
       Swal.fire({

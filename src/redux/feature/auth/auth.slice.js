@@ -2,11 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authLogin, logout, updateProfile, myProfile } from './auth.service';
 
 const getInitialAuthState = () => ({
-  accessToken: localStorage.getItem('accessToken') || '',
+  accessToken: '',
   isLoading: false,
   ProfileUpdateLoading: false,
   error: null,
   message: '',
+  user: {},
 });
 
 const authSlice = createSlice({
@@ -22,7 +23,10 @@ const authSlice = createSlice({
       .addCase(authLogin.fulfilled, (state, action) => {
         state.isLoading = false;
         const { content } = action.payload;
+        state.accessToken = content?.accessToken
         localStorage.setItem('accessToken', content?.accessToken);
+        console.log(content?.customer)
+        state.user = content?.customer;
       })
       .addCase(authLogin.rejected, (state, action) => {
         state.isLoading = false;
@@ -34,8 +38,8 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = null;
-        state.role = '';
+        state.user = {};
+        state.accessToken = '';
         state.error = null;
         state.message = action.payload.data?.message;
 
