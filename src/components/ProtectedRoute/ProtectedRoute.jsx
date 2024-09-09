@@ -8,9 +8,6 @@ const ProtectedRoute = () => {
     // Redirect to SignIn page if the user is not authenticated
     return <Navigate to="/" state={{ from: location }} replace />;
   }
-  else {
-    
-  }
 
   // If the user is authenticated, allow access to the route
   return <Outlet />;
