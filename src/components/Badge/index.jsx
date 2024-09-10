@@ -1,30 +1,70 @@
 import React from 'react';
 
-const Badge = ({ label, status }) => {
+function StatusBadge({ status, role, action, language }) {
 
-  const getStatusStyle = () => {
-    switch (status) {
-      case 'REJECTED':
-        return 'bg-red-100 text-red-600';
-      case 'PROCESSING':
-        return 'bg-yellow-100 text-yellow-600';
-      case 'TRANSLATED':
-        return 'bg-blue-100 text-blue-600';
-      default:
-        return 'bg-gray-100 text-gray-600';
+  const getRandomColor = () => {
+    const colors = [
+      'bg-blue-400/5 text-secondary text-sm',
+      'bg-green-400/5 text-green-600 text-sm',
+      'bg-yellow-400/5 text-yellow-600 text-sm',
+      'bg-red-400/5 text-red-600 text-sm',
+      'bg-purple-400/5 text-purple-600 text-sm',
+      'bg-pink-400/5 text-pink-600 text-sm',
+    ];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+
+  const getStyle = () => {
+    // Define styles for status
+    const statusStyles = {
+      active: 'bg-green-600/5 text-green-600 text-sm',
+      inactive: 'bg-red-600/5 text-red-600 text-sm',
+      pending: 'bg-yellow-600/5 text-yellow-600 text-sm',
+      suspended: 'bg-gray-600/5 text-gray-600 text-sm',
+      TRANSLATED: 'bg-blue-500 rounded-full text-white text-base',
+      PROCESSING: 'bg-yellow-500 rounded-full text-white text-base',
+      PENDING: 'bg-red-500 rounded-full text-white text-base',
+    };
+
+    // Define styles for action
+    const actionStyles = {
+      read: 'bg-blue-600/5 text-secondary text-sm',
+      create: 'bg-green-600/5 text-green-600 text-sm',
+      update: 'bg-yellow-600/5 text-yellow-600 text-sm',
+      delete: 'bg-red-600/5 text-red-600 text-sm',
+      restore: 'bg-green-600/5 text-green-600 text-sm',
+    };
+
+    // Apply random color for roles if a role is provided
+    if (role) {
+      return getRandomColor();
     }
+    // Return style for action
+    if (action) {
+      return actionStyles[action] || 'bg-blue-600/5 text-secondary text-sm';
+    }
+
+    // Return style for status
+    if (status) {
+      return statusStyles[status] || 'text-primary bg-gray-500';
+    }
+
+    // Default fallback for language
+    if (language) {
+      return 'bg-gray-400/5 text-blue-500 text-sm';
+    }
+
+    return 'text-primary';
   };
 
   return (
-    <div className='flex items-center gap-1.5'>
-      {/* <strong className='text-xs md:text-base whitespace-nowrap text-black'>{label}</strong> */}
-      <p
-        className={`${getStatusStyle()} rounded-full px-6 py-1 text-xs md:text-base font-medium`}
-      >
-        {status}
-      </p>
-    </div>
+    <span
+      className={`text-[11px] font-medium px-2.5 py-0.5 rounded h-5 ${getStyle()}`}
+    >
+      {role || status || action || language}
+    </span>
   );
-};
+}
 
-export default Badge;
+export default StatusBadge;
