@@ -4,6 +4,8 @@ const config = {
   endPoints: {
     authLogin: 'auth/login',
     authLogout: 'auth/logOut',
+    myProfile : 'auth/profile',
+    updateProfile : 'uth/updateProfile',
     myOrder: 'order/myOrder',
     createPayment: 'payment/createPayment',
     createPlan: 'plan/createPlan',

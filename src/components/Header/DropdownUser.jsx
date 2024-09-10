@@ -15,8 +15,7 @@ const DropdownUser = () => {
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
-  const userDetails = useSelector((state) => state?.auth.user);
-  console.log("userDetails: ", userDetails)
+  const userDetails = useSelector((state) => state?.auth?.user);
 
   const handleLogout = () => {
     dispatch(logout())
@@ -65,8 +64,8 @@ const DropdownUser = () => {
         to='#'
       >
         <span className='hidden text-right lg:block'>
-          <span className='block text-sm font-medium text-black'> {userDetails.name + " " + userDetails.surname} </span>
-          <span className='block text-xs'>Admin</span>
+          <span className='block text-sm font-medium text-black'> {userDetails.name + " " + userDetails.surname || ""} </span>
+          <span className='block text-xs'>{userDetails?.role || ""}</span>
         </span>
 
         <span className='h-12 w-12 rounded-full'>
