@@ -78,8 +78,10 @@ const DropdownUser = () => {
                   alt="Profile"
                 />
             ) : (
+              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black">
                 <span className="text-xl font-medium leading-none text-white">
-                  {userDetails?.username?.charAt(0).toUpperCase()}
+                  {userDetails?.name?.charAt(0).toUpperCase()}
+                </span>
                 </span>
             )
           }
