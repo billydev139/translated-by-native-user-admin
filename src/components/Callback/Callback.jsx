@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { myProfile } from '../../redux/feature/auth/auth.service';
 
 const Callback = () => {
   const navigate = useNavigate();
@@ -21,7 +23,13 @@ const Callback = () => {
       navigate('/');
     }
   }, [navigate]);
-
+    const dispatch = useDispatch();
+    
+  useEffect(() => {
+    dispatch(myProfile());
+    // other side effects
+    //...
+  }, []);
   return <div>Loading...</div>;
 };
 

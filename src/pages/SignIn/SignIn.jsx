@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { loginSchema } from "../../schema/auth.schema";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authLogin } from "../../redux/feature/auth/auth.service";
+import { authLogin, myProfile } from "../../redux/feature/auth/auth.service";
 
 const SignIn = () => {
   const signInLoading = useSelector((state) => state?.loading[authLogin.typePrefix]);
@@ -28,7 +28,9 @@ const SignIn = () => {
 
       await dispatch(authLogin(values))
       .then(() => {
-        navigate("/");
+        dispatch(myProfile()).then(() => {
+          navigate("/");
+        })
       })
       .catch((error) => {
         console.error("Error in authLogin: ", error);
