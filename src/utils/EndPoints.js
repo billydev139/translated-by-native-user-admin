@@ -5,7 +5,7 @@ const config = {
     authLogin: 'auth/login',
     authLogout: 'auth/logOut',
     myProfile : 'auth/profile',
-    updateProfile : 'uth/updateProfile',
+    updateProfile : 'auth/updateProfile',
     myOrder: 'order/myOrder',
     createPayment: 'payment/createPayment',
     createPlan: 'plan/createPlan',
