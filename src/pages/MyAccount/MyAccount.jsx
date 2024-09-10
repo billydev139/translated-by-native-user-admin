@@ -8,10 +8,8 @@ const MyAccount = () => {
   const initialValues = {
     name: '',
     surname: '',
-    gender: '',
+    phone: '',
     email: '',
-    language: '',
-    timezone: '',
     newPassword: '',
     repeatPassword: '',
   };
@@ -19,10 +17,8 @@ const MyAccount = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     surname: Yup.string().required('Surname is required'),
-    gender: Yup.string().required('Gender is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
-    language: Yup.string().required('Language is required'),
-    timezone: Yup.string().required('Timezone is required'),
+    phone: Yup.string().required('Phone is required'),
     newPassword: Yup.string(),
     repeatPassword: Yup.string().test(
       'passwords-match',
@@ -46,10 +42,8 @@ const MyAccount = () => {
   const fieldConfig = [
     { id: 'name', name: 'name', type: 'text', placeholder: 'Enter your name', label: 'Name' },
     { id: 'surname', name: 'surname', type: 'text', placeholder: 'Enter your surname', label: 'Surname' },
-    { id: 'gender', name: 'gender', type: 'select', options: ['Select', 'Unspecified', 'Male', 'Female', 'Other'], label: 'Gender' },
     { id: 'email', name: 'email', type: 'email', placeholder: 'Enter your email', label: 'Email' },
-    { id: 'language', name: 'language', type: 'select', options: ['Select', 'English (British)'], label: 'Display Language' },
-    { id: 'timezone', name: 'timezone', type: 'select', options: ['Select', 'Europe / Madrid'], label: 'Timezone' },
+    { id: 'phone', name: 'phone', type: 'phone', placeholder: 'Enter your phone', label: 'Phone' },
     { id: 'newPassword', name: 'newPassword', type: 'password', placeholder: 'Enter new password', label: 'New Password' },
     { id: 'repeatPassword', name: 'repeatPassword', type: 'password', placeholder: 'Repeat new password', label: 'Confirm Password' },
   ];
@@ -75,7 +69,7 @@ const MyAccount = () => {
             <div key={field.id} className="mb-8 mt-5 flex flex-col md:flex-row md:items-center">
               
               <label className="sm:w-1/4 block text-[#464E5F] font-normal text-[14px] sm:mb-0" htmlFor={field.id}>
-                {field.label} <span className="text-red-500">*</span>
+                {field.label} { field.id !== "newPassword" && field.id !== "repeatPassword" ? <span className="text-red-500">*</span> : null }
               </label>
               
               <div className='w-full'>
