@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownMenu, } from "../Dropdo
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 import { FaUsers, FaCrown, FaUserTie } from 'react-icons/fa';
 import { TfiDownload } from "react-icons/tfi";
-import Badge from "../Badge";
+import StatusBadge from "../Badge";
 
 const Table = ({
   columns,
@@ -89,17 +89,27 @@ const Table = ({
                   {column.field === "customer" ? (
                     <div>
                       <div className="flex justify-between lg:w-[60%] items-start space-x-2">
-                          {
-                              <span className="underline"> { item?.userId?.name + " " + item?.userId?.surname } </span>
-                          }
+                        {
+                          <span className="underline"> { item?.userId?.name + " " + item?.userId?.surname } </span>
+                        }
                       </div>
                     </div>
-                  ) : column.field === "name" ? (
+                  ) : column.field === "targetLanguage" ? (
+                    <div>
+                      {item[column.field].map((language, index) => {
+                        return (
+                          <span key={index}>
+                            <StatusBadge language={language}/>
+                          </span>
+                        );
+                      })}
+                    </div>
+                ) : column.field === "name" ? (
                     <div>
                       <div className="flex justify-between lg:w-[60%] items-start space-x-2">
-                          {
-                              <span className="underline"> { item?.name + " " + item?.surname } </span>
-                          }
+                        {
+                          <span className="underline"> { item?.name + " " + item?.surname } </span>
+                        }
                       </div>
                     </div>
                   ) : column.title === "Role" ? (
@@ -125,7 +135,7 @@ const Table = ({
                     </div>
                   ) : column.field === "document" ? (
                       <div className="flex space-x-6">
-                        <LuEye className="size-4 xl:size-6 text-red-500 cursor-pointer" />
+                        {/* <LuEye className="size-4 xl:size-6 text-red-500 cursor-pointer" /> */}
                         <TfiDownload 
                           className="size-4 xl:size-6 text-blue-500 cursor-pointer"
                           onClick={() => handleFileDownload(item)}
@@ -135,7 +145,7 @@ const Table = ({
                   ) : column.field === "status" ? (
                       // <SelectMenu optionValues={["PROCESSING", "TRANSLATED", "REJECTED"]}/>
                       // <p> {item.status} </p>
-                      <Badge status={item.status}/>
+                      <StatusBadge status={item.status}/>
                   ) : column.field === "totalPricing" ? (
                       <div>
                         {`€ ${item[column.field].toFixed(2)}`}
