@@ -1,10 +1,12 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
-  const accessToken = localStorage.getItem('accessToken');
   const location = useLocation();
+  const accessToken = localStorage.getItem('accessToken');
+  const isTokenValid = accessToken && accessToken != "false" && accessToken != "null" && accessToken != "undefined";
 
-  if (!accessToken) {
+
+  if (!isTokenValid) {
     // Redirect to SignIn page if the user is not authenticated
     return <Navigate to="/" state={{ from: location }} replace />;
   }

@@ -8,15 +8,17 @@ const Callback = () => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
 
+    // Check if the token is truthy (not null, undefined, or an empty string)
     if (token) {
-      // Save token in local storage or context
+      // Save token in local storage
       localStorage.setItem('accessToken', token);
 
       // Redirect to the main application page
       navigate('/order');
     } else {
-      // Handle the case where there is no token
-      console.error('No token found');
+      // If the token is not truthy, redirect to the login page
+      console.error('No token found, redirecting to login.');
+      navigate('/');
     }
   }, [navigate]);
 
