@@ -4,6 +4,7 @@ import { CiLogout } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/feature/auth/auth.service';
+import { config } from '../../utils/EndPoints';
 
 const DropdownUser = () => {
 
@@ -69,11 +70,19 @@ const DropdownUser = () => {
         </span>
 
         <span className='h-12 w-12 rounded-full'>
-          <img
-            src='https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg'
-            alt='User'
-            className='rounded-full'
-          />
+          {
+            userDetails?.profile_pic ? (
+                <img
+                  className="h-full w-full object-cover rounded-full"
+                  src={`${config.BASE_URL}/profile/${userDetails?.profile_pic}`}
+                  alt="Profile"
+                />
+            ) : (
+                <span className="text-xl font-medium leading-none text-white">
+                  {userDetails?.username?.charAt(0).toUpperCase()}
+                </span>
+            )
+          }
         </span>
 
         <IoIosArrowDown />

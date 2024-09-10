@@ -2,14 +2,16 @@ import React from 'react';
 import DefaultLayout from '../../layout/DefaultLayout';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 
 const MyAccount = () => {
+  const userDetails = useSelector((state) => state?.auth?.user);
 
   const initialValues = {
-    name: '',
-    surname: '',
-    phone: '',
-    email: '',
+    name: userDetails.name || '',
+    surname: userDetails.surname || '',
+    phone: userDetails.phone || '',
+    email: userDetails.email || '',
     newPassword: '',
     repeatPassword: '',
   };
