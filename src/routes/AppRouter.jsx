@@ -12,17 +12,14 @@ import Callback from "../components/Callback/Callback";
 const AppRouter = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // Get the token from localStorage and check if it's truthy
   const accessToken = localStorage.getItem('accessToken');
-  // Check if the token is truthy
-const isTokenValid = accessToken && accessToken != "false" && accessToken != "null" && accessToken != "undefined";
-return (
+  return (
       <Routes>
         <Route path="/auth/callback" element={<Callback/>} />
         <Route
           path="/"
           element={
-            isTokenValid  ? (
+            accessToken ? (
                 <Navigate to="/dashboard" replace />
             ) : (
               <SignIn />
