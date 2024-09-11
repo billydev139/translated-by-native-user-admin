@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import DropdownUser from './DropdownUser';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { myProfile } from '../../redux/feature/auth/auth.service';
 
 const Header = ({ sidebarOpen, setSidebarOpen }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(myProfile());
+    // other side effects
+    //...
+  }, []);
   return (
     <header className='sticky top-0 z-999 flex w-full bg-white drop-shadow-1'>
       <div className='flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11'>

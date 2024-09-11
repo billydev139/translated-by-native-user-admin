@@ -4,6 +4,7 @@ import { CiLogout } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/feature/auth/auth.service';
+import { config } from '../../utils/EndPoints';
 
 const DropdownUser = () => {
 
@@ -15,8 +16,7 @@ const DropdownUser = () => {
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
-  const userDetails = useSelector((state) => state?.auth.user);
-  console.log("userDetails: ", userDetails)
+  const userDetails = useSelector((state) => state?.auth?.user);
 
   const handleLogout = () => {
     dispatch(logout())
@@ -65,16 +65,26 @@ const DropdownUser = () => {
         to='#'
       >
         <span className='hidden text-right lg:block'>
-          <span className='block text-sm font-medium text-black'> {userDetails.name + " " + userDetails.surname} </span>
-          <span className='block text-xs'>Admin</span>
+          <span className='block text-sm font-medium text-black'> {userDetails.name + " " + userDetails.surname || ""} </span>
+          <span className='block text-xs'>{userDetails?.role || ""}</span>
         </span>
 
         <span className='h-12 w-12 rounded-full'>
-          <img
-            src='https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg'
-            alt='User'
-            className='rounded-full'
-          />
+          {
+            userDetails?.profile_pic ? (
+                <img
+                  className="h-full w-full object-cover rounded-full"
+                  src={`${config.BASE_URL}/profile/${userDetails?.profile_pic}`}
+                  alt="Profile"
+                />
+            ) : (
+              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black">
+                <span className="text-xl font-medium leading-none text-white">
+                  {userDetails?.name?.charAt(0).toUpperCase()}
+                </span>
+                </span>
+            )
+          }
         </span>
 
         <IoIosArrowDown />
