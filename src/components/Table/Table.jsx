@@ -90,7 +90,7 @@ const Table = ({
                     <div>
                       <div className="flex justify-between lg:w-[60%] items-start space-x-2">
                         {
-                          <span className="underline"> { item?.userId?.name + " " + item?.userId?.surname } </span>
+                          <span className="underline"> { item?.name + " " + item?.surname } </span>
                         }
                       </div>
                     </div>
