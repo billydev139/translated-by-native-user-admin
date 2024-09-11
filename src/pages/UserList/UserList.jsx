@@ -62,7 +62,7 @@ const UserList = () => {
           {/* table header end */}
 
           {/* table body start */}
-          <div className="bg-white bg-[#F3F6F9]">
+          <div className="bg-[#F3F6F9]">
             {data.map((item, index) => (
               <div
                 key={index}
