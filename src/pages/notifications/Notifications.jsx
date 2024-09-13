@@ -127,7 +127,7 @@ const Notifications = () => {
                     </td>
                   )
                     : (
-                    <div className="">
+                    <div className="p-4">
                       {filteredNotifications.map((item) => (
                         <div key={item.id} className="mt-2">
                           <Notification 

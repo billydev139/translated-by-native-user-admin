@@ -3,7 +3,7 @@ import { MdOutlineMarkChatRead, MdOutlineMarkChatUnread } from "react-icons/md"
 const Notification = ({ id, subject, message, time, status, icon }) => {
   return (
     <>
-    <div className={`bg-white ${status === "Read" ? "bg-gray-4" : "hover:bg-blue-200"} flex justify-between p-4 mb-4 rounded shadow-card cursor-pointer`}>
+    <div className={`${status === "Read" ? "bg-white hover:bg-[#ECF9F3]" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card cursor-pointer`}>
 
       <div className="flex gap-8 w-11/12 items-center">
         {/* <img
@@ -30,7 +30,6 @@ const Notification = ({ id, subject, message, time, status, icon }) => {
       </div>
 
     </div>
-    
     </>
   )
 }
