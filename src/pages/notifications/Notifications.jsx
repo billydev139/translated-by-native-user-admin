@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import DefaultLayout from "../../layout/DefaultLayout";
+import Notification from "../../components/Notification/Notification";
 
 const Notifications = () => {
   // State to track the active label
-  const [activeLabel, setActiveLabel] = useState("");
+  const [activeLabel, setActiveLabel] = useState("All");
+
+  console.log("Status Value: ", activeLabel);
 
   // Array for form fields
   const fields = [
@@ -22,6 +25,20 @@ const Notifications = () => {
     },
     { id: "actions", label: "ACTIONS", placeholder: "", type: "text" },
   ];
+
+  const Notifications = [
+    {id: '1', subject: "MAINTENANCE IS REQUIRED", message: 'I am Unread Notification', time: '5 hour ago', status: 'Unread'},
+    {id: '2', subject: "MAINTENANCE IS REQUIRED", message: 'I am Read Notification', time: '3 hour ago', status: 'Read'},
+    {id: '3', subject: "MAINTENANCE IS REQUIRED", message: 'I am Unread Notification', time: '5 hour ago', status: 'Unread'},
+    {id: '4', subject: "MAINTENANCE IS REQUIRED", message: 'I am Read Notification', time: '3 hour ago', status: 'Read'},
+    {id: '5', subject: "MAINTENANCE IS REQUIRED", message: 'I am Unread Notification', time: '5 hour ago', status: 'Unread'},
+    {id: '6', subject: "MAINTENANCE IS REQUIRED", message: 'I am Read Notification', time: '3 hour ago', status: 'Read' }
+  ]
+
+  const filteredNotifications = Notifications.filter((item) => {
+    if (activeLabel === 'All') return true; // Show all notifications
+    return item.status === activeLabel; // Show only matching notifications
+  });
 
   return (
     <DefaultLayout>
@@ -103,9 +120,29 @@ const Notifications = () => {
           <table className="min-w-full bg-white">
             <tbody>
               <tr className="text-sm text-[#464E5F]">
-                <td colSpan={fields.length} className="pb-4 px-6 text-center">
-                  No data available in table
-                </td>
+                {
+                  filteredNotifications.length === 0 ? (
+                    <td colSpan={fields.length} className="pb-4 px-6 text-center">
+                      No data available in table
+                    </td>
+                  )
+                    : (
+                    <div className="">
+                      {filteredNotifications.map((item) => (
+                        <div key={item.id} className="mt-2">
+                          <Notification 
+                            id={item.id}
+                            subject={item.subject}
+                            message={item.message}
+                            time={item.time}
+                            status={item.status}
+                            />
+                        </div>               
+                        ))
+                      }
+                    </div>
+                  )
+                }
               </tr>
             </tbody>
           </table>
