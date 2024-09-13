@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DefaultLayout from "../../layout/DefaultLayout";
 import Notification from "../../components/Notification/Notification";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
 
 const Notifications = () => {
   // State to track the active label
@@ -127,7 +128,16 @@ const Notifications = () => {
                     </td>
                   )
                     : (
-                    <div className="p-4">
+                    <div className="p-4 bg-white rounded-2xl shadow-card border border-gray-4">
+
+                      <div className="flex items-center justify-between bg-white px-4 py-4 mb-5 sm:mb-8">
+                        <p className="text-lg sm:text-2xl text-black font-semibold"> Notifications </p>
+                        <div className="flex items-center gap-2">
+                          <IoCheckmarkDoneOutline className="size-6 sm:size-8 font-semibold text-green-600" />
+                          <p className="text-lg sm:text-2xl text-green-600"> Mark all as read </p>
+                        </div>
+                      </div>
+
                       {filteredNotifications.map((item) => (
                         <div key={item.id} className="mt-2">
                           <Notification 
