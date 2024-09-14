@@ -32,6 +32,9 @@ const config = {
     updateTopic: 'topic/updateTopic',
     deleteSingleTopic: 'topic/deleteSingleTopic',
     deleteTopics: 'topic/deleteTopics',
+    getAllNotifications: 'notifications',
+    markAsRead: 'notifications/mark-as-read',
+    markAllAsRead: 'notifications/mark-all-as-read',
   },
 };
 
