@@ -1,7 +1,7 @@
 import React from "react";
 
 import { LuEye, LuTrash2 } from "react-icons/lu";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdOutlineFileDownload, MdOutlineFileDownloadOff } from "react-icons/md";
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu, } from "../Dropdown/Dropdown";
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 import { FaUsers, FaCrown, FaUserTie } from 'react-icons/fa';
@@ -140,10 +140,18 @@ const Table = ({
                           className="size-4 xl:size-6 text-red-500 cursor-pointer" 
                           onClick={() => viewOrderDetails(item._id)}
                         />
-                        <TfiDownload 
-                          className="size-4 xl:size-6 text-blue-500 cursor-pointer"
-                          onClick={() => handleFileDownload(item)}
-                        />
+                        {
+                          item?.translatedDoc?.length > 0 ? (
+                            <MdOutlineFileDownload 
+                              className="size-4 xl:size-6 text-green-500 cursor-pointer" 
+                              onClick={() => handleFileDownload(item)}
+                            />
+                          ) : (
+                            <MdOutlineFileDownloadOff
+                              className="size-4 xl:size-6 text-gray-500 cursor-pointer" 
+                            />
+                          )
+                        }
                         {/* <TbFileUpload className="size-4 xl:size-6 text-green-500 cursor-pointer" /> */}
                      </div>
                   ) : column.field === "status" ? (
