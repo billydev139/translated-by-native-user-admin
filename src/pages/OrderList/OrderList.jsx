@@ -26,7 +26,8 @@ const OrderList = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   //Data From Redux Store
-  const isLoading = useSelector((state) => state?.order?.isLoading);
+  const isLoading = useSelector((state) => state?.loading[getMyOrder.typePrefix]);
+  
   const myOrderListData = useSelector((state) => state?.order?.myOrder?.orders?.orders);
   console.log("orderData => ", myOrderListData);
   
