@@ -11,7 +11,7 @@ import { saveAs } from 'file-saver';
 import DefaultLayout from "../../layout/DefaultLayout";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 
-import { getMyOrder } from "../../redux/feature/order/order.service";
+import { getMyOrder, getSingleOrder } from "../../redux/feature/order/order.service";
 import axios from "axios";
 import GlobalModal from "../../components/GlobalModal/GlobalModal";
 import { openModal } from "../../redux/feature/modal/modal.slice";
@@ -125,8 +125,11 @@ const OrderList = () => {
   }
 
 
-  const viewOrderDetails = (item) => {
-    dispatch(openModal({ componentName: OrderDetails, componentProps: item }))
+  const viewOrderDetails = (id) => {
+    dispatch(getSingleOrder(id))
+    .then(() => {
+      dispatch(openModal({ componentName: OrderDetails }))
+    })
   }
 
 

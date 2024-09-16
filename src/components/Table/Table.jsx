@@ -138,7 +138,7 @@ const Table = ({
                       <div className="flex space-x-6">
                         <LuEye 
                           className="size-4 xl:size-6 text-red-500 cursor-pointer" 
-                          onClick={() => viewOrderDetails(item)}
+                          onClick={() => viewOrderDetails(item._id)}
                         />
                         <TfiDownload 
                           className="size-4 xl:size-6 text-blue-500 cursor-pointer"

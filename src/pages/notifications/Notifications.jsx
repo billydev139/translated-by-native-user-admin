@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import DefaultLayout from "../../layout/DefaultLayout";
 import Notification from "../../components/Notification/Notification";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { getNotifications, markAllAsRead } from "../../redux/feature/notification/notification.service";
+import { getNotifications, markAllAsRead, markAsRead } from "../../redux/feature/notification/notification.service";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../components/Pagination";
 import GlobalModal from "../../components/GlobalModal/GlobalModal";
 import { openModal } from "../../redux/feature/modal/modal.slice";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import { getSingleOrder } from "../../redux/feature/order/order.service";
 
 const Notifications = () => {
 
@@ -80,8 +81,24 @@ const Notifications = () => {
   }
 
 
-  const viewOrderDetails_Notification = (orderId) => {
-    dispatch(openModal({ componentName: OrderDetails, componentProps: orderId }))
+  const viewOrderDetails_Notification = (id = notifications._id) => {
+    
+    dispatch((getSingleOrder(notifications[0].orderId)))
+      .then(() => {
+        dispatch(openModal({ componentName: OrderDetails }))
+      })
+      .then(() => {
+        dispatch(markAsRead(id))
+          .then(() => {
+            handleClearFilters();
+          })
+          .then(() => {
+            dispatch(getNotifications({
+              from: "",
+              to: ""
+          }));
+        })
+      }) 
   }
 
   return (
@@ -165,8 +182,8 @@ const Notifications = () => {
                     {notifications?.map((item) => (
                       <div key={item?.id} className="mt-2">
                         <Notification
-                          id={item?._id}
-                          orderId={item?.orderId}
+                          // id={item?._id}
+                          // orderId={item?.orderId}
                           subject={`Order ${item?.orderId}`}
                           message={item?.message}
                           time={item?.createdAt}

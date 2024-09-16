@@ -1,30 +1,31 @@
 import { MdOutlineMarkChatRead, MdOutlineMarkChatUnread } from "react-icons/md"
-import { useDispatch } from "react-redux";
-import { getNotifications, markAsRead } from "../../redux/feature/notification/notification.service";
+// import { useDispatch } from "react-redux";
+// import { getNotifications, markAsRead } from "../../redux/feature/notification/notification.service";
 import { formatDate } from "../../utils/FormatDate";
 import { useEffect, useState } from "react";
 
 const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, handleClearFilters }) => {
   
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
   const [notificationMessage, setNotificationMessage] = useState("");
 
-  const handleMarkAsRead = () => {
+  // const handleMarkAsRead = () => {
 
-    viewOrderDetails_Notification(orderId);
+  //   viewOrderDetails_Notification(orderId);
     
-    dispatch(markAsRead(id))
-      .then(() => {
-        handleClearFilters();
-      })
-      .then(() => {
-        dispatch(getNotifications({
-          from: "",
-          to: ""
-        }));
-      }
-      )
-  }
+  //   dispatch(markAsRead(id))
+  //     .then(() => {
+  //       handleClearFilters();
+  //     })
+  //     .then(() => {
+  //       dispatch(getNotifications({
+  //         from: "",
+  //         to: ""
+  //       }));
+  //     }
+  //     )
+  // }
 
   useEffect(() => {
 
@@ -59,7 +60,7 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
   return (
     <>
       <div
-        onClick={handleMarkAsRead}
+        onClick={viewOrderDetails_Notification}
         className={`${read ? "bg-white" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card cursor-pointer`}>
 
         <div className="flex gap-4 sm:gap-8 w-11/12 items-center">
