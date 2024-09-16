@@ -80,27 +80,6 @@ const Notifications = () => {
     setToDate("");
   }
 
-
-  const viewOrderDetails_Notification = (id = notifications._id) => {
-    
-    dispatch((getSingleOrder(notifications[0].orderId)))
-      .then(() => {
-        dispatch(openModal({ componentName: OrderDetails }))
-      })
-      .then(() => {
-        dispatch(markAsRead(id))
-          .then(() => {
-            handleClearFilters();
-          })
-          .then(() => {
-            dispatch(getNotifications({
-              from: "",
-              to: ""
-          }));
-        })
-      }) 
-  }
-
   return (
     <DefaultLayout>
       <div className="max-w-full mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -182,13 +161,12 @@ const Notifications = () => {
                     {notifications?.map((item) => (
                       <div key={item?.id} className="mt-2">
                         <Notification
-                          // id={item?._id}
-                          // orderId={item?.orderId}
+                          id={item?._id}
+                          orderId={item?.orderId}
                           subject={`Order ${item?.orderId}`}
                           message={item?.message}
                           time={item?.createdAt}
                           read={item?.read}
-                          viewOrderDetails_Notification={viewOrderDetails_Notification}
                           handleClearFilters={handleClearFilters}
                         />
                       </div>

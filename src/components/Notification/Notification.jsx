@@ -3,29 +3,35 @@ import { MdOutlineMarkChatRead, MdOutlineMarkChatUnread } from "react-icons/md"
 // import { getNotifications, markAsRead } from "../../redux/feature/notification/notification.service";
 import { formatDate } from "../../utils/FormatDate";
 import { useEffect, useState } from "react";
+import { getNotifications, markAsRead } from "../../redux/feature/notification/notification.service";
+import { getSingleOrder } from "../../redux/feature/order/order.service";
+import { openModal } from "../../redux/feature/modal/modal.slice";
+import { useDispatch } from "react-redux";
+import OrderDetails from "../../pages/OrderDetails/OrderDetails";
 
 const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, handleClearFilters }) => {
   
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [notificationMessage, setNotificationMessage] = useState("");
 
-  // const handleMarkAsRead = () => {
-
-  //   viewOrderDetails_Notification(orderId);
-    
-  //   dispatch(markAsRead(id))
-  //     .then(() => {
-  //       handleClearFilters();
-  //     })
-  //     .then(() => {
-  //       dispatch(getNotifications({
-  //         from: "",
-  //         to: ""
-  //       }));
-  //     }
-  //     )
-  // }
+  const handleMarkAsRead = () => {
+    dispatch(getSingleOrder(orderId))
+    .then(() => {
+      dispatch(openModal({ componentName: OrderDetails }))
+    })
+      dispatch(markAsRead(id))
+      .then(() => {
+        handleClearFilters();
+      })
+      .then(() => {
+        dispatch(getNotifications({
+          from: "",
+          to: ""
+        }));
+      }
+      )
+  }
 
   useEffect(() => {
 
@@ -60,7 +66,7 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
   return (
     <>
       <div
-        onClick={viewOrderDetails_Notification}
+        onClick={handleMarkAsRead}
         className={`${read ? "bg-white" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card cursor-pointer`}>
 
         <div className="flex gap-4 sm:gap-8 w-11/12 items-center">
