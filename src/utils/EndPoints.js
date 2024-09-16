@@ -7,6 +7,7 @@ const config = {
     myProfile : 'auth/profile',
     updateProfile : 'auth/updateProfile',
     myOrder: 'order/myOrder',
+    getSingleOrder: 'order/getSingleOrder',
     createPayment: 'payment/createPayment',
     createPlan: 'plan/createPlan',
     getPlans: 'plan/getPlans',

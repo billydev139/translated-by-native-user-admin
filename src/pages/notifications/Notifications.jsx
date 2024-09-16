@@ -5,10 +5,16 @@ import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import { getNotifications, markAllAsRead } from "../../redux/feature/notification/notification.service";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../components/Pagination";
+import GlobalModal from "../../components/GlobalModal/GlobalModal";
+import { openModal } from "../../redux/feature/modal/modal.slice";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 const Notifications = () => {
+
   const dispatch = useDispatch();
   const { notifications, pages, total } = useSelector((state) => state?.notification?.notifications?.notifications || {});
+
+  console.log(`Notifications:`, notifications)
 
   // State to track the active label (All, Read, Unread)
   const [activeLabel, setActiveLabel] = useState("All");
@@ -23,6 +29,7 @@ const Notifications = () => {
 
   // Fetch notifications when activeLabel, page, limit, fromDate, or toDate changes
   useEffect(() => {
+
     let readFlag = null;
     if (activeLabel === "Read") readFlag = true;
     if (activeLabel === "Unread") readFlag = false;
@@ -34,6 +41,7 @@ const Notifications = () => {
       from: fromDate,
       to: toDate
     }));
+
   }, [dispatch, activeLabel, page, limit, fromDate, toDate]);
 
   // Handle pagination
@@ -51,8 +59,10 @@ const Notifications = () => {
   const handleToDateChange = (event) => {
     setToDate(event.target.value);
   };
+
   // Mark all notifications as read
   const handleMarkAllAsRead = () => {
+
     dispatch(markAllAsRead())
       .then(() => {
         // Refetch notifications
@@ -62,17 +72,26 @@ const Notifications = () => {
         }));
       });
   };
+
   const handleClearFilters = () => {
     setActiveLabel("All");
     setFromDate("");
     setToDate("");
   }
+
+
+  const viewOrderDetails_Notification = (orderId) => {
+    dispatch(openModal({ componentName: OrderDetails, componentProps: orderId }))
+  }
+
   return (
     <DefaultLayout>
       <div className="max-w-full mx-auto p-6 bg-white shadow-md rounded-lg">
+        
         {/* Tabs for All, Read, Unread */}
         <div className="flex items-center mb-6 mt-6">
-          {["All", "Read", "Unread"].map((label) => (
+          {
+            ["All", "Read", "Unread"].map((label) => (
             <button
               key={label}
               className={`py-2 px-4 text-[#464E5F] hover:text-[#2E8F96] border-b-2 ${activeLabel === label
@@ -147,10 +166,12 @@ const Notifications = () => {
                       <div key={item?.id} className="mt-2">
                         <Notification
                           id={item?._id}
+                          orderId={item?.orderId}
                           subject={`Order ${item?.orderId}`}
                           message={item?.message}
                           time={item?.createdAt}
                           read={item?.read}
+                          viewOrderDetails_Notification={viewOrderDetails_Notification}
                           handleClearFilters={handleClearFilters}
                         />
                       </div>
@@ -173,6 +194,10 @@ const Notifications = () => {
           </div>
         )}
       </div>
+
+      
+      <GlobalModal/>
+
     </DefaultLayout>
   );
 };

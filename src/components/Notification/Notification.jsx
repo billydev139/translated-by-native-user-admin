@@ -4,10 +4,15 @@ import { getNotifications, markAsRead } from "../../redux/feature/notification/n
 import { formatDate } from "../../utils/FormatDate";
 import { useEffect, useState } from "react";
 
-const Notification = ({ id, subject, message, time, read, handleClearFilters }) => {
+const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, handleClearFilters }) => {
+  
   const dispatch = useDispatch();
   const [notificationMessage, setNotificationMessage] = useState("");
+
   const handleMarkAsRead = () => {
+
+    viewOrderDetails_Notification(orderId);
+    
     dispatch(markAsRead(id))
       .then(() => {
         handleClearFilters();
@@ -20,11 +25,14 @@ const Notification = ({ id, subject, message, time, read, handleClearFilters }) 
       }
       )
   }
+
   useEffect(() => {
+
     const regex = /ID (\w+) from (\w+) to (\w+)/;
     const match = message.match(regex);
 
     let id, oldStatus, newStatus;
+
     if (match) {
       [, id, oldStatus, newStatus] = match;
     }
@@ -35,6 +43,7 @@ const Notification = ({ id, subject, message, time, read, handleClearFilters }) 
       TRANSLATED: '✅',
       REJECTED: '❌'
     };
+
     // Highlighted message with emojis and text
     const highlightedMessage = message
       .replace(id, `<strong style="color: #00000;">${id}</strong>`)
@@ -46,6 +55,7 @@ const Notification = ({ id, subject, message, time, read, handleClearFilters }) 
     }
   }, [message]);
   
+
   return (
     <>
       <div
@@ -53,12 +63,6 @@ const Notification = ({ id, subject, message, time, read, handleClearFilters }) 
         className={`${read ? "bg-white" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card cursor-pointer`}>
 
         <div className="flex gap-4 sm:gap-8 w-11/12 items-center">
-          {/* <img
-          alt=""
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          className="inline-block h-10 w-10 rounded-full"
-        /> */}
-
           {
             read ?
               <MdOutlineMarkChatRead className="size-5 sm:size-6 text-green-600" />

@@ -13,6 +13,9 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 
 import { getMyOrder } from "../../redux/feature/order/order.service";
 import axios from "axios";
+import GlobalModal from "../../components/GlobalModal/GlobalModal";
+import { openModal } from "../../redux/feature/modal/modal.slice";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 const OrderList = () => {
 
@@ -121,6 +124,12 @@ const OrderList = () => {
     }
   }
 
+
+  const viewOrderDetails = (item) => {
+    dispatch(openModal({ componentName: OrderDetails, componentProps: item }))
+  }
+
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Order List" />
@@ -144,6 +153,7 @@ const OrderList = () => {
                 columns={columns}
                 data={myOrderListData}
                 handleFileDownload={handleFileDownload}
+                viewOrderDetails={viewOrderDetails}
               />
             </div>
           ) : (
@@ -162,6 +172,10 @@ const OrderList = () => {
           />
         </div>
       )}
+
+
+      <GlobalModal/>
+
     </DefaultLayout>
   );
 };
