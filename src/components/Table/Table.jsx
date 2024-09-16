@@ -12,6 +12,7 @@ const Table = ({
   columns,
   data,
   handleFileDownload,
+  viewOrderDetails,
   onDelete,
   onEdit = () => {},
   isModalOpen,
@@ -135,7 +136,10 @@ const Table = ({
                     </div>
                   ) : column.field === "document" ? (
                       <div className="flex space-x-6">
-                        {/* <LuEye className="size-4 xl:size-6 text-red-500 cursor-pointer" /> */}
+                        <LuEye 
+                          className="size-4 xl:size-6 text-red-500 cursor-pointer" 
+                          onClick={() => viewOrderDetails(item)}
+                        />
                         <TfiDownload 
                           className="size-4 xl:size-6 text-blue-500 cursor-pointer"
                           onClick={() => handleFileDownload(item)}

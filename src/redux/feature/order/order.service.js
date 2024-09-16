@@ -34,6 +34,19 @@ const getMyOrder = createAsyncThunk("order/getMyOrder", async ({page, search = "
         return rejectWithValue(error.message);
       }
     }
-}) 
+})
 
-export { getOrders, getMyOrder };
+const getSingleOrder = createAsyncThunk('order/getSingleOrder', async (id, { rejectWithValue }) => {
+  try {
+    const response = await api.get(`${config.endPoints.getSingleOrder}/${id}`)
+    console.log("DATAAAA: ", response.data);
+    return response?.data;
+
+
+  } catch (error) {
+      console.log('Error Message:', error.message);
+      return rejectWithValue(error.message);
+  }
+})
+
+export { getOrders, getMyOrder, getSingleOrder };
