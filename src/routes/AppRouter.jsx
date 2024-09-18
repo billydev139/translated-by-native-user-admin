@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SignIn from "../pages/SignIn/SignIn";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
@@ -11,14 +11,15 @@ import { useEffect } from "react";
 import Translation from "../pages/Translation/Translation";
 import BillingInformation from "../pages/billing-information/BillingInformation";
 import Payment from "../pages/payment/Payment";
+import OrderDetails from "../pages/OrderDetails/OrderDetails";
 
 
 const AppRouter = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+
   const accessToken = localStorage.getItem('accessToken');
   // Redirect to the dashboard if the user is already authenticated
 
+  
   return (
       <Routes>
         {/* <Route path="/auth/callback" element={<Callback/>} /> */}
@@ -40,6 +41,7 @@ const AppRouter = () => {
         <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/order" element={<OrderList />} />
+        <Route path="/order/detail" element={<OrderDetails />} />
         <Route path="/Notifications" element={<Notifications />} />
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/payment" element={<Payment />} />

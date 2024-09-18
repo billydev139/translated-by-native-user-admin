@@ -1,4 +1,3 @@
-// createAsyncThunk
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../../utils/Api";
 import { config } from "../../../utils/EndPoints";
