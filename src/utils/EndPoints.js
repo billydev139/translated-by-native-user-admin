@@ -4,6 +4,7 @@ const config = {
   endPoints: {
     authLogin: 'auth/login',
     authLogout: 'auth/logOut',
+    authRegister: 'auth/register',
     myProfile : 'auth/profile',
     updateProfile : 'auth/updateProfile',
     myOrder: 'order/myOrder',

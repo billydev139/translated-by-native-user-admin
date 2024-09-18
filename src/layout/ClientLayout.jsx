@@ -1,11 +1,15 @@
+// src/app/layout/Layout.js
+
+"use client";
+
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // React Router
-import CustomStepper from "../components/common/custom-stepper/CustomStepper"; // Update with actual path
-import Header from "../components/common/header/Header"; // Update with actual path
-import OrderSummaryComponent from "../components/common/order-summary/OrderSummary"; // Update with actual path
-import OrderSummaryMobile from "../components/common/order-summary-mobile/OrderSummaryMobile"; // Update with actual path
+import { useNavigate, useLocation } from "react-router-dom";
+import CustomStepper from "../components/common/custom-stepper/CustomStepper";
+import Header from "../components/common/header/Header";
+import OrderSummaryComponent from "../components/common/order-summary/OrderSummary";
+import OrderSummaryMobile from "../components/common/order-summary-mobile/OrderSummaryMobile";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 const steps = [
   { id: 1, title: "Project Information", href: "/", field: "step_1" },
@@ -17,8 +21,8 @@ const steps = [
 ];
 
 const ClientLayout = ({ children }) => {
-  const navigate = useNavigate(children)
-  const location = useLocation(); // React Router's useLocation hook
+  const navigate = useNavigate();
+  const { pathname } = useLocation(); // Destructure pathname
   const stepState = useSelector((state) => state?.order?.orderSummary?.steps); // Assuming this holds the step completion status
   const [currentStep, setCurrentStep] = useState(1);
   const [width, setWidth] = useState(window.innerWidth);
@@ -32,9 +36,11 @@ const ClientLayout = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const stepIndex = steps.findIndex(step => step.href === location.pathname);
-    setCurrentStep(stepIndex + 1);
-  }, [location.pathname]);
+    const cleanPathname = pathname.split('?')[0].replace(/\/$/, '');
+    const stepIndex = steps.findIndex(step => step.href === cleanPathname);
+    setCurrentStep(stepIndex !== -1 ? stepIndex + 1 : 1); // Default to step 1 if no match
+  }, [pathname]);
+  
 
   useEffect(() => {
     // Check for small screens
@@ -50,14 +56,14 @@ const ClientLayout = ({ children }) => {
     if (currentStep > 1 && stepState) {
       // Check if all previous steps are completed dynamically
       let foundIncompleteStep = false;
-  
+
       for (let i = 0; i < currentStep - 1; i++) {
         const stepField = steps[i].field; // The field in stepState that corresponds to the step's completion status
-  
+
         // If the current step is incomplete
         if (!stepState?.[stepField]) {
           foundIncompleteStep = true;
-  
+
           // Show alert and redirect only once
           Swal.fire({
             icon: "warning",
@@ -66,11 +72,11 @@ const ClientLayout = ({ children }) => {
           }).then(() => {
             navigate(steps[i].href); // Redirect back to the incomplete step
           });
-          
+
           break; // Stop checking after finding the first incomplete step
         }
       }
-  
+
       // If no incomplete step was found, allow progression
       if (!foundIncompleteStep) {
         console.log("All previous steps completed, you can proceed!");
