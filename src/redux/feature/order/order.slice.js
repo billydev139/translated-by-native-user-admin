@@ -1,21 +1,69 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getOrders, getMyOrder, getSingleOrder } from "./order.service";
+import { getOrders, getMyOrder, getSingleOrder, createOrder, uploadDoc } from "./order.service";
 
 const initialState = {
   isLoading: false,
   orders: [],
   myOrder: [],
   singleOrder: [],
-  error: null
+  orderSummary : {},
+  error: null,
+  success: false,
+  loading: false
 }
 
 const orderSlice = createSlice({
   name: "orders",
   initialState,
-  reducers: {},
+  reducers: {
+    clearOrderState: (state) => {
+      state.success = false;
+      state.error = null;
+    },
+    setCurrentCreateOrder: (state, action) => {
+      state.orderSummary = {
+        ...state.orderSummary,
+        ...action.payload
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
-
+    .addCase(createOrder.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(createOrder.fulfilled, (state, action) => {
+      state.orders.push(action.payload);
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+    })
+    .addCase(createOrder.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    // uploadDoc
+    .addCase(uploadDoc.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(uploadDoc.fulfilled, (state, action) => {
+      state.error = null;
+      state.orderSummary = {
+        ...state.orderSummary,
+        file: [
+          ...(state.orderSummary.file || []), // Ensure state.orderSummary.file is an array
+          ...action.payload.fileData
+        ]
+      };    
+      state.loading = false;
+      state.success = true;
+    })
+    .addCase(uploadDoc.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
     //getOrders -> get all orders
     .addCase(getOrders.pending, (state) => {
       state.isLoading = true;
@@ -58,4 +106,5 @@ const orderSlice = createSlice({
 
 })
 
+export const { clearOrderState, setCurrentCreateOrder } = orderSlice.actions;
 export default orderSlice.reducer;

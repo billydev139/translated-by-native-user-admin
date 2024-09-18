@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { authLogin, logout, updateProfile, myProfile } from './auth.service';
+import { authLogin, logout, updateProfile, myProfile, authRegister } from './auth.service';
 
 const getInitialAuthState = () => ({
   accessToken: '',
@@ -15,6 +15,20 @@ const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+    .addCase(authRegister.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    })
+    .addCase(authRegister.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload.message;
+      state.error = null;
+        localStorage.setItem('accessToken', action.payload?.content?.accessToken);
+       })
+    .addCase(authRegister.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    })
       .addCase(authLogin.pending, (state) => {
         state.isLoading = true;
         state.error = null;

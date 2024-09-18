@@ -31,7 +31,7 @@ const SignIn = () => {
       await dispatch(authLogin(values))
       .then(() => {
         dispatch(myProfile()).then(() => {
-          navigate("/");
+          navigate("/billing-information");
         })
       })
       .catch((error) => {

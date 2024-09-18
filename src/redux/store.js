@@ -8,7 +8,7 @@ import { loadingMiddleware } from "./middleware/loader.middleware";
 const persistConfig = {
   key: "root",
   version: 1,
-  storage
+  storage,
 }
 
 // Create a persisted reducer

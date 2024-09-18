@@ -1,0 +1,58 @@
+/* Style the select */
+.custom-select {
+    padding: 8px;
+    background-color: #f3f6f9;
+    color: #3f4254;
+    /* border: 1px solid #b5b5c3; */
+    /* border-radius: 4px; */
+    font-size: 10px; /* You can control the size here */
+    -webkit-appearance: none; /* Remove default browser appearance */
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  /* Style the option */
+  .custom-select option {
+    font-size: 10px; /* Text size for options */
+    color: #3f4254;
+    background-color: #ffffff;
+  }
+  
+  /* Styles for extra-large screens (xl) */
+  @media (min-width: 1280px) {
+    .custom-select {
+      padding: 10px; /* Increased padding on xl screens */
+      font-size: 12px;
+    }
+    .custom-select option {
+      font-size: 12px; /* Even larger text for options on xl screens */
+    }
+  }
+  
+  /* Styles for 2xl screens */
+  @media (min-width: 1536px) {
+    .custom-select {
+      padding: 14px; /* Increased padding on 2xl screens */
+      font-size: 14px;
+    }
+    .custom-select option {
+      font-size: 14px; /* Larger text for options on 2xl screens */
+    }
+  }
+  
+  /* Styles for 4xl screens */
+  @media (min-width: 1920px) {
+    .custom-select {
+      padding: 12px; /* Increased padding on 2xl screens */
+      font-size: 14px;
+    }
+    .custom-select option {
+      font-size: 14px; /* Larger text for options on 2xl screens */
+    }
+  }
+  
+  
+  
