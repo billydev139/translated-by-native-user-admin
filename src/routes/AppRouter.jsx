@@ -10,6 +10,7 @@ import Callback from "../components/Callback/Callback";
 import { useEffect } from "react";
 import Translation from "../pages/Translation/Translation";
 import BillingInformation from "../pages/billing-information/BillingInformation";
+import Payment from "../pages/payment/Payment";
 
 
 const AppRouter = () => {
@@ -41,6 +42,7 @@ const AppRouter = () => {
         <Route path="/order" element={<OrderList />} />
         <Route path="/Notifications" element={<Notifications />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/payment" element={<Payment />} />
         </Route>
       </Routes>
   );
