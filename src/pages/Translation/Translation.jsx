@@ -236,7 +236,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
     <Layout>
       <div className="py-5">
         <h1 className="text-textgray text-base 2xl:text-xl mb-8 font-semibold">
-          Translation by native service
+          Translation service
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 2xl:mt-14 mb-6">
           {translationServices.map((field) => (

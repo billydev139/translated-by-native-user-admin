@@ -59,8 +59,21 @@ jobs:
 
     - name: Build project
       run: npm run build --if-present
-
+      
+    - name: Notify Slack (Deployment Started)
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"🚀 *Deployment started!* Starting the deployment for `translated-by-native-client`."}' ${{ secrets.SLACK_WEBHOOK_URL }}
     - name: Deploy using deploy.sh script
       run: |
             chmod +x ./deploy.sh
             ./deploy.sh
+
+    - name: Notify Slack (Deployment Completed)
+      if: success()
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"🎉 *Deployment complete!* `translated-by-native-client` has been deployed successfully."}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Notify Slack (Deployment Failed)
+      if: failure()
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"❌ *Deployment failed!* There was an issue deploying `translated-by-native-client`. Investigating now."}' ${{ secrets.SLACK_WEBHOOK_URL }}
