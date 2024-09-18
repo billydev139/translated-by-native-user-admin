@@ -13,13 +13,13 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 
 import { getMyOrder, getSingleOrder } from "../../redux/feature/order/order.service";
 import axios from "axios";
-import GlobalModal from "../../components/GlobalModal/GlobalModal";
-import { openModal } from "../../redux/feature/modal/modal.slice";
-import OrderDetails from "../OrderDetails/OrderDetails";
+
+import { useNavigate } from "react-router-dom";
 
 const OrderList = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -129,7 +129,8 @@ const OrderList = () => {
   const viewOrderDetails = (id) => {
     dispatch(getSingleOrder(id))
     .then(() => {
-      dispatch(openModal({ componentName: OrderDetails }))
+      // dispatch(openModal({ componentName: OrderDetails }))
+      navigate('/order/detail');
     })
   }
 
@@ -176,9 +177,6 @@ const OrderList = () => {
           />
         </div>
       )}
-
-
-      <GlobalModal/>
 
     </DefaultLayout>
   );
