@@ -1,8 +1,37 @@
+import Swal from "sweetalert2";
 import api from "../../../utils/Api"
 import { config } from "../../../utils/EndPoints"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const getOrders = createAsyncThunk("order/getOrders", async (_, { rejectWithValue }) => {
+// Create a new order
+export const createOrder = createAsyncThunk(
+  "order/createOrder",
+  async (orderData, { rejectWithValue }) => {
+    try {
+      const response = await api.post(config.endPoints.createOrder, orderData);
+      return response.data;
+    } catch (error) {
+      Swal.fire({ title: 'Error', text: error.response.data.message, icon: 'error' });
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const uploadDoc = createAsyncThunk(
+  "order/uploadDoc",
+  async (orderData, { rejectWithValue }) => {
+    try {
+      const response = await api.post(config.endPoints.uploadDoc, orderData);
+      return response.data;
+    } catch (error) {
+      Swal.fire({ title: 'Error', text: error.response.data.message, icon: 'error' });
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+export const getOrders = createAsyncThunk("order/getOrders", async (_, { rejectWithValue }) => {
   try {
     const response = await api.get(`${config.endPoints.getOrders}`)
     return response.data;
@@ -12,7 +41,7 @@ const getOrders = createAsyncThunk("order/getOrders", async (_, { rejectWithValu
   }
 });
 
-const getMyOrder = createAsyncThunk("order/getMyOrder", async ({page, search = "", limit}, { rejectWithValue }) => {
+export const getMyOrder = createAsyncThunk("order/getMyOrder", async ({page, search = "", limit}, { rejectWithValue }) => {
   try {
     const response = await api.get(`${config.endPoints.myOrder}?page=${page}&limit=${limit}&search=${search}`);
     return response.data;
@@ -36,7 +65,7 @@ const getMyOrder = createAsyncThunk("order/getMyOrder", async ({page, search = "
     }
 })
 
-const getSingleOrder = createAsyncThunk('order/getSingleOrder', async (id, { rejectWithValue }) => {
+export const getSingleOrder = createAsyncThunk('order/getSingleOrder', async (id, { rejectWithValue }) => {
   try {
     const response = await api.get(`${config.endPoints.getSingleOrder}/${id}`)
     console.log("DATAAAA: ", response.data);
@@ -49,4 +78,3 @@ const getSingleOrder = createAsyncThunk('order/getSingleOrder', async (id, { rej
   }
 })
 
-export { getOrders, getMyOrder, getSingleOrder };

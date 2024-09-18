@@ -8,7 +8,8 @@ import { loadingMiddleware } from "./middleware/loader.middleware";
 const persistConfig = {
   key: "root",
   version: 1,
-  storage
+  storage,
+  whitelist: [], // Add the auth reducer to persist
 }
 
 // Create a persisted reducer

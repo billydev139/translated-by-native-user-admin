@@ -3,6 +3,32 @@ import Swal from 'sweetalert2';
 import api from '../../../utils/Api';
 import { config } from '../../../utils/EndPoints';
 
+const authRegister = createAsyncThunk(
+  'auth/register',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`${config.endPoints.authRegister}`, data);
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Success',
+          text: response?.data?.message,
+          icon: 'success',
+          timer: 2000,
+        });
+      }
+      return response.data
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error?.response?.data?.message,
+        icon: 'error',
+        timer: 2000,
+      });
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
  const authLogin = createAsyncThunk(
   'auth/authLogin',
   async (data, { rejectWithValue }) => {
@@ -123,4 +149,4 @@ const updateProfile = createAsyncThunk(
   }
 );
 
-export { authLogin, logout, changePassword, myProfile, updateProfile };
+export { authRegister, authLogin, logout, changePassword, myProfile, updateProfile };

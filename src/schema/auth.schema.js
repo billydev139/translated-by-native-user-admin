@@ -8,3 +8,11 @@ export const loginSchema = Yup.object({
     .matches(/[A-Z]/, 'Must contain at least one capital letter')
     .required('Required'),
 })
+
+export const SignupSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().min(6, 'Too Short!').required('Required'),
+  repeat_password: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Required'),
+});
