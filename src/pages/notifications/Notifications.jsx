@@ -2,13 +2,9 @@ import React, { useEffect, useState } from "react";
 import DefaultLayout from "../../layout/DefaultLayout";
 import Notification from "../../components/Notification/Notification";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { getNotifications, markAllAsRead, markAsRead } from "../../redux/feature/notification/notification.service";
+import { getNotifications, markAllAsRead } from "../../redux/feature/notification/notification.service";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../components/Pagination";
-import GlobalModal from "../../components/GlobalModal/GlobalModal";
-import { openModal } from "../../redux/feature/modal/modal.slice";
-import OrderDetails from "../OrderDetails/OrderDetails";
-import { getSingleOrder } from "../../redux/feature/order/order.service";
 
 const Notifications = () => {
 
@@ -189,9 +185,6 @@ const Notifications = () => {
           </div>
         )}
       </div>
-
-      
-      <GlobalModal/>
 
     </DefaultLayout>
   );

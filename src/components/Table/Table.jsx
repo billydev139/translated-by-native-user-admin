@@ -5,7 +5,6 @@ import { MdEdit, MdOutlineFileDownload, MdOutlineFileDownloadOff } from "react-i
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu, } from "../Dropdown/Dropdown";
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 import { FaUsers, FaCrown, FaUserTie } from 'react-icons/fa';
-import { TfiDownload } from "react-icons/tfi";
 import StatusBadge from "../Badge";
 
 const Table = ({
@@ -152,12 +151,10 @@ const Table = ({
                             />
                           )
                         }
-                        {/* <TbFileUpload className="size-4 xl:size-6 text-green-500 cursor-pointer" /> */}
+                        
                      </div>
                   ) : column.field === "status" ? (
-                      // <SelectMenu optionValues={["PROCESSING", "TRANSLATED", "REJECTED"]}/>
-                      // <p> {item.status} </p>
-                      <StatusBadge status={item.status}/>
+                        <StatusBadge status={item.status}/>
                   ) : column.field === "totalPricing" ? (
                       <div>
                         {`€ ${item[column.field].toFixed(2)}`}
