@@ -15,8 +15,8 @@ const GlobalModal = () => {
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="2xsm:w-11/12 md:w-3/4 lg:w-4/6 xl:w-1/2 relative bg-white p-6 rounded-lg shadow-lg">
+      <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="relative bg-white p-6 rounded-lg shadow-lg 2xsm:w-11/12 sm:w-4/5 lg:w-3/4 xl:w-2/3 2xl:w-1/2">
           
           {/* Close Button */}
           <button

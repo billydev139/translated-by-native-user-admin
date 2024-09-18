@@ -1,17 +1,15 @@
 import { MdOutlineMarkChatRead, MdOutlineMarkChatUnread } from "react-icons/md"
-// import { useDispatch } from "react-redux";
-// import { getNotifications, markAsRead } from "../../redux/feature/notification/notification.service";
 import { formatDate } from "../../utils/FormatDate";
 import { useEffect, useState } from "react";
 import { getNotifications, markAsRead } from "../../redux/feature/notification/notification.service";
 import { getSingleOrder } from "../../redux/feature/order/order.service";
-import { openModal } from "../../redux/feature/modal/modal.slice";
 import { useDispatch } from "react-redux";
-import OrderDetails from "../../pages/OrderDetails/OrderDetails";
+import { useNavigate } from "react-router-dom";
 
 const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, handleClearFilters }) => {
   
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [notificationMessage, setNotificationMessage] = useState("");
 
@@ -19,19 +17,20 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
     
     dispatch(getSingleOrder(orderId))
     .then(() => {
-      dispatch(openModal({ componentName: OrderDetails }))
+      navigate("/order/detail");
     })
-      dispatch(markAsRead(id))
-      .then(() => {
-        handleClearFilters();
-      })
-      .then(() => {
-        dispatch(getNotifications({
-          from: "",
-          to: ""
-        }));
-      }
-      )
+    
+    dispatch(markAsRead(id))
+    .then(() => {
+      handleClearFilters();
+    })
+    .then(() => {
+      dispatch(getNotifications({
+        from: "",
+        to: ""
+      }));
+    
+    })
   }
 
   useEffect(() => {
@@ -85,7 +84,6 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
 
         <div className="flex flex-col gap-1 text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base">
           <p> {formatDate(time)} </p>
-          {/* <p className={`text-white rounded-full text-center ${read === "Read" ? "bg-blue-500" : "bg-orange-500"}`}> {read} </p> */}
         </div>
 
       </div>
