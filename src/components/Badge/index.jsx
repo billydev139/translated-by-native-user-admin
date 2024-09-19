@@ -60,7 +60,7 @@ function Badge({ status, role, action, language }) {
 
   return (
     <span
-      className={`text-[8px] xsm:text-[10px] lg:text-xs xl:text-sm font-medium ${language ? "px-0 text-xs xsm:text-sm sm:text-sm md:text-sm 2xl:text-base" : "px-2.5"} py-0.5 rounded h-5 ${getStyle()}`}
+      className={`text-[7px] xsm:text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-medium ${language ? "px-1 text-xs xsm:text-[8px] sm:text-[10px] md:text-xs 2xl:text-base" : "px-2.5"} py-0.5 rounded h-5 ${getStyle()}`}
     >
       {role || status || action || language}
     </span>

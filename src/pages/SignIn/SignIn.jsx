@@ -30,7 +30,8 @@ const SignIn = () => {
 
       await dispatch(authLogin(values))
       .then(() => {
-        dispatch(myProfile()).then(() => {
+        dispatch(myProfile())
+        .then(() => {
           navigate("/billing-information");
         })
       })
