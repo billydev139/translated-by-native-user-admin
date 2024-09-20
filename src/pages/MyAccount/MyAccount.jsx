@@ -167,7 +167,7 @@ const MyAccount = () => {
   return (
     <DefaultLayout>
       <div className="max-w-6xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <div className="flex justify-between items-center pt-5 mb-12">
+        <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-semibold text-[#464E5F]">
             User information
           </h2>
