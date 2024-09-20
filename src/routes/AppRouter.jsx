@@ -25,6 +25,7 @@ const AppRouter = () => {
         {/* <Route path="/auth/callback" element={<Callback/>} /> */}
         <Route path="/" element={<Translation />} />
         <Route path="/billing-information" element={<BillingInformation />} />
+        <Route path="/payment" element={<Payment />} />
 
         {/* Dashboard route, protected by accessToken */}
         <Route
@@ -44,7 +45,6 @@ const AppRouter = () => {
         <Route path="/order/detail" element={<OrderDetails />} />
         <Route path="/Notifications" element={<Notifications />} />
         <Route path="/my-account" element={<MyAccount />} />
-        <Route path="/payment" element={<Payment />} />
         </Route>
       </Routes>
   );
