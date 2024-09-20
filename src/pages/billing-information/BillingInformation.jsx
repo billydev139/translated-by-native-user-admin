@@ -373,7 +373,7 @@ const BillingInformation = () => {
               }).then((swalResult) => {
                 if (swalResult.isConfirmed) {
                   navigate("/order");
-                  dispatch(clearOrderState( {  })); // Clear order details
+                  dispatch(clearOrderState()); // Clear order details
                 }
               });
             })
