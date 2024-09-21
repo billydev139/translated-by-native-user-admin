@@ -19,6 +19,7 @@ const orderSlice = createSlice({
     clearOrderState: (state) => {
       state.success = false;
       state.error = null;
+      state.orderSummary = {};
     },
     setCurrentCreateOrder: (state, action) => {
       state.orderSummary = {

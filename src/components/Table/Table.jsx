@@ -25,9 +25,9 @@ const Table = ({
   console.log("DATA INSIDE TABLE: ", data );
 
   return (
-    <table className="w-full text-left bg-white p-9 table-auto mt-3 border border-[#e5e5e5]">
+    <table style={{ borderRadius: "20px"}} className="w-full text-left bg-white p-9 table-auto mt-3 border border-[#e5e5e5]">
       
-      <thead>
+      <thead >
         <tr className="bg-gray-2 text-left dark:bg-meta-4">
           {columns.map((column, index) => (
             <>
@@ -95,10 +95,10 @@ const Table = ({
                       </div>
                     </div>
                   ) : column.field === "targetLanguage" ? (
-                    <div>
+                    <div className="flex gap-1 flex-wrap">
                       {item[column.field].map((language, index) => {
                         return (
-                          <span key={index}>
+                          <span key={index} className="">
                             <StatusBadge language={language}/>
                           </span>
                         );

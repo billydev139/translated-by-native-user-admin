@@ -51,7 +51,7 @@ const OrderDetails = () => {
               src={LOGO}
               alt='img icon'
             /> */}
-            <GoBook className='size-4 xsm:size-6 sm:size-10 lg:size-6 xl:size-8 3xl:size-12 text-blue-500'/>
+            <GoBook className='size-4 xsm:size-6 sm:size-10 lg:size-4 xl:size-6 2xl:size-8 text-blue-500'/>
           </div>
           <div className='w-full flex items-center justify-between gap-1'>
             <p className='text-[10px] xsm:text-xs lg:text-sm xl:text-base 2xl:text-xl 3xl:text-2xl text-slate-600'> Source Language </p>
@@ -66,7 +66,7 @@ const OrderDetails = () => {
               src={LOGO}
               alt='img icon'
             /> */}
-            <GoBook className='size-4 xsm:size-6 sm:size-10 lg:size-6 xl:size-8 3xl:size-12 text-blue-500'/>
+            <GoBook className='size-4 xsm:size-6 sm:size-10 lg:size-4 xl:size-6 2xl:size-8 text-blue-500'/>
           </div>
           <div className='w-full flex items-center justify-between gap-1'>
             <p className='text-[10px] xsm:text-xs lg:text-sm xl:text-base 2xl:text-xl 3xl:text-2xl text-slate-600'> Target Language </p>
@@ -81,7 +81,7 @@ const OrderDetails = () => {
               src={LOGO}
               alt='img icon'
             /> */}
-            <MdOutlineTopic className='size-6 xsm:size-8 sm:size-12 lg:size-10 xl:size-12 3xl:size-16 text-blue-500' />
+            <MdOutlineTopic className='size-6 xsm:size-8 sm:size-12 lg:size-8 xl:size-10 2xl:size-12 text-blue-500' />
           </div>
           <div className='w-full flex items-center justify-between gap-1'>
             <p className='text-[10px] xsm:text-xs lg:text-sm xl:text-base 2xl:text-xl 3xl:text-2xl text-slate-600'> Topic </p>
