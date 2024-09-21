@@ -234,11 +234,11 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
 
   return (
     <Layout>
-      <div className="py-5">
+      <div className="py-2">
         <h1 className="text-textgray text-base 2xl:text-xl mb-8 font-semibold">
           Translation service
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 2xl:mt-14 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 2xl:mt-8 mb-6">
           {translationServices.map((field) => (
             <div key={field.id}>
               <label
@@ -396,7 +396,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
           <h1 className="text-base 2xl:text-xl font-semibold text-textgray mt-9">
             Choose Rate
           </h1>
-          <div className="mt-7 mb-10  py-6 px-8 bg-[#D5E9FA] rounded-md  ">
+          <div className="mt-7 mb-10  py-6 px-[30px] bg-[#D5E9FA] rounded-md  ">
             <div className="flex text-[#464E5F] text-xs 2xl:text-base font-bold">
               <div>
                 <span className="inline-flex items-center justify-center border border-[#0084F4] p-1 rounded-full mr-3">
@@ -405,7 +405,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
               </div>
               <div>
                 Some rates are not available for this language combination. -
-                ATTENTION: for the Machine Translation/Postediting service the
+                ATTENTION: for the Machine Translation/Post Editing service the
                 supported formats are: .pdf, .docx and .pptx.
               </div>
             </div>

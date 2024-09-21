@@ -9,7 +9,7 @@ const Header = () => {
       <div>
         {/* <Image src={logo} alt="Logo" className="w-20 h-20" /> */}
       </div>
-      <div className="flex justify-center items-center gap-2 mt-4">
+      <div className="flex justify-center items-center gap-2">
         <GiWorld className="text-xl xl:text-2xl 2xl:text-[30px] text-terchary" />
         <p className="text-terchary text-xs xl:text-sm 2xl:text-base"> (€) </p>
         <div className="flex flex-col justify-start items-center">

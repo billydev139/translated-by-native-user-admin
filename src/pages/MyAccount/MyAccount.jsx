@@ -119,7 +119,7 @@ const MyAccount = () => {
     {
       id: "phone",
       name: "phone",
-      type: "phone",
+      type: "tel",
       placeholder: "Enter your phone",
       label: "Phone",
     },

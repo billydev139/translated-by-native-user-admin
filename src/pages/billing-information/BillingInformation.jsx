@@ -611,13 +611,19 @@ const BillingInformation = () => {
               ))}
             </div>
           </div>
-          <button
-            type="submit"
-            disabled = {orderLoading}
-            className="px-4 xl:px-6 2xl:px-8 py-2 xl:py-2.5 2xl:py-3 text-xs xl:text-sm 2xl:text-base bg-[#2E8F96] text-white rounded-md hover:bg-[#247679] focus:outline-none"
-          >
-            {orderLoading ? "Please wait..." : "Submit"}
-          </button>
+
+          <div className="flex items-center justify-end gap-4">
+            <button
+              type="submit"
+              disabled = {orderLoading}
+              className="px-4 xl:px-6 2xl:px-8 py-2 xl:py-2.5 2xl:py-3 text-xs xl:text-sm 2xl:text-base bg-[#2E8F96] text-white rounded-md hover:bg-[#247679] focus:outline-none"
+            >
+              {orderLoading ? "Please wait..." : "Continue"}
+            </button>
+
+            <p className="text-base"> Send by Quote Email </p>
+          </div>
+        
         </form>
       </div>
     </Layout>
