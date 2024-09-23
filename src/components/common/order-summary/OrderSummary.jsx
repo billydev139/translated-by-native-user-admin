@@ -64,7 +64,7 @@ const OrderSummaryComponent = () => {
                 {summaryData?.TargetLanguage?.length > 0 &&
                   summaryData?.SourceLanguage &&
                   summaryData?.TargetLanguage?.map((language, index) => (
-                    <div key = {index} class="inline-block bg-lightgreen text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-black px-2 py-1 rounded mr-1">
+                    <div key = {index} class="inline-block mt-0.5 bg-lightgreen text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-black px-2 py-1 rounded mr-1">
                       <strong>{language?.targetLanguages}</strong>{" "}
                       <span>+ €{language?.price}/w</span>
                     </div>
