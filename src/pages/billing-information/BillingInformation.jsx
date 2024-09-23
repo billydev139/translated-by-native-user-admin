@@ -11,6 +11,7 @@ import { authRegister } from "../../redux/feature/auth/auth.service";
 import Swal from "sweetalert2";
 import { clearOrderState, setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
 import { Link, useNavigate } from "react-router-dom";
+import { IoMailOutline } from "react-icons/io5";
 
 const BillingInformation = () => {
   const dispatch = useDispatch();
@@ -496,7 +497,8 @@ const BillingInformation = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values[field.id]}
-                    className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#B5B5C3] rounded-md w-full focus:outline-none"
+                    // text-[#B5B5C3]
+                    className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#3F4254] placeholder:text-[#3F4254] rounded-md w-full focus:outline-none"
                   />
                   {formik.touched[field.id] && formik.errors[field.id] && (
                     <div className="text-red-500 text-sm mt-1">
@@ -599,7 +601,8 @@ const BillingInformation = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values[field.id]}
-                      className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#B5B5C3] rounded-md w-full focus:outline-none"
+                      // text-[#B5B5C3]
+                      className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#3F4254] placeholder:text-[#3F4254] rounded-md w-full focus:outline-none"
                     />
                   )}
                   {formik.touched[field.id] && formik.errors[field.id] && (
@@ -616,12 +619,16 @@ const BillingInformation = () => {
             <button
               type="submit"
               disabled = {orderLoading}
-              className="px-4 xl:px-6 2xl:px-8 py-2 xl:py-2.5 2xl:py-3 text-xs xl:text-sm 2xl:text-base bg-[#2E8F96] text-white rounded-md hover:bg-[#247679] focus:outline-none"
+              className="px-5 xl:px-6 2xl:px-8 py-3 text-white text-xs font-semibold 2xl:text-sm bg-[#2E8F96] rounded-md hover:bg-[#247679] focus:outline-none"
             >
               {orderLoading ? "Please wait..." : "Continue"}
             </button>
 
-            <p className="text-base"> Send by Quote Email </p>
+            
+            <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
+              <IoMailOutline className="text-sm 2xl:text-base font-semibold" />
+              Send quote by email
+            </button>
           </div>
         
         </form>

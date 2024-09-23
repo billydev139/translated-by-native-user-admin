@@ -444,7 +444,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             <button
               type="submit"
               onClick={handleSubmit}
-              className="bg-[#FD8C04] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
+              className="bg-[#FD8C04] text-white text-xs font-semibold px-5 py-3 xl:px-6 2xl:px-8 2xl:text-sm rounded-md hover:bg-[#e69500]"
             >
               Continue
             </button>
