@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 const Payment = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartData = useSelector((state) => state?.order?.CardData);
+  const cartData = useSelector((state) => state?.order?.CartData);
+  console.log("🚀 ~ Payment ~ cartData:", cartData)
 
   const [showDiscountInput, setShowDiscountInput] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
