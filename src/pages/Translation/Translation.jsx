@@ -179,10 +179,11 @@ const Translation = () => {
     if (
       !selectedTargetId ||
       !selectedSourceLanguages ||
-      !selectedServiceId ||
       !choosePlan?._id ||
       !selectedTopic ||
-      orderSummary?.file?.length < 1
+      orderSummary?.file?.length < 1 ||
+      !orderSummary?.file
+
     ) {
       Swal.fire({
         title: "Error",
