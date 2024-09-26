@@ -12,6 +12,8 @@ import Translation from "../pages/Translation/Translation";
 import BillingInformation from "../pages/billing-information/BillingInformation";
 import Payment from "../pages/payment/Payment";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
+import CheckoutSuccess from "../pages/payment/CheckoutSuccess";
+import CheckoutCancelled from "../pages/payment/CheckoutCancelled";
 
 
 const AppRouter = () => {
@@ -26,6 +28,8 @@ const AppRouter = () => {
         <Route path="/" element={<Translation />} />
         <Route path="/billing-information" element={<BillingInformation />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/checkout-success" element={<CheckoutSuccess />} />
+        <Route path="/checkout-cancelled" element={<CheckoutCancelled />} />
 
         {/* Dashboard route, protected by accessToken */}
         <Route
