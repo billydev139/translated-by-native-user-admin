@@ -7,6 +7,7 @@ const initialState = {
   myOrder: [],
   singleOrder: [],
   orderSummary : {},
+  CartData : {},
   error: null,
   success: false,
   loading: false
@@ -27,6 +28,10 @@ const orderSlice = createSlice({
         ...action.payload
       }
     },
+    setCartData: (state, action) => {
+      state.CartData = action.payload;
+    }
+
   },
   extraReducers: (builder) => {
     builder
@@ -107,5 +112,5 @@ const orderSlice = createSlice({
 
 })
 
-export const { clearOrderState, setCurrentCreateOrder } = orderSlice.actions;
+export const { clearOrderState, setCurrentCreateOrder,setCartData } = orderSlice.actions;
 export default orderSlice.reducer;
