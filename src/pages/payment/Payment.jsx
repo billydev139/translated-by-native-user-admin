@@ -1,39 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaStripe, FaPaypal } from "react-icons/fa";
 import Layout from "../../layout/ClientLayout";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import PayButton from "./PayButton";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartData = useSelector((state) => state?.order?.CardData);
+
   const [showDiscountInput, setShowDiscountInput] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("Stripe"); // Default to Stripe
   const [termsAccepted, setTermsAccepted] = useState(false); // Track if terms are accepted
+  const [accessToken, setAccessToken] = useState(false);
 
+  const getToken = () => localStorage.getItem("accessToken");
+  
+  useEffect(() => {
+    const token = getToken();
+    
+    if (token && token !== "undefined" && token !== "null" && token !== "") {
+      setAccessToken(token); // Token is valid, set to true
+    } else {
+      setAccessToken(null); // No valid token, set to false
+    }
+  }, [getToken(), dispatch]);
   // Handle payment method selection
   const handlePaymentMethodSelect = (method) => {
     setSelectedPaymentMethod(method);
-  };
-
-  // Handle Confirm Order action
-  const handleConfirmOrder = () => {
-    if (!termsAccepted) {
-      Swal.fire({
-        title: "Error",
-        text: "You must accept the terms and conditions before proceeding!",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-    // Route to Stripe or PayPal based on the selected payment method
-    if (selectedPaymentMethod === "Stripe") {
-      // Redirect to Stripe payment route
-      window.location.href = "/stripe-payment"; // Adjust to your Stripe payment route
-    } else if (selectedPaymentMethod === "PayPal") {
-      // Redirect to PayPal payment route
-      window.location.href = "/paypal-payment"; // Adjust to your PayPal payment route
-    }
   };
 
   return (
@@ -151,14 +148,16 @@ const Payment = () => {
                 </a>
               </label>
             </div>
-
-            {/* Confirm Order Button */}
-            <button
-              onClick={handleConfirmOrder}
-              className="bg-[#FD8C04] text-white text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
-            >
-              Confirm order
-            </button>
+            {accessToken ? (
+                <PayButton cartItems={cartData} paymentMethod={selectedPaymentMethod} termsAccepted={termsAccepted}/>
+              ) : (
+                <button
+                  className="cart-login"
+                  onClick={() => navigate("/auth/login")}
+                >
+                  Login to Check out
+                </button>
+              )}
           </div>
         </div>
       </Layout>
