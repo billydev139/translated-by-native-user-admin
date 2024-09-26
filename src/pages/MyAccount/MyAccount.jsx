@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../../layout/DefaultLayout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,21 +7,31 @@ import { config } from "../../utils/EndPoints";
 import { myProfile, updateProfile } from "../../redux/feature/auth/auth.service";
 
 const MyAccount = () => {
+  
   const dispatch = useDispatch();
+  
   const updateProfileLoading = useSelector((state) => state?.loading[updateProfile.typePrefix]) || false;
-  const userDetails = useSelector((state) => state?.auth?.user);
+  
+  const userDetails = useSelector((state) => state.auth.user);
   const [profileImagePreview, setProfileImagePreview] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
+
+  useEffect(() => {
+    dispatch(myProfile())
+  }, [dispatch])
+  
   const initialValues = {
-    name: userDetails.name || "",
-    surname: userDetails.surname || "",
-    phone: userDetails.phone || "",
-    email: userDetails.email || "",
+
+    name: userDetails?.name || "",
+    surname: userDetails?.surname || "",
+    phone: userDetails?.phone || "",
+    email: userDetails?.email || "",
     newPassword: "",
     repeatPassword: "",
   };
 
   const validationSchema = Yup.object().shape({
+
     name: Yup.string().required("Name is required"),
     surname: Yup.string().required("Surname is required"),
     email: Yup.string()
@@ -41,8 +51,11 @@ const MyAccount = () => {
   });
 
   const formik = useFormik({
+    
     initialValues: initialValues,
+    
     validationSchema: validationSchema,
+
     onSubmit: (values) => {
       const formData = new FormData();
   
@@ -66,13 +79,14 @@ const MyAccount = () => {
       }
   
       // Now you can send the formData with your API request
-     dispatch (updateProfile(formData)).then (() => {
-      formik.resetForm();
-      dispatch (myProfile());
-      // Clear the form values and set the profileImage to null
-      setProfileImagePreview(null);
-      setProfileImage(null);
-     });
+     dispatch(updateProfile(formData))
+      .then (() => {
+        formik.resetForm();
+        dispatch(myProfile());
+        // Clear the form values and set the profileImage to null
+        setProfileImagePreview(null);
+        setProfileImage(null);
+      });
   
       // Example: you can send formData using fetch or axios
       // fetch or axios.post(apiUrl, formData, headers);
@@ -105,7 +119,7 @@ const MyAccount = () => {
     {
       id: "phone",
       name: "phone",
-      type: "phone",
+      type: "tel",
       placeholder: "Enter your phone",
       label: "Phone",
     },
@@ -135,10 +149,25 @@ const MyAccount = () => {
       setProfileImage(file);
     }
   };
+
+  // Set form values when userDetails are updated
+  useEffect(() => {
+    if (userDetails) {
+      formik.setValues({
+        name: userDetails.name || "",
+        surname: userDetails.surname || "",
+        phone: userDetails.phone || "",
+        email: userDetails.email || "",
+        newPassword: "",
+        repeatPassword: "",
+      });
+    }
+  }, [userDetails]);
+  
   return (
     <DefaultLayout>
       <div className="max-w-6xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <div className="flex justify-between items-center pt-5 mb-12">
+        <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-semibold text-[#464E5F]">
             User information
           </h2>

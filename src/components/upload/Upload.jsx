@@ -98,7 +98,7 @@ export default function Upload({wordCount, setWordCount}) {
           onDragOver={handleDragOver}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current.click()}
-          className={`min-h-[110px] 2xl:min-h-[118px] p-8 w-full bg-[#F3F6F9] border border-[#ADD0D4] border-dashed rounded-md text-center cursor-pointer ${
+          className={`min-h-[110px] 2xl:min-h-[118px] p-[30px] w-full bg-[#F3F6F9] border border-[#ADD0D4] border-dashed rounded-md text-center cursor-pointer ${
             isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
           }`}
         >

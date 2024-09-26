@@ -81,7 +81,7 @@ const Notifications = () => {
       <div className="max-w-full mx-auto p-6 bg-white shadow-md rounded-lg">
         
         {/* Tabs for All, Read, Unread */}
-        <div className="flex items-center mb-6 mt-6">
+        <div className="flex items-center mb-1">
           {
             ["All", "Read", "Unread"].map((label) => (
             <button

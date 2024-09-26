@@ -24,7 +24,7 @@ function Badge({ status, role, action, language }) {
       suspended: 'bg-gray-600/5 text-gray-600 text-sm',
       TRANSLATED: 'bg-blue-500 rounded-full text-white text-base',
       PROCESSING: 'bg-yellow-500 rounded-full text-white text-base',
-      PENDING: 'bg-red-500 rounded-full text-white text-base',
+      REJECTED: 'bg-red-500 rounded-full text-white text-base',
     };
 
     // Define styles for action

@@ -87,7 +87,7 @@ const ClientLayout = ({ children }) => {
   return (
     <div className="mx-auto my-auto">
       <div className="flex flex-col lg:flex-row gap-4">
-        <div style={{ width: width >= 1536 ? "66.5%" : width < 1024 ? "100%" : "70%" }} className="px-8 py-12">
+        <div style={{ width: width >= 1536 ? "66.5%" : width < 1024 ? "100%" : "70%" }} className="px-8 py-6">
           <Header />
           {isSmallScreen && (
             <div style={{ display: "block" }}>
@@ -95,9 +95,9 @@ const ClientLayout = ({ children }) => {
             </div>
           )}
 
-          <div className="mx-auto px-4 py-8">
+          <div className="mx-auto px-4 py-4">
             <CustomStepper steps={steps} currentStep={currentStep} />
-            <div className="mb-8">{children}</div>
+            <div className="mb-4">{children}</div>
           </div>
         </div>
         {!isSmallScreen && (
