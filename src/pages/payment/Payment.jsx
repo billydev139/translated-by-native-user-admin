@@ -1,35 +1,88 @@
 import React, { useState } from "react";
-import { FaStripe } from "react-icons/fa";
+import { FaStripe, FaPaypal } from "react-icons/fa";
 import Layout from "../../layout/ClientLayout";
-import { Link } from "react-router-dom";
-
-
+import Swal from "sweetalert2";
 
 const Payment = () => {
   const [showDiscountInput, setShowDiscountInput] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("Stripe"); // Default to Stripe
+  const [termsAccepted, setTermsAccepted] = useState(false); // Track if terms are accepted
+
+  // Handle payment method selection
+  const handlePaymentMethodSelect = (method) => {
+    setSelectedPaymentMethod(method);
+  };
+
+  // Handle Confirm Order action
+  const handleConfirmOrder = () => {
+    if (!termsAccepted) {
+      Swal.fire({
+        title: "Error",
+        text: "You must accept the terms and conditions before proceeding!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+    // Route to Stripe or PayPal based on the selected payment method
+    if (selectedPaymentMethod === "Stripe") {
+      // Redirect to Stripe payment route
+      window.location.href = "/stripe-payment"; // Adjust to your Stripe payment route
+    } else if (selectedPaymentMethod === "PayPal") {
+      // Redirect to PayPal payment route
+      window.location.href = "/paypal-payment"; // Adjust to your PayPal payment route
+    }
+  };
+
   return (
     <div>
       <Layout>
-        <div className="px-8 py-4 ">
+        <div className="px-8 py-4">
           <h2 className="text-base xl:text-lg 2xl:text-xl 3xl:text-2xl text-[#464E5F] font-semibold ">
             Select payment method
           </h2>
+
+          {/* Stripe Payment Option */}
           <div
-            className="flex lg:flex-row flex-col items-center
-           border border-[#E5EAEE] lg:p-4 xl:p-6 2xl:p-8 3xl:p-10 rounded mt-10 lg:gap-16 gap-0 hover:shadow-custom-light cursor-pointer"
+            onClick={() => handlePaymentMethodSelect("Stripe")}
+            className={`flex lg:flex-row flex-col items-center border lg:p-4 xl:p-6 2xl:p-8 3xl:p-10 rounded mt-10 lg:gap-16 gap-0 hover:shadow-custom-light cursor-pointer
+              ${selectedPaymentMethod === "Stripe" ? "border-[#FD8C04] shadow-custom" : "border-[#E5EAEE]"}`}
           >
             <div className="bg-[#EBF4F5] rounded px-4 py-3 2xl:px-5">
               <FaStripe className="size-4 xl:size-5 2xl:size-6 3xl:size-8" color="#2E8F96" />
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base text-[#464E5F] font-bold ">Stripe</p>
+              <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base text-[#464E5F] font-bold">
+                Stripe
+              </p>
               <p className="text-[10px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-[#464E5F] font-regular">
                 When you confirm, you will be redirected to the payment gateway
-                to make the payment by bank card and finalise the order.
+                to make the payment by bank card and finalize the order.
               </p>
             </div>
           </div>
+
+          {/* PayPal Payment Option */}
+          {/* <div
+            onClick={() => handlePaymentMethodSelect("PayPal")}
+            className={`flex lg:flex-row flex-col items-center border lg:p-4 xl:p-6 2xl:p-8 3xl:p-10 rounded mt-6 lg:gap-16 gap-0 hover:shadow-custom-light cursor-pointer
+              ${selectedPaymentMethod === "PayPal" ? "border-[#FD8C04] shadow-custom" : "border-[#E5EAEE]"}`}
+          >
+            <div className="bg-[#EBF4F5] rounded px-4 py-3 2xl:px-5">
+              <FaPaypal className="size-4 xl:size-5 2xl:size-6 3xl:size-8" color="#2E8F96" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base text-[#464E5F] font-bold">
+                PayPal
+              </p>
+              <p className="text-[10px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-[#464E5F] font-regular">
+                When you confirm, you will be redirected to the PayPal gateway
+                to complete the payment and finalize the order.
+              </p>
+            </div>
+          </div> */}
 
           <div className="my-6 space-y-7">
             <div>
@@ -85,9 +138,13 @@ const Payment = () => {
               <input
                 type="checkbox"
                 id="terms"
-                className="h-3 w-3 xl:h-4 xl:w-4 2xl:h-5 2xl:w-5 border border-solid border-transparent bg-[#EBEDF3] rounded appearance-none checked:appearance-white checked:bg-[#2E8F96]  checked:text-white  cursor-pointer"
+                className="h-3 w-3 xl:h-4 xl:w-4 2xl:h-5 2xl:w-5 border border-solid border-transparent bg-[#EBEDF3] rounded appearance-none checked:appearance-white checked:bg-[#2E8F96] checked:text-white cursor-pointer"
+                onChange={(e) => setTermsAccepted(e.target.checked)}
               />
-              <label htmlFor="terms" className="ml-2 text-xs xl:text-sm 2xl:text-base text-[#464E5F]">
+              <label
+                htmlFor="terms"
+                className="ml-2 text-xs xl:text-sm 2xl:text-base text-[#464E5F]"
+              >
                 I have read and accept the{" "}
                 <a href="#" className="text-[#2E8F96] hover:underline">
                   Terms and conditions of sale
@@ -96,11 +153,12 @@ const Payment = () => {
             </div>
 
             {/* Confirm Order Button */}
-            <Link href="/confirmed-order">
-              <button className="bg-[#FD8C04] text-white text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]">
-                Confirm order
-              </button>
-            </Link>
+            <button
+              onClick={handleConfirmOrder}
+              className="bg-[#FD8C04] text-white text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
+            >
+              Confirm order
+            </button>
           </div>
         </div>
       </Layout>
