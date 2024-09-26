@@ -44,13 +44,14 @@ const SignIn = () => {
   return (
     <div className="bg-[#305e73]">
       <div className=" m-auto  flex justify-center items-center h-screen">
-        <div className="2xsm:px-4 xsm:px-10 sm:px-12 py-12 rounded-md bg-white shadow-default ">
+        <div className="2xsm:px-2.5 xsm:px-8 sm:px-12 py-12 rounded-md bg-white shadow-default ">
           <div className="flex flex-wrap items-center justify-center ">
             <div className="w-full   ">
               <div className="w-full p-4 sm:p-12.5 xl:p-5">
                 <span className="mb-1.5 block font-medium">Start for free</span>
-                <h2 className="mb-9 text-2xl font-bold text-black  sm:text-title-xl2">
-                  Sign In to BigTranslation
+                {/* sm:text-title-xl2 */}
+                <h2 className="mb-9 text-xl sm:text-2xl md:text-3xl xl:text-title-xl2 font-bold text-black ">
+                  Sign In to Translation By Native
                 </h2>
 
                 <form onSubmit={formik.handleSubmit}>

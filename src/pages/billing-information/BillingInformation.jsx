@@ -430,7 +430,7 @@ const BillingInformation = () => {
           !accessToken && (
           <div className="flex items-center gap-3 pl-10 bg-[#ADD0D4] py-2.5 xl:py-3 2xl:py-4 rounded-md">
             <CiUser className="size-4 xl:size-5 2xl:size-6" color="#2E8F96" />
-            <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base">Already have an account?</p>
+            <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base"> Already have an account? </p>
             <Link
               to="/auth/login"
               className="text-[#2E8F96] text-[10px] xl:text-xs 2xl:text-sm font-semibold"
