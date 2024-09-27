@@ -1,9 +1,18 @@
 // src/components/Header.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { GiWorld } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import { myProfile } from "../../../redux/feature/auth/auth.service";
 // import { logo } from "../../../";
 
 const Header = () => {
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(myProfile());
+    // other side effects
+    //...
+  }, []);
   return (
     <div className={`flex justify-between items-center`}>
       <div>
