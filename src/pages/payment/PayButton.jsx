@@ -3,15 +3,19 @@ import { useSelector } from "react-redux";
 import { config } from "../../utils/EndPoints";
 import Swal from "sweetalert2";
 import api from "../../utils/Api";
+import { useState } from "react";
 
 const PayButton = ({ cartItems, paymentMethod, termsAccepted }) => {
 console.log("🚀 ~ PayButton ~ cartItems:", cartItems)
 const orderSummary = useSelector(state => state?.order?.orderSummary);
+// isLoading 
+const [isLoading, setIsLoading] = useState(false);
 cartItems = {
     ...cartItems,
     docData : orderSummary?.file
 }
     const handleStripeCheckout = async () => {
+        setIsLoading(true);
         try {
           const response = await api.post(`${config.BASE_URL}/payment/create-checkout-session`, {
             cartItems,
@@ -32,6 +36,7 @@ cartItems = {
             confirmButtonText: "OK",
           });
         }
+        setIsLoading(false);
       };
       
 
@@ -77,7 +82,7 @@ cartItems = {
         onClick={handleCheckout} // Use the updated checkout handler
         className="bg-[#FD8C04] text-white text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
       >
-        Confirm order
+        {isLoading ? "Processing..." : "Checkout"}
       </button>
     </>
   );
