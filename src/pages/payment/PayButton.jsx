@@ -6,7 +6,6 @@ import api from "../../utils/Api";
 import { useState } from "react";
 
 const PayButton = ({ cartItems, paymentMethod, termsAccepted }) => {
-console.log("🚀 ~ PayButton ~ cartItems:", cartItems)
 const orderSummary = useSelector(state => state?.order?.orderSummary);
 // isLoading 
 const [isLoading, setIsLoading] = useState(false);
