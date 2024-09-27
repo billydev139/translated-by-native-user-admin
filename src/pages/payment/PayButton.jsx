@@ -7,11 +7,14 @@ import { useState } from "react";
 
 const PayButton = ({ cartItems, paymentMethod, termsAccepted }) => {
 const orderSummary = useSelector(state => state?.order?.orderSummary);
+const User = useSelector((state) => state?.auth?.user);
+
 // isLoading 
 const [isLoading, setIsLoading] = useState(false);
 cartItems = {
     ...cartItems,
-    docData : orderSummary?.file
+    docData : orderSummary?.file,
+    userId : User?._id
 }
     const handleStripeCheckout = async () => {
         setIsLoading(true);
