@@ -13,7 +13,7 @@ import BillingInformation from "../pages/billing-information/BillingInformation"
 import Payment from "../pages/payment/Payment";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
 import CheckoutSuccess from "../pages/payment/CheckoutSuccess";
-import CheckoutCancelled from "../pages/payment/CheckoutCancelled";
+import CheckoutCancelled from "../pages/payment/CheckoutCancel";
 
 
 const AppRouter = () => {
@@ -45,7 +45,7 @@ const AppRouter = () => {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/order" element={<OrderList />} />
+        <Route path="/orders" element={<OrderList />} />
         <Route path="/order/detail" element={<OrderDetails />} />
         <Route path="/Notifications" element={<Notifications />} />
         <Route path="/my-account" element={<MyAccount />} />

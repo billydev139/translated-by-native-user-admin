@@ -16,7 +16,7 @@ const Callback = () => {
       localStorage.setItem('accessToken', token);
 
       // Redirect to the main application page
-      navigate('/order');
+      navigate('/orders');
     } else {
       // If the token is not truthy, redirect to the login page
       console.error('No token found, redirecting to login.');
