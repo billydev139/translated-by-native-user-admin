@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../redux/feature/order/order.service";
 import { authRegister } from "../../redux/feature/auth/auth.service";
 import Swal from "sweetalert2";
-import { clearOrderState, setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
+import { setCartData, setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMailOutline } from "react-icons/io5";
 
@@ -260,112 +260,121 @@ const BillingInformation = () => {
       individualIncome: orderSummary?.individualIncome || "",
     },
     validationSchema: getValidationSchema(userType),
-    onSubmit: (values, { resetForm }) => {
-      // if (orderSummary?.order_completed) {
-      //   navigate("/payment");
-      //   return ;
-      // }
-      const orderData = {
-        ...orderSummary,
-        ...values,
-      };    
-      dispatch(setCurrentCreateOrder(values));
-      const billData = {
-        name: orderData.name || "",
-        surname: orderData.surname || "",
-        phone: orderData.phone || "",
-        whatAreYou: {
-          userType: userType,
-          companyName: orderData.companyName || "",
-          VAT: orderData.VAT || "",
-          address: orderData.address || "",
-          country: orderData.country || "",
-          municipality: orderData.municipality || "",
-          postcode: orderData.postcode || ""
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const orderData = {
+          ...orderSummary,
+          ...values,
+        };
+    
+        // Log values to ensure they are set correctly
+        console.log('Order Data:', orderData);
+        
+        // Update order in the Redux store
+        dispatch(setCurrentCreateOrder(values));
+    
+        // Prepare billing data
+        const billData = {
+          name: orderData.name || "",
+          surname: orderData.surname || "",
+          phone: orderData.phone || "",
+          whatAreYou: {
+            userType: userType,
+            companyName: orderData.companyName || "",
+            VAT: orderData.VAT || "",
+            address: orderData.address || "",
+            country: orderData.country || "",
+            municipality: orderData.municipality || "",
+            postcode: orderData.postcode || ""
+          }
+        };
+    
+        const excludeKeys = ["RateType", "serviceType", "total", "WordCount"];
+        const orderKeys = ["serviceTypeId", "planId", "file", "topic", "targetLanguageId", "sourceLanguage"];
+    
+        // Create a new object to store the order details
+        const orderPayload = {};
+    
+        // Iterate through orderData and construct the payload for createOrder
+        for (const key in orderData) {
+          if (excludeKeys.includes(key)) continue; // Skip excluded keys
+    
+          if (orderData.hasOwnProperty(key)) {
+            let value = orderData[key];
+    
+            // Convert array values to comma-separated strings if necessary
+            if (Array.isArray(value)) {
+              value = value.join(",");
+            }
+    
+            // Handle specific keys like TargetLanguage, SourceLanguage, extras, and Plan
+            if (key === "TargetLanguage") {
+              const targetLanguagesId = orderData[key]?.map((targetLanguage) => targetLanguage._id);
+              orderPayload.targetLanguageId = targetLanguagesId;
+              continue;
+            }
+    
+            if (key === "file") {
+              const files = orderData[key]?.map((file) => file.fileName);
+              orderPayload.files = files;
+              continue;
+            }
+    
+            if (key === "SourceLanguage") {
+              orderPayload.sourceLanguage = value;
+              continue;
+            }
+    
+            if (key === "extras") {
+              const serviceTypeId = orderData[key]?.label?.map((item) => item._id);
+              orderPayload.serviceTypeId = serviceTypeId;
+              continue;
+            }
+    
+            if (key === "Plan") {
+              orderPayload.planId = orderData?.Plan?._id;
+              continue;
+            }
+    
+            // Only include necessary keys for the order
+            if (orderKeys.includes(key)) {
+              orderPayload[key] = value;
+            }
+          }
         }
-      };
-      const excludeKeys = ["RateType", "serviceType", "total", "WordCount"];
-      const orderKeys = ["serviceTypeId", "planId", "file", "topic", "targetLanguageId", "sourceLanguage"];
     
-      // Create a new object to store the order details
-      const orderPayload = {};
+        const orderPayloadData = {
+          ...orderPayload,
+          ...billData
+        };
     
-      // Iterate through orderData and construct the payload for createOrder
-      for (const key in orderData) {
-        if (excludeKeys.includes(key)) continue; // Skip excluded keys
+        // Construct the billing data
+        const register = {
+          email: orderData.email || "",
+          password: orderData.password || "",
+          repeat_password: orderData.repeat_password || "",
+        };
     
-        if (orderData.hasOwnProperty(key)) {
-          let value = orderData[key];
+        console.log('Final Order Payload Data:', orderPayloadData);
     
-          // Convert array values to comma-separated strings if necessary
-          if (Array.isArray(value)) {
-            value = value.join(",");
-          }
-    
-          // Handle specific keys like TargetLanguage, SourceLanguage, extras, and Plan
-          if (key === "TargetLanguage") {
-            const value = orderData[key] ;
-            const targetLanguagesId = value && value?.map((targetLanguage) => targetLanguage._id);
-            orderPayload.targetLanguageId = targetLanguagesId;
-            continue;
-          }
-
-          // Handle specific keys like TargetLanguage, SourceLanguage, extras, and Plan
-          if (key === "file") {
-            const value = orderData[key] ;
-            const files = value && value?.map((file) => file.fileName);
-            orderPayload.files = files;
-            continue;
-          }
-    
-          if (key === "SourceLanguage") {
-            orderPayload.sourceLanguage = value;
-            continue;
-          }
-    
-          if (key === "extras") {
-            const value = orderData[key] ;
-            const serviceTypeId = value?.label?.map((item) => item._id);
-            orderPayload.serviceTypeId = serviceTypeId;
-            continue;
-          }
-    
-          if (key === "Plan") {
-            orderPayload.planId = orderData?.Plan?._id;
-            continue;
-          }
-    
-          // Only include necessary keys for the order
-          if (orderKeys.includes(key)) {
-            orderPayload[key] = value;
-          }
-        }
-      }    
-      const orderPayloadData = {
-        ...orderPayload,
-        ...billData
-      }
-      // Construct the billing data
-      const WhatAreWe = {
-        ...billData,
-        email: orderData.email || "",
-        password: orderData.password || "",
-        repeat_password: orderData.repeat_password || "",
-      };    
-      // Function to handle registration and order creation
-  const registerAndCreateOrder = () => {
-    return new Promise((resolve, reject) => {
-      const token = localStorage.getItem('accessToken');
-
-      if (!token) {
-        // No token, register first
-        dispatch(authRegister(WhatAreWe))
-          .unwrap()
-          .then((registerResponse) => {
-            const token = registerResponse.content?.accessToken
-            dispatch(createOrder(orderPayloadData))
+        // Check accessToken status
+        if (!accessToken) {
+          console.log('No access token found, registering user...');
+          // No token, register first
+          dispatch(authRegister(register))
             .unwrap()
             .then((response) => {
+              // Ensure step_2 is being updated
+const updatedOrderSummary = {
+  ...orderSummary,
+  steps: {
+    ...orderSummary.steps,
+    step_2: true,
+  }
+};
+
+// Dispatch action with updated summary data
+              dispatch(setCurrentCreateOrder(updatedOrderSummary));
               Swal.fire({
                 title: 'Success',
                 text: response?.data?.message || 'Order created successfully!',
@@ -373,53 +382,46 @@ const BillingInformation = () => {
                 confirmButtonText: 'OK',
               }).then((swalResult) => {
                 if (swalResult.isConfirmed) {
-                  navigate("/order");
-                  dispatch(clearOrderState()); // Clear order details
+                  dispatch(setCartData(orderPayloadData));
+                  console.log('Navigating to payment...');
+                  navigate("/payment");
                 }
               });
             })
             .catch((error) => {
-              console.error('Error creating order:', error);
+              console.error('Error during registration:', error);
+              Swal.fire({
+                title: 'Error',
+                text: error?.response?.data?.message || 'Registration failed',
+                icon: 'error',
+                confirmButtonText: 'OK',
+              });
             });
-          })
-          .catch((error) => {
-            reject('Registration failed:', error);
-          });
-      } else {
-        // Token exists, proceed with order creation
-        resolve(token);
-      }
-    });
-  };
-
-  // Call the registration and order creation process
-  registerAndCreateOrder()
-    .then((accessToken) => {
-      // Proceed with order creation
-      dispatch(createOrder(orderPayloadData))
-        .unwrap()
-        .then((response) => {
-          Swal.fire({
-            title: 'Success',
-            text: response?.data?.message || 'Order created successfully!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          }).then((swalResult) => {
-            if (swalResult.isConfirmed) {
-                navigate("/order");
-                dispatch(clearOrderState()); // Clear order details
-            }
-          });
-        })
-        .catch((error) => {
-          console.error('Error creating order:', error);
+        } else {
+              // Ensure step_2 is being updated
+              const updatedOrderSummary = {
+                ...orderSummary,
+                steps: {
+                  ...orderSummary.steps,
+                  step_2: true,
+                }
+              };          // Token exists, proceed with order creation
+              dispatch(setCurrentCreateOrder(updatedOrderSummary));
+          dispatch(setCartData(orderPayloadData));
+          console.log('Navigating to payment page...');
+          navigate("/payment");
+        }
+      } catch (error) {
+        console.error('Error in order submission:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'An unexpected error occurred. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK',
         });
-    })
-    .catch((error) => {
-      // Handle registration failure
-      console.error('Error during registration or token retrieval:', error);
-    });
+      }
     }
+    
   });
 
   return (
