@@ -179,10 +179,11 @@ const Translation = () => {
     if (
       !selectedTargetId ||
       !selectedSourceLanguages ||
-      !choosePlan?._id ||
-      !selectedTopic ||
-      orderSummary?.file?.length < 1 ||
-      !orderSummary?.file
+      // !choosePlan?._id ||
+      !selectedTopic 
+      // ||
+      // orderSummary?.file?.length < 1 ||
+      // !orderSummary?.file
 
     ) {
       Swal.fire({
@@ -393,7 +394,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
         </div>
 
 
-        <div>
+        {/* <div>
           <h1 className="text-base 2xl:text-xl font-semibold text-textgray mt-9">
             Choose Rate
           </h1>
@@ -411,14 +412,14 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
               </div>
             </div>
           </div>
-          <RateSelector
+           <RateSelector
             choosePlan={choosePlan}
             setChoosePlan={setChoosePlan}
             createOrder={OrderSummary}
           />
-        </div>
+        </div> */}
 
-        <div className="mt-14">
+        {/* <div className="mt-14">
           <h1 className="text-base 2xl:text-[20px] font-semibold text-textgray pl-3 mb-8">
             Select extra services
           </h1>
@@ -426,7 +427,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             selectService={selectService}
             setSelectService={setSelectService}
           />
-        </div>
+        </div> */}
 
         <hr className="my-12 2xl:my-16" />
 

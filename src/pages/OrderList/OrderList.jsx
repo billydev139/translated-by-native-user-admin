@@ -138,7 +138,7 @@ const OrderList = () => {
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Order List" />
-      <div className="max-w-full overflow-auto bg-white">
+      <div className="max-w-full overflow-auto bg-white dark:bg-white">
         <div>
           <div className="py-4 gap-3 flex flex-col sm:flex-row justify-between items-center space-x-4">
             <SearchBar

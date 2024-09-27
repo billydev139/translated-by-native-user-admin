@@ -489,7 +489,7 @@ const updatedOrderSummary = {
                     className="block text-[#464E5F] text-[10px] xl:text-xs 2xl:text-sm font-regular mb-2"
                     htmlFor={field.id}
                   >
-                    {field.label}
+                    {field.label} *
                   </label>
                   <input
                     id={field.id}
@@ -559,7 +559,7 @@ const updatedOrderSummary = {
                     className="block text-[#464E5F] text-[10px] xl:text-xs 2xl:text-sm font-regular mb-2"
                     htmlFor={field.id}
                   >
-                    {field.label}
+                    {field.label} *
                   </label>
                   {field.type === "select" ? (
                     <div className="relative inline-block w-full">
