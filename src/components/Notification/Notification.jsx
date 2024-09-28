@@ -7,30 +7,30 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, handleClearFilters }) => {
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [notificationMessage, setNotificationMessage] = useState("");
 
   const handleMarkAsRead = () => {
-    
+
     dispatch(getSingleOrder(orderId))
-    .then(() => {
-      navigate("/order/detail");
-    })
-    
+      .then(() => {
+        navigate("/order/detail");
+      })
+
     dispatch(markAsRead(id))
-    .then(() => {
-      handleClearFilters();
-    })
-    .then(() => {
-      dispatch(getNotifications({
-        from: "",
-        to: ""
-      }));
-    
-    })
+      .then(() => {
+        handleClearFilters();
+      })
+      .then(() => {
+        dispatch(getNotifications({
+          from: "",
+          to: ""
+        }));
+
+      })
   }
 
   useEffect(() => {
@@ -61,13 +61,12 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
       setNotificationMessage(highlightedMessage);
     }
   }, [message]);
-  
+
 
   return (
     <>
       <div
-        onClick={handleMarkAsRead}
-        className={`${read ? "bg-white" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card cursor-pointer`}>
+        className={`${read ? "bg-white" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card`}>
 
         <div className="flex gap-4 sm:gap-8 w-11/12 items-center">
           {
@@ -78,7 +77,17 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
           }
           <div className="flex flex-col">
             <p className="text-[10px] sm:text-sm xl:text-base 2xl:text-lg 3xl:text-xl font-semibold"> {subject} </p>
-            <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-normal mt-0.5 sm:mt-2" dangerouslySetInnerHTML={{ __html: notificationMessage }} />
+            <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-normal mt-0.5 sm:mt-2">
+              {notificationMessage}
+              <span
+                onClick={handleMarkAsRead}
+                className="text-blue-500 cursor-pointer ms-3">
+                Click to view order details
+              </span>
+            </p>
+
+
+
           </div>
         </div>
 
