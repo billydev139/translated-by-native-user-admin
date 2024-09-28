@@ -25,6 +25,7 @@ const AppRouter = () => {
   return (
       <Routes>
         {/* <Route path="/auth/callback" element={<Callback/>} /> */}
+        
         <Route path="/" element={<Translation />} />
         <Route path="/billing-information" element={<BillingInformation />} />
         <Route path="/payment" element={<Payment />} />
@@ -33,15 +34,9 @@ const AppRouter = () => {
 
         {/* Dashboard route, protected by accessToken */}
         <Route
-          path="/dashboard"
-          element={accessToken ? <Dashboard /> : <Navigate to="/auth/login" replace />}
-        />
-           {/* SignIn route - Redirect to dashboard if user is already signed in */}
-           <Route
-          path="/auth/login"
-          element={accessToken ? <Navigate to="/dashboard" replace /> : <SignIn />}
-        />
-        <Route path="/auth/login" element={<SignIn />} />
+        path="/auth/login"
+        element={accessToken ? <Navigate to="/dashboard" replace /> : <SignIn />}
+      />
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />

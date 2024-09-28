@@ -98,19 +98,9 @@ const Notifications = () => {
         </div>
 
         {/* Clear Filters */}
-        <div className="flex justify-end mb-8">
-          <button
-            className="px-4 py-2 bg-[#E4E6EF] text-[#2E8F96] font-medium rounded focus:outline-none"
-            onClick={handleClearFilters}
-          >
-            Clear Filters
-          </button>
-        </div>
-
-        <hr className="text-[#eeeeee] my-7" />
-
+        <div className="flex justify-between">
         {/* Date Filters */}
-        <div className="flex space-x-4 mb-6">
+        <div className="flex space-x-4 mt-4">
           <input
             type="date"
             value={fromDate}
@@ -124,9 +114,18 @@ const Notifications = () => {
             className="px-3 py-2 border border-[#E4E6EF] rounded-md bg-[#F3F6F9] text-[#464E5F] focus:outline-none focus:border-[#69B3FF]"
           />
         </div>
+        <div className="mt-4">
+        <button
+            className="px-4 py-2 bg-[#E4E6EF] text-[#2E8F96] font-medium rounded focus:outline-none"
+            onClick={handleClearFilters}
+          >
+            Clear Filters
+          </button>
+        </div>
+        </div>
 
         {/* Notification List */}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mt-4">
           <table className="min-w-full bg-white">
             <tbody>
               {notifications?.length === 0 ? (
@@ -139,15 +138,15 @@ const Notifications = () => {
                 <>
                   <div className="p-4 bg-white rounded-2xl shadow-card border border-gray-4">
                     <div className="flex items-center justify-between bg-white px-4 py-4 mb-5 sm:mb-8">
-                      <p className="text-lg sm:text-2xl text-black font-semibold">
+                      <p className="text-md sm:text-lg text-black font-semibold">
                         Notifications
                       </p>
                       <button
                         onClick={handleMarkAllAsRead}
                         className="flex items-center gap-2 p-0 bg-transparent border-none cursor-pointer"
                       >
-                        <IoCheckmarkDoneOutline className="size-6 sm:size-8 font-semibold text-green-600" />
-                        <p className="text-lg sm:text-2xl text-green-600">
+                        <IoCheckmarkDoneOutline className="size-4 sm:size-6 font-semibold text-green-600" />
+                        <p className="text-md sm:text-lg text-green-600">
                           Mark all as read
                         </p>
                       </button>

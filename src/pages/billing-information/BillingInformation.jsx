@@ -361,7 +361,7 @@ const BillingInformation = () => {
         if (!accessToken) {
           console.log('No access token found, registering user...');
           // No token, register first
-          dispatch(authRegister(register))
+          dispatch(authRegister({...register, ...billData}))
             .unwrap()
             .then((response) => {
               // Ensure step_2 is being updated

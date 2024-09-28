@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaStripe, FaPaypal } from "react-icons/fa";
 import Layout from "../../layout/ClientLayout";
-import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import PayButton from "./PayButton";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,6 @@ const Payment = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state?.order?.CartData);
-  console.log("🚀 ~ Payment ~ cartData:", cartData)
 
   const [showDiscountInput, setShowDiscountInput] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);

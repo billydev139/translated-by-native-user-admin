@@ -9,7 +9,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: [], // Add the auth reducer to persist
+  whitelist: ["order"], // Add the auth reducer to persist
 }
 
 // Create a persisted reducer

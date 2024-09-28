@@ -42,6 +42,7 @@ const OrderList = () => {
     { title: "Target Language", field: "targetLanguage", span: 1 },
     { title: "Topic", field: "topic", span: 1 },
     { title: "Status", field: "status", span: 1 },
+    { title: "Payment", field: "payment_status", span: 1 },
     { title: "Total Pricing", field: "totalPricing", span: 1 },
     { title: "Action", field: "document", span: 1 },
   ];
