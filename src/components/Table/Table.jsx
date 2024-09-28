@@ -94,7 +94,7 @@ const Table = ({
                   ) : column.field === "payment_status" ? (
                     <div className="flex justify-between lg:w-[60%] items-start space-x-2">
                       <span>
-                      <Badge payment_status={item[column.field].charAt(0).toUpperCase() + item[column.field].slice(1)}/> 
+                      <Badge payment_status={item[column.field]?.charAt(0)?.toUpperCase() + item[column.field]?.slice(1)}/> 
                       </span>
                     </div>
                   ) : column.title === "Role" ? (
