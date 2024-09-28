@@ -128,6 +128,7 @@ const OrderList = () => {
 
 
   const viewOrderDetails = (id) => {
+    localStorage.setItem('orderId', id);
     dispatch(getSingleOrder(id))
     .then(() => {
       // dispatch(openModal({ componentName: OrderDetails }))
