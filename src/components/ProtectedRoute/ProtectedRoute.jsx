@@ -7,8 +7,10 @@ const ProtectedRoute = () => {
 
   if (!isTokenValid) {
     // Redirect to SignIn page if the user is not authenticated
-    return <Navigate to="/dashboard" state={{ from: location }} replace />;
+    return <Navigate to="/auth/login" state={{ from: location }} />;
   }
+
+  
 
   // If the user is authenticated, allow access to the route
   return <Outlet />;

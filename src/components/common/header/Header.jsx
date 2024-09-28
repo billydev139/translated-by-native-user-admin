@@ -6,10 +6,15 @@ import { myProfile } from "../../../redux/feature/auth/auth.service";
 // import { logo } from "../../../";
 
 const Header = () => {
-  
+  const accessToken = localStorage.getItem("accessToken");
+  const isTokenValid = accessToken && accessToken !== "false" && accessToken !== "null" && accessToken !== "undefined";
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(myProfile());
+    if (isTokenValid) {
+      // Redirect to SignIn page if the user is not authenticated
+      dispatch(myProfile());
+    }
     // other side effects
     //...
   }, []);

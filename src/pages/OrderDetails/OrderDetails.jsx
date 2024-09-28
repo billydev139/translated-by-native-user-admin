@@ -30,13 +30,25 @@ const OrderDetails = () => {
             <p className='text-green-600'> {singleOrderDetails.name + " " + singleOrderDetails.surname} </p>
           </div>
           
-          <div className='flex items-center gap-2 sm:gap-4 md:gap-8 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl'>
+          <div className='flex items-center gap-2 sm:gap-2 md:gap-8 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl'>
             <p className='hidden sm:block text-gray-6'> | </p>
             <p className={`${singleOrderDetails.status === "PROCESSING" ? "text-blue-500" : 
               singleOrderDetails.status === "TRANSLATED" ? "text-green-600" : singleOrderDetails.status === "REJECTED" ? 
               "text-red-500" : null}`}> 
-              <span className='text-gray-6'>Status: </span> 
+              <span className='text-gray-6'>Order Status: </span> 
               <Badge status={singleOrderDetails.status}/> 
+            </p>
+            <p className='hidden sm:block text-gray-6'> | </p>
+            <p> 
+              <span className='text-gray-6'>Payment Status: </span> 
+              {/* convert first letter of the status  to capitalised */}
+              <Badge payment_status={singleOrderDetails.payment_status.charAt(0).toUpperCase() + singleOrderDetails.payment_status.slice(1)}/>
+            </p>
+            <p className='hidden sm:block text-gray-6'> | </p>
+              {/* Payment intent id  */}
+            <p> 
+              <span className='text-gray-6'>Stripe Payment Intent ID: </span>
+              {singleOrderDetails.payment_intent}
             </p>
           </div>
           
