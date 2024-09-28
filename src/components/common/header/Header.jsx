@@ -17,7 +17,7 @@ const Header = () => {
     }
     // other side effects
     //...
-  }, []);
+  }, [isTokenValid]);
   return (
     <div className={`flex justify-between items-center`}>
       <div>
