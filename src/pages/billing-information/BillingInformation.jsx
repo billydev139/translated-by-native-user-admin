@@ -612,19 +612,20 @@ const BillingInformation = () => {
           </div>
 
           <div className="flex items-center justify-end gap-4">
+            <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
+              <IoMailOutline className="text-sm 2xl:text-base font-semibold" />
+              Send quote by email
+            </button>
+
             <button
               type="submit"
               disabled={orderLoading}
-              className="px-5 xl:px-6 2xl:px-8 py-3 text-white text-xs font-semibold 2xl:text-sm bg-[#2E8F96] rounded-md hover:bg-[#247679] focus:outline-none"
+              className="px-5 xl:px-6 2xl:px-8 py-3 text-white text-xs font-semibold 2xl:text-sm bg-[#FD8C04] rounded-md hover:bg-[#e69500] focus:outline-none"
             >
               {orderLoading ? "Please wait..." : "Continue"}
             </button>
 
 
-            <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
-              <IoMailOutline className="text-sm 2xl:text-base font-semibold" />
-              Send quote by email
-            </button>
           </div>
 
         </form>
