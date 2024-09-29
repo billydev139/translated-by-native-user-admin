@@ -34,36 +34,49 @@ const OrderDetails = () => {
                   <p> {singleOrderDetails?._id} </p>
                 </div>
 
-                <div className='flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-4 md:gap-8 lg:gap-20 mt-4'>
+                <div className="flex flex-col gap-4 sm:gap-6 mt-4">
+                  {/* First Row */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-4 md:gap-8 lg:gap-8">
+                    <div className="flex items-center gap-2 sm:gap-4 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl">
+                      <p className="text-gray-6">Customer Name:</p>
+                      <p className="text-green-600">{singleOrderDetails?.name}</p>
+                    </div>
 
-                  <div className='flex items-center gap-2 sm:gap-4 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl'>
-                    <p className='text-gray-6'> Customer Name: </p>
-                    <p className='text-green-600'> {singleOrderDetails?.name + " " + singleOrderDetails?.surname} </p>
+                    <div className="flex items-center gap-2 sm:gap-4 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl">
+                      <p className="text-gray-6">Stripe Customer ID:</p>
+                      <p className="text-green-600">{singleOrderDetails?.stripe_customer_id}</p>
+                    </div>
                   </div>
 
-                  <div className='flex items-center gap-2 sm:gap-2 md:gap-8 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl'>
-                    <p className='hidden sm:block text-gray-6'> | </p>
-                    <p className={`${singleOrderDetails?.status === "PROCESSING" ? "text-blue-500" :
-                      singleOrderDetails?.status === "TRANSLATED" ? "text-green-600" : singleOrderDetails?.status === "REJECTED" ?
-                        "text-red-500" : null}`}>
-                      <span className='text-gray-6'>Order Status: </span>
-                      <Badge status={singleOrderDetails?.status} />
-                    </p>
-                    <p className='hidden sm:block text-gray-6'> | </p>
-                    <p>
-                      <span className='text-gray-6'>Payment Status: </span>
-                      {/* convert first letter of the status  to capitalised */}
-                      <Badge payment_status={singleOrderDetails?.payment_status?.charAt(0)?.toUpperCase() + singleOrderDetails?.payment_status?.slice(1)} />
-                    </p>
-                    <p className='hidden sm:block text-gray-6'> | </p>
-                    {/* Payment intent id  */}
-                    <p>
-                      <span className='text-gray-6'>Stripe Payment Intent ID: </span>
-                      {singleOrderDetails?.payment_intent}
-                    </p>
-                  </div>
+                  <hr className="text-gray-4 border border-gray-4" />
 
+                  {/* Second Row */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 md:gap-8 lg:gap-8">
+                    <div className="flex items-center gap-2 sm:gap-2 md:gap-8 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl">
+                      <p className={`${singleOrderDetails?.status === "PROCESSING" ? "text-blue-500" :
+                        singleOrderDetails?.status === "TRANSLATED" ? "text-green-600" : singleOrderDetails?.status === "REJECTED" ?
+                          "text-red-500" : null}`}>
+                        <span className="text-gray-6">Order Status: </span>
+                        <Badge status={singleOrderDetails?.status} />
+                      </p>
+
+                      <p className="hidden sm:block text-gray-6">|</p>
+
+                      <p>
+                        <span className="text-gray-6">Payment Status: </span>
+                        <Badge payment_status={singleOrderDetails?.payment_status?.charAt(0)?.toUpperCase() + singleOrderDetails?.payment_status?.slice(1)} />
+                      </p>
+
+                      <p className="hidden sm:block text-gray-6">|</p>
+
+                      <p>
+                        <span className="text-gray-6">Stripe Payment Intent ID: </span>
+                        {singleOrderDetails?.payment_intent}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+
 
                 <hr className='mt-4 xsm:mt-6 sm:mt-10 mb-6 text-gray-4 border border-gray-4' />
 
@@ -129,17 +142,18 @@ const OrderDetails = () => {
 
                     <div className='flex items-center gap-1 xsm:gap-2 lg:gap-4 mt-2 sm:mt-4'>
                       <p className='text-[10px] xsm:text-[8px] sm:text-[10px] md:text-xs lg:text-sm 2xl:text-base 3xl:text-xl font-semibold text-black'> Total Pricing: </p>
-                      <p className='text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-semibold text-green-500'> {singleOrderDetails?.totalPricing} </p>
+                      <p className='text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-semibold text-green-500'> € {singleOrderDetails?.totalPricing} </p>
                     </div>
                   </div>
 
                   <div className='w-1/2'>
-                    <p className='text-black text-[10px] xsm:text-[8px] sm:text-[10px] md:text-xs lg:text-sm 2xl:text-base 3xl:text-xl font-semibold'> Address </p>
-                    <p className='mt-2 sm:mt-4 text-gray-6 text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-medium'> {singleOrderDetails?.whatAreYou?.address}, </p>
+                    <p className='text-black text-[10px] xsm:text-[8px] sm:text-[10px] md:text-xs lg:text-sm 2xl:text-base 3xl:text-xl font-semibold'> Billing Address </p>
+                    <p className='mt-2 sm:mt-4 text-gray-6 text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-medium'> Line 1 : {singleOrderDetails?.customer_address?.line1}, </p>
+                    <p className='mt-1 text-gray-6 text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-medium'> Line 2 : {singleOrderDetails?.customer_address?.line2}, </p>
                     <p className='mt-0.5 sm:mt-1 text-gray-6 text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-medium'>
-                      Postcode: {singleOrderDetails?.whatAreYou?.postcode}, {singleOrderDetails?.whatAreYou?.country}
+                      Postcode: {singleOrderDetails?.customer_address?.postal_code}, {singleOrderDetails?.customer_address?.city} {singleOrderDetails?.customer_address?.country} {singleOrderDetails?.customer_address?.state}
                     </p>
-                    <p className='mt-1 xsm:mt-2 sm:mt-4 text-gray-6 text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-medium'> Contact: {singleOrderDetails?.phone} </p>
+                    <p className='mt-1 text-gray-6 text-[8px] sm:text-[10px] md:text-xs lg:text-xs 2xl:text-sm 3xl:text-lg font-medium'> Contact: {singleOrderDetails?.phone} </p>
                   </div>
 
                 </div>
