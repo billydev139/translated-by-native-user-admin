@@ -81,7 +81,7 @@ const Payment = () => {
           </div> */}
 
           <div className="my-6 space-y-7">
-            <div>
+            {/* <div>
               <p
                 className="cursor-pointer text-xs xl:text-sm 2xl:text-base text-[#2E8F96]"
                 onClick={() => setShowDiscountInput(!showDiscountInput)}
@@ -102,7 +102,7 @@ const Payment = () => {
                   </button>
                 </div>
               )}
-            </div>
+            </div> */}
 
             <div>
               <p
