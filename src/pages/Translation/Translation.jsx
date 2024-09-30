@@ -179,7 +179,7 @@ const Translation = () => {
     if (
       !selectedTargetId ||
       !selectedSourceLanguages ||
-      !choosePlan?._id ||
+      // !choosePlan?._id ||
       !selectedTopic ||
       orderSummary?.file?.length < 1 ||
       !orderSummary?.file
@@ -393,7 +393,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
         </div>
 
 
-        <div>
+        {/* <div>
           <h1 className="text-base 2xl:text-xl font-semibold text-textgray mt-9">
             Choose Rate
           </h1>
@@ -426,7 +426,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             selectService={selectService}
             setSelectService={setSelectService}
           />
-        </div>
+        </div> */}
 
         <hr className="my-12 2xl:my-16" />
 

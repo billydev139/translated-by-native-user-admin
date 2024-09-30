@@ -41,11 +41,6 @@ const OrderDetails = () => {
                       <p className="text-gray-6">Customer Name:</p>
                       <p className="text-green-600">{singleOrderDetails?.name}</p>
                     </div>
-
-                    <div className="flex items-center gap-2 sm:gap-4 text-[8px] xsm:text-[10px] sm:text-xs md:text-sm 2xl:text-lg 3xl:text-xl">
-                      <p className="text-gray-6">Stripe Customer ID:</p>
-                      <p className="text-green-600">{singleOrderDetails?.stripe_customer_id}</p>
-                    </div>
                   </div>
 
                   <hr className="text-gray-4 border border-gray-4" />
@@ -70,7 +65,7 @@ const OrderDetails = () => {
                       <p className="hidden sm:block text-gray-6">|</p>
 
                       <p>
-                        <span className="text-gray-6">Stripe Payment Intent ID: </span>
+                        <span className="text-gray-6">Payment Intent ID: </span>
                         {singleOrderDetails?.payment_intent}
                       </p>
                     </div>

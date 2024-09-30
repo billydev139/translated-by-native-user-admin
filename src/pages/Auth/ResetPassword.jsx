@@ -20,14 +20,14 @@ const ResetPassword = () => {
       repeatPassword: "",
     },
     validationSchema: resetPasswordSchema, // Validation schema for password
-    onSubmit: async (values) => {
+    onSubmit: async (values, {resetForm}) => {
       console.log("Resetting password with token: ", resetToken);
       
       await dispatch(resetUserPassword({ resetToken, password: values.password, repeatPassword: values.repeatPassword }))
         .then(() => {
           console.log("Password reset successfully");
           navigate("/auth/login"); // Redirect to login page after resetting password
-
+          resetForm(); // Reset the form after successful password reset
         })
         .catch((error) => {
           console.error("Error resetting password: ", error);

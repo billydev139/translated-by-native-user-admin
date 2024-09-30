@@ -17,10 +17,10 @@ const Payment = () => {
   const [accessToken, setAccessToken] = useState(false);
 
   const getToken = () => localStorage.getItem("accessToken");
-  
+
   useEffect(() => {
     const token = getToken();
-    
+
     if (token && token !== "undefined" && token !== "null" && token !== "") {
       setAccessToken(token); // Token is valid, set to true
     } else {
@@ -134,7 +134,7 @@ const Payment = () => {
               <input
                 type="checkbox"
                 id="terms"
-                className="h-3 w-3 xl:h-4 xl:w-4 2xl:h-5 2xl:w-5 border border-solid border-transparent bg-[#EBEDF3] rounded appearance-none checked:appearance-white checked:bg-[#2E8F96] checked:text-white cursor-pointer"
+                className="h-3 w-3 xl:h-4 xl:w-4 2xl:h-5 2xl:w-5 border border-solid border-transparent bg-[#EBEDF3] rounded appearance-none checked:bg-[#2E8F96] checked:border-[#2E8F96] cursor-pointer"
                 onChange={(e) => setTermsAccepted(e.target.checked)}
               />
               <label
@@ -147,16 +147,26 @@ const Payment = () => {
                 </a>
               </label>
             </div>
+
+            <style jsx>{`
+  input[type="checkbox"]:checked {
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M5.333 10.2l-2.866-2.867a.733.733 0 00-1.033 1.034l3.4 3.4a.733.733 0 001.033 0l7.4-7.4a.733.733 0 00-1.034-1.033L5.333 10.2z" fill="%23FFF"/%3E%3C/svg%3E');
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+`}</style>
+
             {accessToken ? (
-                <PayButton cartItems={cartData} paymentMethod={selectedPaymentMethod} termsAccepted={termsAccepted}/>
-              ) : (
-                <button
-                  className="cart-login"
-                  onClick={() => navigate("/auth/login")}
-                >
-                  Login to Check out
-                </button>
-              )}
+              <PayButton cartItems={cartData} paymentMethod={selectedPaymentMethod} termsAccepted={termsAccepted} />
+            ) : (
+              <button
+                className="cart-login"
+                onClick={() => navigate("/auth/login")}
+              >
+                Login to Check out
+              </button>
+            )}
           </div>
         </div>
       </Layout>
