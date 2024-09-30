@@ -149,4 +149,58 @@ const updateProfile = createAsyncThunk(
   }
 );
 
-export { authRegister, authLogin, logout, changePassword, myProfile, updateProfile };
+// Send Verification Email Link
+const sendPasswordResetEmail = createAsyncThunk(
+  'auth/sendPasswordResetEmail',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`${config.endPoints.sendPasswordResetEmail}`, data);
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Success',
+          text: response?.data?.message,
+          icon: 'success',
+          timer: 2000,
+        });
+      }
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error?.response?.data?.message,
+        icon: 'error',
+        timer: 2000,
+      });
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Reset Password
+const resetUserPassword = createAsyncThunk(
+  'auth/resetUserPassword',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`${config.endPoints.resetUserPassword}`, data);
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Success',
+          text: response?.data?.message,
+          icon: 'success',
+          timer: 2000,
+        });
+      }
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error?.response?.data?.message,
+        icon: 'error',
+        timer: 2000,
+      });
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export { authRegister, authLogin, logout, changePassword, myProfile, updateProfile, sendPasswordResetEmail, resetUserPassword };

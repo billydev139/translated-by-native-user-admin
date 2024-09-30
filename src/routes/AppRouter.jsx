@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import SignIn from "../pages/SignIn/SignIn";
+import SignIn from "../pages/Auth/SignIn";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
 import Notifications from "../pages/notifications/Notifications";
@@ -14,6 +14,9 @@ import Payment from "../pages/payment/Payment";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
 import CheckoutSuccess from "../pages/payment/CheckoutSuccess";
 import CheckoutCancelled from "../pages/payment/CheckoutCancel";
+import SendVerificationEmail from "../pages/Auth/SendVerifcationEmail";
+import ForgetPassword from "../pages/Auth/ForgetPassword";
+import ResetPassword from "../pages/Auth/ResetPassword";
 
 
 const AppRouter = () => {
@@ -31,6 +34,9 @@ const AppRouter = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
         <Route path="/checkout-cancelled" element={<CheckoutCancelled />} />
+        <Route path="/send-password-reset-email" element={<ForgetPassword />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+
 
         {/* Dashboard route, protected by accessToken */}
         <Route
