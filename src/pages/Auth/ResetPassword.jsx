@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { resetUserPassword } from "../../redux/feature/auth/auth.service"; // Assuming you have this action
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { resetPasswordSchema } from "../../schema/auth.schema";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing eye icons
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { resetToken } = useParams(); // Get the token from URL parameters
 
   const [showPassword, setShowPassword] = useState(false); // State for showing password
@@ -25,6 +26,8 @@ const ResetPassword = () => {
       await dispatch(resetUserPassword({ resetToken, password: values.password, repeatPassword: values.repeatPassword }))
         .then(() => {
           console.log("Password reset successfully");
+          navigate("/auth/login"); // Redirect to login page after resetting password
+
         })
         .catch((error) => {
           console.error("Error resetting password: ", error);
