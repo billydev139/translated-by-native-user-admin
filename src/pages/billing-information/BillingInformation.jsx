@@ -377,7 +377,7 @@ const BillingInformation = () => {
               dispatch(setCurrentCreateOrder(updatedOrderSummary));
               Swal.fire({
                 title: 'Success',
-                text: response?.data?.message || 'Order created successfully!',
+                text: response?.data?.message || 'Registration successful',
                 icon: 'success',
                 confirmButtonText: 'OK',
               }).then((swalResult) => {

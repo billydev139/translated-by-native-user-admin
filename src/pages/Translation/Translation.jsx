@@ -106,7 +106,7 @@ const Translation = () => {
       0
     );
     // Calculate total cost
-    const total = rateCharges + extraServicesCharges + targetLanguagesPrice;
+    const total =  targetLanguagesPrice;
 
     // Create summary data object
     const summaryData = {
@@ -137,8 +137,8 @@ const Translation = () => {
       selectedTopic &&
       selectedSourceLanguages &&
       selectedTargetLanguages &&
-      choosePlan &&
-      selectService.length > 0 &&
+      // choosePlan &&
+      // selectService.length > 0 &&
       wordCount &&
       orderSummary?.file
     ) {
@@ -161,8 +161,8 @@ const Translation = () => {
     selectedTopic,
     selectedSourceLanguages,
     selectedTargetLanguages,
-    choosePlan,
-    selectService,
+    // choosePlan,
+    // selectService,
     wordCount,
 
     dispatch,
