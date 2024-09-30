@@ -24,8 +24,8 @@ export const sendPasswordReset = Yup.object().shape({
 export const resetPasswordSchema = Yup.object().shape({
   password: Yup.string().min(6, 'Must be at least 6 characters')
   .matches(/[A-Z]/, 'Must contain at least one capital letter')
-  .required('Required'),
+  .required('Password is required'),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Required'),
+    .required('Repeat password is required'),
 });
