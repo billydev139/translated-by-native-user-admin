@@ -37,7 +37,7 @@ const OrderList = () => {
 
   //Table Columns
   const columns = [
-    { title: "Customer", field: "customer", span: 1 },
+    { title: "Customer", field: "name", span: 1 },
     { title: "Source Language", field: "sourceLanguage", span: 1 },
     { title: "Target Language", field: "targetLanguage", span: 1 },
     { title: "Topic", field: "topic", span: 1 },

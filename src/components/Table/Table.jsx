@@ -75,11 +75,7 @@ const Table = ({
                   )}
 
                   {/* Render customer name */}
-                  {column.field === "customer" ? (
-                    <div className="flex justify-between lg:w-[60%] items-start space-x-2">
-                      <span className="underline">{item?.name + " " + item?.surname}</span>
-                    </div>
-                  ) : column.field === "targetLanguage" ? (
+                  { column.field === "targetLanguage" ? (
                     <div className="flex gap-1 flex-wrap">
                       {item[column.field].map((language, index) => (
                         <span key={index}>
@@ -89,7 +85,7 @@ const Table = ({
                     </div>
                   ) : column.field === "name" ? (
                     <div className="flex justify-between lg:w-[60%] items-start space-x-2">
-                      <span className="underline">{item?.name + " " + item?.surname}</span>
+                      <span className="underline">{item?.name}</span>
                     </div>
                   ) : column.field === "payment_status" ? (
                     <div className="flex justify-between lg:w-[60%] items-start space-x-2">

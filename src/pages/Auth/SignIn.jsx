@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schema/auth.schema";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin, myProfile } from "../../redux/feature/auth/auth.service";
 
@@ -101,7 +101,7 @@ const SignIn = () => {
 
                   <div className="mb-6">
                     <label className="mb-2.5 block font-medium text-black dark:text-white">
-                      Re-type Password
+                      Password
                     </label>
                     <div className="relative">
                       <input
@@ -145,6 +145,13 @@ const SignIn = () => {
                         <div className="text-red-500 mt-2">{formik.errors.password}</div>
                       ) : (null)
                     }
+                    {/* Forget Password */}
+                    <Link
+                      to="/send-password-reset-email"
+                      className="block text-[#305e73] text-sm font-medium mt-2"
+                    >
+                      Forget Password?
+                    </Link>
                   </div>
                   
                   <div className="mb-5">

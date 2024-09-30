@@ -420,7 +420,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
 
         <div className="mt-14">
           <h1 className="text-base 2xl:text-[20px] font-semibold text-textgray pl-3 mb-8">
-            Select extra services
+            Select extra services <span className="text-[#B5B5C3] text-xs">(optional)</span>
           </h1>
           <ExtraServices
             selectService={selectService}

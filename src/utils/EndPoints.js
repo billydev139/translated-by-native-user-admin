@@ -5,6 +5,8 @@ const config = {
     authLogin: 'auth/login',
     authLogout: 'auth/logOut',
     authRegister: 'auth/register',
+    sendPasswordResetEmail : 'auth/reset-password-link',
+    resetUserPassword :  'auth/reset-password',
     myProfile : 'auth/profile',
     updateProfile : 'auth/updateProfile',
     myOrder: 'order/myOrder',
