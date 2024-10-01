@@ -12,6 +12,7 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
   const [notificationMessage, setNotificationMessage] = useState("");
 
   const handleMarkAsRead = () => {
+    localStorage.setItem("orderId", orderId);
     dispatch(getSingleOrder({id : orderId}))
       .then(() => {
         navigate("/order/detail");

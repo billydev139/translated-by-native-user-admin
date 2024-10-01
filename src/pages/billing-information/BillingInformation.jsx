@@ -88,12 +88,6 @@ const BillingInformation = () => {
       placeholder: "Company Name",
     },
     {
-      id: "VAT",
-      type: "text",
-      label: "Company VAT",
-      placeholder: "Company VAT",
-    },
-    {
       id: "address",
       type: "text",
       label: "Company Address",
@@ -134,18 +128,6 @@ const BillingInformation = () => {
       placeholder: "Individual ID",
     },
     {
-      id: "individualIncome",
-      type: "text",
-      label: "Annual Income",
-      placeholder: "Annual Income",
-    },
-    {
-      id: "VAT",
-      type: "text",
-      label: "VAT",
-      placeholder: "VAT",
-    },
-    {
       id: "country",
       type: "select",
       label: "Country",
@@ -179,12 +161,7 @@ const BillingInformation = () => {
   ];
 
   const selfEmployedDetails = [
-    {
-      id: "VAT",
-      type: "text",
-      label: "VAT",
-      placeholder: "VAT",
-    },
+    
     {
       id: "address",
       type: "text",
@@ -250,14 +227,12 @@ const BillingInformation = () => {
       name: orderSummary?.name || "",
       surname: orderSummary?.surname || "",
       phone: orderSummary?.phone || "",
-      VAT: orderSummary?.VAT || "",
       address: orderSummary?.address || "",
       municipality: orderSummary?.municipality || "",
       postcode: orderSummary?.postcode || "",
       country: orderSummary?.country || "",
       companyName: orderSummary?.companyName || "",
       individualId: orderSummary?.individualId || "",
-      individualIncome: orderSummary?.individualIncome || "",
     },
     validationSchema: getValidationSchema(userType),
     onSubmit: async (values, { resetForm }) => {
@@ -281,7 +256,6 @@ const BillingInformation = () => {
           whatAreYou: {
             userType: userType,
             companyName: orderData.companyName || "",
-            VAT: orderData.VAT || "",
             address: orderData.address || "",
             country: orderData.country || "",
             municipality: orderData.municipality || "",
