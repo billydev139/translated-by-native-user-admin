@@ -120,7 +120,8 @@ const Payment = () => {
                     name="confirmationEmail"
                     type="email"
                     placeholder="Email"
-                    className="p-3 bg-[#F3F6F9] text-[#B5B5C3] rounded-md w-72 focus:outline-none"
+                    //text-[#B5B5C3]
+                    className="p-3 bg-[#F3F6F9] text-[#464E5F] rounded-md w-72 focus:outline-none"
                   />
                 </div>
               )}
