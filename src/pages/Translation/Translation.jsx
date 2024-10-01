@@ -89,6 +89,7 @@ const Translation = () => {
       .then(() => dispatch(getTargetLanguages()))
       .then(() => dispatch(getTopics()));
   }, [dispatch]);
+  
   // Define a summary data object based on your form inputs
   useEffect(() => {
     // Calculate rate charges and extra services
