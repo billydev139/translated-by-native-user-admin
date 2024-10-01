@@ -142,7 +142,7 @@ const OrderList = () => {
       <Breadcrumb pageName="Order List" />
       <div className="max-w-full overflow-auto bg-white dark:bg-white">
         <div>
-          <div className="py-4 gap-3 flex flex-col sm:flex-row justify-between items-center space-x-4">
+          <div className="py-2 p-1 gap-3 flex flex-col sm:flex-row justify-between items-center space-x-4">
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -155,7 +155,8 @@ const OrderList = () => {
           {isLoading ? (
             <Spinner/>
           ) : totalRecords > 0 ? (
-            <div className="min-h-[300px] md:min-h-[600px] bg-white overflow-x-auto">
+            // overflow-x-auto
+            <div className="min-h-[300px] md:min-h-[600px] bg-white p-1">
               <Table
                 columns={columns}
                 data={myOrderListData}
