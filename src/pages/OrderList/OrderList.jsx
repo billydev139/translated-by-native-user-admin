@@ -29,7 +29,6 @@ const OrderList = () => {
   const isLoading = useSelector((state) => state?.loading[getMyOrder.typePrefix]);
   
   const myOrderListData = useSelector((state) => state?.order?.myOrder?.orders?.orders);
-  console.log("orderData => ", myOrderListData);
   
   const totalPages = useSelector((state) => state?.order?.myOrder?.orders?.pages);
   const totalRecords = useSelector((state) => state?.order?.myOrder?.orders?.total);
