@@ -86,9 +86,11 @@ const ClientLayout = ({ children }) => {
 
   return (
     <div className="mx-auto my-auto">
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col gap-4">
+        {/* <Header /> */}
         <div style={{ width: width >= 1536 ? "66.5%" : width < 1024 ? "100%" : "70%" }} className="px-8 py-6">
           <Header />
+          
           {isSmallScreen && (
             <div style={{ display: "block" }}>
               <OrderSummaryMobile className="w-full max-w-xs mx-auto" />
