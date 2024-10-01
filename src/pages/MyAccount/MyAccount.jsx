@@ -12,7 +12,7 @@ const MyAccount = () => {
   
   const updateProfileLoading = useSelector((state) => state?.loading[updateProfile.typePrefix]) || false;
   
-  const userDetails = useSelector((state) => state.auth.user);
+  const userDetails = useSelector((state) => state?.auth?.user);
   const [profileImagePreview, setProfileImagePreview] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
 
@@ -150,14 +150,13 @@ const MyAccount = () => {
     }
   };
 
-  // Set form values when userDetails are updated
   useEffect(() => {
     if (userDetails) {
       formik.setValues({
-        name: userDetails.name || "",
-        surname: userDetails.surname || "",
-        phone: userDetails.phone || "",
-        email: userDetails.email || "",
+        name: userDetails?.name || "",
+        surname: userDetails?.surname || "",
+        phone: userDetails?.phone || "",
+        email: userDetails?.email || "",
         newPassword: "",
         repeatPassword: "",
       });
@@ -166,7 +165,7 @@ const MyAccount = () => {
   
   return (
     <DefaultLayout>
-      <div className="max-w-6xl mx-auto p-6 bg-white shadow-md rounded-lg">
+      <div className="max-w-6xl mx-auto border p-6 bg-white shadow-md rounded-2xl">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-semibold text-[#464E5F]">
             User information

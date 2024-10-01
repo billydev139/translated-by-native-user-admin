@@ -93,7 +93,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 to="/dashboard"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
-                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                    isActive ? "bg-[#2E8F96] text-white" : "text-white"
                   }`
                 }
               >
@@ -105,7 +105,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 to="/orders"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
-                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                    isActive ? "bg-[#2E8F96] text-white" : "text-white"
                   }`
                 }
               >
@@ -117,7 +117,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 to="/Notifications"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
-                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                    isActive ? "bg-[#2E8F96] text-white" : "text-white"
                   }`
                 }
               >
@@ -142,7 +142,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 to="/language-price"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
-                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                    isActive ? "bg-[#2E8F96] text-white" : "text-white"
                   }`
                 }
               >
@@ -152,10 +152,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </ul> */}
             <ul className="mb-6 flex flex-col gap-1.5">
               <NavLink
+              // text-[#464E5F]
                 to="/my-account"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
-                    isActive ? "bg-[#2E8F96] text-white" : "text-[#464E5F]"
+                    isActive ? "bg-[#2E8F96] text-white" : "text-white"
+                    
                   }`
                 }
               >

@@ -109,8 +109,9 @@ const Payment = () => {
                 className="cursor-pointer text-xs xl:text-sm 2xl:text-base text-[#2E8F96]"
                 onClick={() => setShowEmailInput(!showEmailInput)}
               >
-                Do you want to send the confirmation email to a different email
-                address to that of your account?
+                {/* Do you want to send the confirmation email to a different email
+                address to that of your account? */}
+                Do you want to send the confirmation email to a different email address than your account's?
               </p>
               {showEmailInput && (
                 <div className="mt-5">
