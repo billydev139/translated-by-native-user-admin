@@ -26,27 +26,27 @@ const Table = ({
   console.log("DATA INSIDE TABLE: ", data);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-[#e5e5e5] shadow-lg mt-3">
-      {/* Wrapper to handle horizontal scrolling */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left bg-white p-9 table-auto">
-          <thead>
-            <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              {columns.map((column, index) => (
-                <th key={index} className="p-1">
-                  <h5 className="min-w-[150px] text-subtitle-xsm py-3 px-4 font-medium text-black dark:text-white">
-                    {column.title}
-                  </h5>
-                </th>
-              ))}
-            </tr>
-          </thead>
+<div className="overflow-hidden rounded-xl border border-[#e5e5e5] shadow-lg mt-3">
+  {/* Wrapper to handle horizontal scrolling */}
+  <div className="overflow-x-auto">
+    <table className="w-full text-left bg-white p-9 table-auto">
+      <thead>
+        <tr className="bg-gray-2 text-left dark:bg-meta-4">
+          {columns.map((column, index) => (
+            <th key={index} className="p-1">
+              <h5 className="min-w-[150px] whitespace-nowrap text-subtitle-xsm py-4 px-5 font-medium text-black dark:text-white">
+                {column.title}
+              </h5>
+            </th>
+          ))}
+        </tr>
+      </thead>
 
           <tbody className="bg-white dark:bg-boxdark">
             {data?.map((item, rowIndex) => (
               <tr key={item._id || rowIndex} className="border-t border-[#EEEEEE] dark:border-strokedark">
                 {columns?.map((column, colIndex) => (
-                  <td key={colIndex} className="border-b border-[#eee] py-3 px-4 dark:border-strokedark">
+                  <td key={colIndex} className="border-b border-[#eee] py-4 px-6 dark:border-strokedark">
                     <div className="text-subtitle-xsm text-[#495057] dark:text-bodydark">
                       {/* Render action column */}
                       {column.field === "action" && (
