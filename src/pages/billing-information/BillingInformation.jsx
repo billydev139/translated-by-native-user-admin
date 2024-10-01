@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { setCartData, setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMailOutline } from "react-icons/io5";
+import CountrySelect from "../../utils/CountrySelect";
 
 const BillingInformation = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,12 @@ const BillingInformation = () => {
   });
   const orderSummary = useSelector((state) => state?.order?.orderSummary);
   const [accessToken, setAccessToken] = useState(false);
-
-  const getToken = () => localStorage.getItem("accessToken");
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  
+  // Function to handle the change of selected country
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption); // Update the selected country state
+  }; const getToken = () => localStorage.getItem("accessToken");
 
   useEffect(() => {
     const token = getToken();
@@ -88,12 +93,6 @@ const BillingInformation = () => {
       placeholder: "Company Name",
     },
     {
-      id: "VAT",
-      type: "text",
-      label: "Company VAT",
-      placeholder: "Company VAT",
-    },
-    {
       id: "address",
       type: "text",
       label: "Company Address",
@@ -103,14 +102,7 @@ const BillingInformation = () => {
       id: "country",
       type: "select",
       label: "Country",
-      options: [
-        "Afghanistan",
-        "Albania",
-        "Algeria",
-        "Andorra",
-        "Angola",
-        // Add more countries as needed
-      ],
+      options: []
     },
     {
       id: "municipality",
@@ -134,28 +126,10 @@ const BillingInformation = () => {
       placeholder: "Individual ID",
     },
     {
-      id: "individualIncome",
-      type: "text",
-      label: "Annual Income",
-      placeholder: "Annual Income",
-    },
-    {
-      id: "VAT",
-      type: "text",
-      label: "VAT",
-      placeholder: "VAT",
-    },
-    {
       id: "country",
       type: "select",
       label: "Country",
       options: [
-        "Afghanistan",
-        "Albania",
-        "Algeria",
-        "Andorra",
-        "Angola",
-        // Add more countries as needed
       ],
     },
     {
@@ -179,12 +153,7 @@ const BillingInformation = () => {
   ];
 
   const selfEmployedDetails = [
-    {
-      id: "VAT",
-      type: "text",
-      label: "VAT",
-      placeholder: "VAT",
-    },
+
     {
       id: "address",
       type: "text",
@@ -207,14 +176,7 @@ const BillingInformation = () => {
       id: "country",
       type: "select",
       label: "Country",
-      options: [
-        "Afghanistan",
-        "Albania",
-        "Algeria",
-        "Andorra",
-        "Angola",
-        // Add more countries as needed
-      ],
+      options: []
     },
   ];
 
@@ -250,14 +212,12 @@ const BillingInformation = () => {
       name: orderSummary?.name || "",
       surname: orderSummary?.surname || "",
       phone: orderSummary?.phone || "",
-      VAT: orderSummary?.VAT || "",
       address: orderSummary?.address || "",
       municipality: orderSummary?.municipality || "",
       postcode: orderSummary?.postcode || "",
       country: orderSummary?.country || "",
       companyName: orderSummary?.companyName || "",
       individualId: orderSummary?.individualId || "",
-      individualIncome: orderSummary?.individualIncome || "",
     },
     validationSchema: getValidationSchema(userType),
     onSubmit: async (values, { resetForm }) => {
@@ -281,7 +241,6 @@ const BillingInformation = () => {
           whatAreYou: {
             userType: userType,
             companyName: orderData.companyName || "",
-            VAT: orderData.VAT || "",
             address: orderData.address || "",
             country: orderData.country || "",
             municipality: orderData.municipality || "",
@@ -417,7 +376,16 @@ const BillingInformation = () => {
     }
 
   });
-
+  useEffect(() => {
+    // Update Formik state with the selected country value
+    formik.setFieldValue("country", selectedCountry?.value || "");
+  
+    // Dispatch the action to update the order summary
+    dispatch(setCurrentCreateOrder({
+      ...orderSummary,
+      country: selectedCountry?.value || "",
+    }));
+  }, [selectedCountry]);
   return (
 
     <Layout>
@@ -555,7 +523,16 @@ const BillingInformation = () => {
                   >
                     {field.label} *
                   </label>
-                  {field.type === "select" ? (
+                  {(field.type === "select" && field.id === "country") ? (
+                    <div className="relative inline-block w-full">
+                      <CountrySelect
+                        label="Country"
+                        placeholder="Select a country"
+                        onChange={handleCountryChange} // Pass the change handler
+                        value={selectedCountry ? selectedCountry.value : null} // Pass the selected country value
+                      />
+                    </div>
+                  ) : field.type === "select" ? (
                     <div className="relative inline-block w-full">
                       <select
                         id={field.id}
