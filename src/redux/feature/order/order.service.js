@@ -65,7 +65,7 @@ export const getMyOrder = createAsyncThunk("order/getMyOrder", async ({page, sea
     }
 })
 
-export const getSingleOrder = createAsyncThunk('order/getSingleOrder', async (id, { rejectWithValue }) => {
+export const getSingleOrder = createAsyncThunk('order/getSingleOrder', async ({id}, { rejectWithValue }) => {
   try {
     const response = await api.get(`${config.endPoints.getSingleOrder}/${id}`)
     console.log("DATAAAA: ", response.data);
