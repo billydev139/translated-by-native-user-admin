@@ -18,7 +18,7 @@ const OrderDetails = () => {
 
   useEffect(() => {
     const orderId = localStorage.getItem('orderId');
-    dispatch(getSingleOrder(orderId));
+    dispatch(getSingleOrder({id:orderId}));
   }, []);
   return (
     <>
