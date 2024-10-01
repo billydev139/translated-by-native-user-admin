@@ -6,6 +6,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownMenu, } from "../Dropdo
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 import { FaUsers, FaCrown, FaUserTie } from 'react-icons/fa';
 import StatusBadge from "../Badge";
+import Badge from "../Badge";
 
 const Table = ({
   columns,
@@ -74,11 +75,7 @@ const Table = ({
                   )}
 
                   {/* Render customer name */}
-                  {column.field === "customer" ? (
-                    <div className="flex justify-between lg:w-[60%] items-start space-x-2">
-                      <span className="underline">{item?.name + " " + item?.surname}</span>
-                    </div>
-                  ) : column.field === "targetLanguage" ? (
+                  { column.field === "targetLanguage" ? (
                     <div className="flex gap-1 flex-wrap">
                       {item[column.field].map((language, index) => (
                         <span key={index}>
@@ -88,7 +85,13 @@ const Table = ({
                     </div>
                   ) : column.field === "name" ? (
                     <div className="flex justify-between lg:w-[60%] items-start space-x-2">
-                      <span className="underline">{item?.name + " " + item?.surname}</span>
+                      <span className="underline">{item?.name}</span>
+                    </div>
+                  ) : column.field === "payment_status" ? (
+                    <div className="flex justify-between lg:w-[60%] items-start space-x-2">
+                      <span>
+                      <Badge payment_status={item[column.field]?.charAt(0)?.toUpperCase() + item[column.field]?.slice(1)}/> 
+                      </span>
                     </div>
                   ) : column.title === "Role" ? (
                     <div className="flex items-center">

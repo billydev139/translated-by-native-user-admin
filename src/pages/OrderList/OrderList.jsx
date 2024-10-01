@@ -37,11 +37,12 @@ const OrderList = () => {
 
   //Table Columns
   const columns = [
-    { title: "Customer", field: "customer", span: 1 },
+    { title: "Customer", field: "name", span: 1 },
     { title: "Source Language", field: "sourceLanguage", span: 1 },
     { title: "Target Language", field: "targetLanguage", span: 1 },
     { title: "Topic", field: "topic", span: 1 },
     { title: "Status", field: "status", span: 1 },
+    { title: "Payment", field: "payment_status", span: 1 },
     { title: "Total Pricing", field: "totalPricing", span: 1 },
     { title: "Action", field: "document", span: 1 },
   ];
@@ -127,6 +128,7 @@ const OrderList = () => {
 
 
   const viewOrderDetails = (id) => {
+    localStorage.setItem('orderId', id);
     dispatch(getSingleOrder(id))
     .then(() => {
       // dispatch(openModal({ componentName: OrderDetails }))

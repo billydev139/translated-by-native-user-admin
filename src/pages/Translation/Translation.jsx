@@ -106,7 +106,7 @@ const Translation = () => {
       0
     );
     // Calculate total cost
-    const total = rateCharges + extraServicesCharges + targetLanguagesPrice;
+    const total =  targetLanguagesPrice;
 
     // Create summary data object
     const summaryData = {
@@ -137,8 +137,8 @@ const Translation = () => {
       selectedTopic &&
       selectedSourceLanguages &&
       selectedTargetLanguages &&
-      choosePlan &&
-      selectService.length > 0 &&
+      // choosePlan &&
+      // selectService.length > 0 &&
       wordCount &&
       orderSummary?.file
     ) {
@@ -161,8 +161,8 @@ const Translation = () => {
     selectedTopic,
     selectedSourceLanguages,
     selectedTargetLanguages,
-    choosePlan,
-    selectService,
+    // choosePlan,
+    // selectService,
     wordCount,
 
     dispatch,
@@ -180,10 +180,9 @@ const Translation = () => {
       !selectedTargetId ||
       !selectedSourceLanguages ||
       // !choosePlan?._id ||
-      !selectedTopic 
-      // ||
-      // orderSummary?.file?.length < 1 ||
-      // !orderSummary?.file
+      !selectedTopic ||
+      orderSummary?.file?.length < 1 ||
+      !orderSummary?.file
 
     ) {
       Swal.fire({
@@ -417,11 +416,11 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             setChoosePlan={setChoosePlan}
             createOrder={OrderSummary}
           />
-        </div> */}
+        </div>
 
-        {/* <div className="mt-14">
+        <div className="mt-14">
           <h1 className="text-base 2xl:text-[20px] font-semibold text-textgray pl-3 mb-8">
-            Select extra services
+            Select extra services <span className="text-[#B5B5C3] text-xs">(optional)</span>
           </h1>
           <ExtraServices
             selectService={selectService}

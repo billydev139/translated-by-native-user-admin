@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Badge({ status, role, action, language }) {
+function Badge({ payment_status, status, role, action, language }) {
 
   const getRandomColor = () => {
     const colors = [
@@ -36,9 +36,22 @@ function Badge({ status, role, action, language }) {
       restore: 'bg-green-600/5 text-green-600 text-sm',
     };
 
+    // Define styles for payment status
+    const paymentStatusStyles = {
+      Paid : 'bg-green-500 rounded-full text-white text-base',
+      Succeeded: 'bg-green-500 rounded-full text-white text-base',
+      Pending: 'bg-yellow-500 rounded-full text-white text-base',
+      Failed: 'bg-red-500 rounded-full text-white text-base',
+      Cancelled: 'bg-gray-500 rounded-full text-white text-base',
+    };
+
     // Apply random color for roles if a role is provided
     if (role) {
       return getRandomColor();
+    }
+    // Return style for payment_status
+    if (payment_status) {
+      return paymentStatusStyles[payment_status] || 'bg-gray-400/5 text-black text-sm';
     }
     // Return style for action
     if (action) {
@@ -62,7 +75,7 @@ function Badge({ status, role, action, language }) {
     <span
       className={`text-[7px] xsm:text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-medium ${language ? "px-1 text-xs xsm:text-[8px] sm:text-[10px] md:text-xs 2xl:text-base" : "px-2.5"} py-0.5 rounded h-5 ${getStyle()}`}
     >
-      {role || status || action || language}
+      {role || status || action || language || payment_status}
     </span>
   );
 }

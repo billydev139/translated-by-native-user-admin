@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import SignIn from "../pages/SignIn/SignIn";
+import SignIn from "../pages/Auth/SignIn";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
 import Notifications from "../pages/notifications/Notifications";
@@ -13,7 +13,10 @@ import BillingInformation from "../pages/billing-information/BillingInformation"
 import Payment from "../pages/payment/Payment";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
 import CheckoutSuccess from "../pages/payment/CheckoutSuccess";
-import CheckoutCancelled from "../pages/payment/CheckoutCancelled";
+import CheckoutCancelled from "../pages/payment/CheckoutCancel";
+import SendVerificationEmail from "../pages/Auth/SendVerifcationEmail";
+import ForgetPassword from "../pages/Auth/ForgetPassword";
+import ResetPassword from "../pages/Auth/ResetPassword";
 
 
 const AppRouter = () => {
@@ -25,27 +28,25 @@ const AppRouter = () => {
   return (
       <Routes>
         {/* <Route path="/auth/callback" element={<Callback/>} /> */}
+        
         <Route path="/" element={<Translation />} />
         <Route path="/billing-information" element={<BillingInformation />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
         <Route path="/checkout-cancelled" element={<CheckoutCancelled />} />
+        <Route path="/send-password-reset-email" element={<ForgetPassword />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+
 
         {/* Dashboard route, protected by accessToken */}
         <Route
-          path="/dashboard"
-          element={accessToken ? <Dashboard /> : <Navigate to="/auth/login" replace />}
-        />
-           {/* SignIn route - Redirect to dashboard if user is already signed in */}
-           <Route
-          path="/auth/login"
-          element={accessToken ? <Navigate to="/dashboard" replace /> : <SignIn />}
-        />
-        <Route path="/auth/login" element={<SignIn />} />
+        path="/auth/login"
+        element={accessToken ? <Navigate to="/dashboard" replace /> : <SignIn />}
+      />
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/order" element={<OrderList />} />
+        <Route path="/orders" element={<OrderList />} />
         <Route path="/order/detail" element={<OrderDetails />} />
         <Route path="/Notifications" element={<Notifications />} />
         <Route path="/my-account" element={<MyAccount />} />

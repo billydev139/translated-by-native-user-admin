@@ -1,9 +1,23 @@
 // src/components/Header.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { GiWorld } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import { myProfile } from "../../../redux/feature/auth/auth.service";
 // import { logo } from "../../../";
 
 const Header = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const isTokenValid = accessToken && accessToken !== "false" && accessToken !== "null" && accessToken !== "undefined";
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (isTokenValid) {
+      // Redirect to SignIn page if the user is not authenticated
+      dispatch(myProfile());
+    }
+    // other side effects
+    //...
+  }, [isTokenValid]);
   return (
     <div className={`flex justify-between items-center`}>
       <div>
