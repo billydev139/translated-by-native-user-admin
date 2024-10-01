@@ -1,4 +1,3 @@
-// CountrySelect.js
 import React from "react";
 import Select from "react-select";
 import { getNames } from "country-list";
@@ -9,39 +8,53 @@ const countries = getNames().map((country) => ({
   value: country,
 }));
 
-const CountrySelect = ({ label, placeholder, onChange, value }) => {
+const CountrySelect = ({ placeholder, onChange, value }) => {
   // Custom styles for react-select
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      backgroundColor: '#F3F6F9', // Set the background color here
-      border: 'none', // Optional: Customize the border
-      boxShadow: 'none', // Remove the box shadow
-      '&:hover': {
-        border: '1px solid #80bdff', // Optional: Change border color on hover
-      },
-      height: '45px',
+      backgroundColor: '#F3F6F9',
+      border: '1px solid transparent',
+      borderRadius: '0.375rem',
+      boxShadow: 'none',
+      height: '33px', // Keep height at 33px
+      minHeight: '33px',
+      display: 'flex',
+      alignItems: 'center', // Ensure vertical centering
+      padding: '0 8px', // Horizontal padding
     }),
     menu: (provided) => ({
       ...provided,
-      zIndex: 9999, // Ensure the dropdown appears above other elements
+      zIndex: 9999,
     }),
     placeholder: (provided) => ({
       ...provided,
-      fontSize: '14px', // Change the font size of the placeholder
-      color: '#A0AEC0', // Optional: Change the color of the placeholder
+      fontSize: '14px',
+      color: '#A0AEC0',
+      display: 'flex',
+      alignItems: 'center', // Vertically center placeholder text
+      height: '100%', // Full height for better alignment
+      padding: '0', // Remove padding to center it perfectly
     }),
     singleValue: (provided) => ({
       ...provided,
-      fontSize: '14px', // Change the font size of the selected value
+      fontSize: '12px',
+      display: 'flex',
+      alignItems: 'center', // Vertically center selected value text
+      height: '100%', // Full height for better alignment
+      padding: '0', // Remove padding to center it perfectly
+    }),
+    input: (provided) => ({
+      ...provided,
+      margin: 0,
+      padding: 0,
     }),
   };
 
   return (
-    <div>
-      {/* <label>{label}</label> */}
+    <div className="relative inline-block w-full">
       <Select
-        styles={customStyles} // Apply custom styles
+        styles={customStyles}
         options={countries}
         placeholder={placeholder}
         onChange={onChange}
