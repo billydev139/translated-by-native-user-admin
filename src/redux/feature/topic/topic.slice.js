@@ -20,7 +20,7 @@ const topicSlice = createSlice({
         state.error = null;
       })
       .addCase(getTopics.fulfilled, (state, action) => {
-        state.topics = action.payload.document;
+        state.topics = action.payload;
         state.loading = false;
       })
       .addCase(getTopics.rejected, (state, action) => {

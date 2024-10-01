@@ -32,7 +32,7 @@ const Translation = () => {
       (state) => state?.targetLanguage?.targetLanguages?.targetLanguages
     ) || [];
   
-    const topics = useSelector((state) => state?.topic?.topics) || [];
+    const topics = useSelector((state) => state?.topic?.topics?.topics?.topics) || [];
 
   const [files, setFiles] = useState([]);
   const [wordCount, setWordCount] = useState(orderSummary?.WordCount || 0);
