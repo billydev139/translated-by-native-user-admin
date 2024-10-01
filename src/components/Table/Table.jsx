@@ -116,20 +116,18 @@ const Table = ({
                         </div>
                       ) : column.field === "document" ? (
                         <div className="flex space-x-6">
-                          <LuEye className="size-4 xl:size-6 text-red-500 cursor-pointer" onClick={() => viewOrderDetails(item._id)} />
-
-                          {/* Conditional rendering for file download icon */}
-                          {item.status !== "REJECTED" && (
-                            item.translatedDoc?.length > 0 ? (
-                              <MdOutlineFileDownload
-                                className="size-4 xl:size-6 text-green-500 cursor-pointer"
-                                onClick={() => handleFileDownload(item)}
-                              />
-                            ) : (
-                              <MdOutlineFileDownloadOff className="size-4 xl:size-6 text-gray-500 cursor-pointer" />
-                            )
-                          )}
-                        </div>
+                        <LuEye className="size-4 xl:size-6 text-red-500 cursor-pointer" onClick={() => viewOrderDetails(item._id)} />
+                      
+                        {/* Conditional rendering for file download icon */}
+                        {item.translatedDoc?.length > 0 && item.status !== "REJECTED" ? (
+                          <MdOutlineFileDownload
+                            className="size-4 xl:size-6 text-green-500 cursor-pointer"
+                            onClick={() => handleFileDownload(item)}
+                          />
+                        ) : (
+                          <MdOutlineFileDownloadOff className="size-4 xl:size-6 text-gray-500 cursor-pointer" />
+                        )}
+                      </div>                      
 
                       ) : column.field === "status" ? (
                         <StatusBadge status={item.status} />
