@@ -14,7 +14,8 @@ import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyOrder } from '../../redux/feature/order/order.service';
 import { Link } from 'react-router-dom';
-import Notification from '../../components/Notification/Notification';
+import Notifications from '../notifications/Notifications';
+import DashboardNotifications from '../notifications/DashboardNotifications';
 
 const inputFields = [
   {
@@ -48,9 +49,9 @@ const Dashboard = () => {
   <div className='bg-white shadow-md  px-4 py-4'>
     <div><h1 className='text-[24px] font-bold flex justify-start'>Notifications
 </h1></div>
-<div><h1 className='text-[15px] font-medium text-[#696969] flex justify-center  items-center py-8 px-5'>
-  {/* <Notification /> */}
-</h1></div>
+<div>
+  <DashboardNotifications/>
+</div>
 
   </div>
   <div className='flex flex-col gap-4'>   

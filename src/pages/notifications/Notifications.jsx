@@ -184,7 +184,6 @@ const Notifications = () => {
           </div>
         )}
       </div>
-
     </DefaultLayout>
   );
 };

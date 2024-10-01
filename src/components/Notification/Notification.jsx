@@ -19,7 +19,10 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
 
     dispatch(markAsRead(id))
       .then(() => {
-        handleClearFilters();
+        if (handleClearFilters)
+        {
+          handleClearFilters();
+        }
       })
       .then(() => {
         dispatch(getNotifications({
