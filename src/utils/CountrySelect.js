@@ -17,8 +17,8 @@ const CountrySelect = ({ placeholder, onChange, value }) => {
       border: '1px solid transparent',
       borderRadius: '0.375rem',
       boxShadow: 'none',
-      height: '33px', // Keep height at 33px
-      minHeight: '33px',
+    //   height: '33px', // Keep height at 33px
+    //   minHeight: '33px',
       display: 'flex',
       alignItems: 'center', // Ensure vertical centering
       padding: '0 8px', // Horizontal padding

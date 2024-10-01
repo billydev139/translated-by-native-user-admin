@@ -427,7 +427,7 @@ const BillingInformation = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values[field.id]}
-                      className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#B5B5C3] rounded-md w-full focus:outline-none"
+                      className="p-1.5 xl:p-[10px] 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#B5B5C3] rounded-md w-full focus:outline-none"
                     />
                     {formik.touched[field.id] && formik.errors[field.id] && (
                       <div className="text-[10px] xl:text-xs 2xl:text-sm text-red-500 mt-1">
@@ -462,7 +462,7 @@ const BillingInformation = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values[field.id]}
                     // text-[#B5B5C3]
-                    className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#3F4254] placeholder:text-[#3F4254] rounded-md w-full focus:outline-none"
+                    className="p-1.5 xl:p-[10px] 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#3F4254] placeholder:text-[#3F4254] rounded-md w-full focus:outline-none"
                   />
                   {formik.touched[field.id] && formik.errors[field.id] && (
                     <div className="text-red-500 text-sm mt-1">
@@ -575,7 +575,7 @@ const BillingInformation = () => {
                       onBlur={formik.handleBlur}
                       value={formik.values[field.id]}
                       // text-[#B5B5C3]
-                      className="p-1.5 xl:p-2 2xl:p-3 text-[10px] xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#3F4254] placeholder:text-[#3F4254] rounded-md w-full focus:outline-none"
+                      className="p-1.5 xl:p-[10px] 2xl:p-3 text-[10px]  xl:text-xs 2xl:text-sm placeholder:pl-1 bg-[#F3F6F9] text-[#3F4254] placeholder:text-[#3F4254] rounded-md w-full focus:outline-none"
                     />
                   )}
                   {formik.touched[field.id] && formik.errors[field.id] && (
