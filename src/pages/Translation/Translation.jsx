@@ -32,7 +32,7 @@ const Translation = () => {
       (state) => state?.targetLanguage?.targetLanguages?.targetLanguages
     ) || [];
   
-    const topics = useSelector((state) => state?.topic?.topics) || [];
+    const topics = useSelector((state) => state?.topic?.topics?.topics?.topics) || [];
 
   const [files, setFiles] = useState([]);
   const [wordCount, setWordCount] = useState(orderSummary?.WordCount || 0);
@@ -432,16 +432,16 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
 
         <div className="flex lg:flex-row flex-col-reverse gap-3 lg:justify-between justify-center items-center">
           <div className="flex justify-center items-center cursor-pointer gap-3">
-            <FaAnglesLeft className="text-sm 2xl:text-[17px] text-[#464E5F]" />
+            {/* <FaAnglesLeft className="text-sm 2xl:text-[17px] text-[#464E5F]" />
             <button className="text-[#464E5F] text-xs 2xl:text-sm font-semibold">
               Back to service selection
-            </button>
+            </button> */}
           </div>
           <div className="flex items-center gap-3">
-            <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
+            {/* <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
               <IoMailOutline className="text-sm 2xl:text-base font-semibold" />
               Send quote by email
-            </button>
+            </button> */}
             <button
               type="submit"
               onClick={handleSubmit}
