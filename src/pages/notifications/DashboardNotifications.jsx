@@ -63,6 +63,7 @@ const DashboardNotifications = () => {
                         message={item?.message}
                         time={item?.createdAt}
                         read={item?.read}
+                        dashboardNotification={true}
                       />
                     </div>
                   ))}
