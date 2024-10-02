@@ -104,13 +104,11 @@ const Payment = () => {
               )}
             </div> */}
 
-            <div>
+            {/* <div>
               <p
                 className="cursor-pointer text-xs xl:text-sm 2xl:text-base text-[#2E8F96]"
                 onClick={() => setShowEmailInput(!showEmailInput)}
               >
-                {/* Do you want to send the confirmation email to a different email
-                address to that of your account? */}
                 Do you want to send the confirmation email to a different email address than your account's?
               </p>
               {showEmailInput && (
@@ -120,12 +118,11 @@ const Payment = () => {
                     name="confirmationEmail"
                     type="email"
                     placeholder="Email"
-                    //text-[#B5B5C3]
                     className="p-3 bg-[#F3F6F9] text-[#464E5F] rounded-md w-72 focus:outline-none"
                   />
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
 
           <hr className="my-10" />

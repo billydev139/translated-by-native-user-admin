@@ -6,7 +6,8 @@ import { getSingleOrder } from "../../redux/feature/order/order.service";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, handleClearFilters }) => {
+const Notification = ({ id, orderId, subject, message, time, read, viewOrderDetails_Notification, dashboardNotification, handleClearFilters }) => {
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [notificationMessage, setNotificationMessage] = useState("");
@@ -80,11 +81,14 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
     <>
       <div className={`${read ? "bg-white" : "bg-[#ECF9F3]"} flex justify-between p-4 mb-4 rounded shadow-card`}>
         <div className="flex gap-4 sm:gap-8 w-11/12 items-center">
-          {read ? (
-            <MdOutlineMarkChatRead className="size-5 sm:size-6 text-green-600" />
-          ) : (
-            <MdOutlineMarkChatUnread className="size-5 sm:size-6 text-red-600" />
-          )}
+          { !dashboardNotification && (
+              read ? (
+                <MdOutlineMarkChatRead className="size-5 sm:size-6 text-green-600" />
+              ) : (
+                <MdOutlineMarkChatUnread className="size-5 sm:size-6 text-red-600" />
+              )
+            )
+          }
           <div className="flex flex-col">
             <p className="text-[10px] sm:text-sm xl:text-base 2xl:text-lg 3xl:text-xl font-semibold">
               {subject}
@@ -95,7 +99,7 @@ const Notification = ({ id, orderId, subject, message, time, read, viewOrderDeta
             />
             <span
               onClick={handleMarkAsRead}
-              className="text-blue-500 cursor-pointer ms-3"
+              className="text-blue-500 cursor-pointer"
             >
               Click to view order details
             </span>

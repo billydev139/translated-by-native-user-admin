@@ -40,7 +40,10 @@ export default function LanguageSelector({
 
   return (
     <div className="p-4 min-h-60">
-      <div className="w-full p-2 mb-4 border border-terchary flex justify-center items-center gap-3 rounded">
+      <div className="text-base text-gray-950">
+        Add Target Languages
+      </div>
+      <div className="w-full p-2 mb-4 mt-4 border border-terchary flex justify-center items-center gap-3 rounded">
         <IoIosSearch className="text-terchary text-xl font-extrabold" />
         <input
           type="text"
@@ -54,7 +57,7 @@ export default function LanguageSelector({
         {filteredLanguages.map((lang) => (
           <div
             key={lang._id}
-            className={`flex justify-between items-center px-3 py-2 text-textgray font-normal mb-4 cursor-pointer transition-colors duration-200 ${
+            className={`flex justify-between items-center px-3 py-2 text-textgray text-[14px] font-normal mb-4 cursor-pointer transition-colors duration-200 ${
               selectedLanguages.some((selected) => selected._id === lang._id)
                 ? "bg-[#305e73] text-white"
                 : "hover:bg-[#305e73] hover:bg-opacity-70 hover:text-white"

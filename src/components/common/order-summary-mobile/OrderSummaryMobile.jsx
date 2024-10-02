@@ -123,7 +123,7 @@ const OrderSummaryMobile = () => {
             <div className="border-b border-dotted mb-4 border-primary"></div>
 
             {/* Rate Type */}
-            <div className="flex justify-between mb-8 mt-2 items-center">
+            {/* <div className="flex justify-between mb-8 mt-2 items-center">
               <div className="flex items-center gap-4">
                 <div className="text-primary opacity-65 text-[22px]">
                   <FaMoneyBillWave />
@@ -139,7 +139,7 @@ const OrderSummaryMobile = () => {
                 </p>
               </p>
             </div>
-            <div className="border-b border-dotted mb-4 border-primary"></div>
+            <div className="border-b border-dotted mb-4 border-primary"></div> */}
 
             {/* Topic */}
             <div className="flex justify-between mb-8 mt-2 items-center">
@@ -170,7 +170,7 @@ const OrderSummaryMobile = () => {
             <div className="border-b border-dotted mb-4 border-primary"></div>
 
             {/* Extras */}
-            <div className="flex justify-between mb-8 mt-2 items-center">
+            {/* <div className="flex justify-between mb-8 mt-2 items-center">
               <div className="flex items-center gap-4">
                 <div className="text-primary opacity-65 text-[22px]">
                   <CiStar />
@@ -190,7 +190,7 @@ const OrderSummaryMobile = () => {
                 </div>
               </p>
             </div>
-            <div className="border-b border-dotted mb-4 border-primary"></div>
+            <div className="border-b border-dotted mb-4 border-primary"></div> */}
 
             {/* Subtotal, VAT, and Order Total */}
             <div>

@@ -7,6 +7,7 @@ import { CgUserList } from 'react-icons/cg';
 import { GrLanguage } from 'react-icons/gr';
 import { FaRegUser } from 'react-icons/fa';
 import { IoIosNotifications } from 'react-icons/io';
+import { AiOutlineHome } from "react-icons/ai";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
@@ -97,7 +98,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }`
                 }
               >
-                <RiListOrdered2 size={22} /> Dashboard
+                <AiOutlineHome size={22} /> Dashboard
               </NavLink>
             </ul>
             <ul className="mb-6 flex flex-col gap-1.5">
