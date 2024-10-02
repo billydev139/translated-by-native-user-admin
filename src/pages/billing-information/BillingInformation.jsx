@@ -588,6 +588,8 @@ const BillingInformation = () => {
             </div>
           </div>
 
+          <hr className="my-12 2xl:my-16" />
+
           <div className="flex items-center justify-end gap-4">
             {/* <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
               <IoMailOutline className="text-sm 2xl:text-base font-semibold" />
