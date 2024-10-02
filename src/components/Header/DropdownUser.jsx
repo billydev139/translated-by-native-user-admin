@@ -65,7 +65,14 @@ const DropdownUser = () => {
         to='#'
       >
         <span className='hidden text-right lg:block'>
-          <span className='block text-sm font-medium text-black'> {userDetails.name + " " + userDetails.surname || ""} </span>
+          <span className='block text-sm font-medium text-black'> 
+            {
+              userDetails?.name && userDetails?.surname ? 
+                (userDetails?.name + " " + userDetails?.surname) 
+                : 
+                ("")
+            } 
+          </span>
           <span className='block text-xs'>{userDetails?.role || ""}</span>
         </span>
 
