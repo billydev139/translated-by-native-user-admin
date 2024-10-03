@@ -269,7 +269,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
                     className="p-3 pr-8 bg-[#F3F6F9] text-[#3F4254] rounded-md w-full focus:outline-none appearance-none"
                     placeholder={field.placeholder}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled > {/* selected */}
                       {field.placeholder || "Select an option"}
                     </option>
                     {field.options.map((option, index) => (
@@ -304,7 +304,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
                     className="custom-select p-3 pr-8 bg-[#F3F6F9] text-[#3F4254] rounded-md w-full focus:outline-none appearance-none"
                     placeholder={field.placeholder}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled > {/* selected */}
                       {field.placeholder || "Select an option"}
                     </option>
                     {field.options.map((option, index) => (
@@ -339,7 +339,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
                     className="custom-select p-3 pr-8 bg-[#F3F6F9] text-[#3F4254] rounded-md w-full focus:outline-none appearance-none"
                     placeholder={field.placeholder}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled > {/* selected */}
                       {field.placeholder || "Select an option"}
                     </option>
                     {field.options.map((option, index) => (

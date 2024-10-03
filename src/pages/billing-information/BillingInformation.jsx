@@ -479,7 +479,7 @@ const BillingInformation = () => {
               What are You?
             </h2>
             <div className="flex items-center">
-              <div className="flex items-center mr-4 text-[#464E5F] text-[10px] xl:text-xs 2xl:text-sm font-regular">
+              <div className="flex items-center mr-4 text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
                 <input
                   type="radio"
                   name="type"
