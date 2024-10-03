@@ -15,8 +15,10 @@ import { IoMailOutline } from "react-icons/io5";
 import CountrySelect from "../../utils/CountrySelect";
 
 const BillingInformation = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const orderLoading = useSelector((state) => {
     const { loading } = state;
     const createOrderLoading = loading[createOrder.typePrefix] || false;
@@ -24,16 +26,22 @@ const BillingInformation = () => {
 
     return createOrderLoading || authRegisterLoading || false;
   });
+
   const orderSummary = useSelector((state) => state?.order?.orderSummary);
-  const [accessToken, setAccessToken] = useState(false);
+  const [accessToken, setAccessToken] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   
   // Function to handle the change of selected country
   const handleCountryChange = (selectedOption) => {
     setSelectedCountry(selectedOption); // Update the selected country state
-  }; const getToken = () => localStorage.getItem("accessToken");
+  }; 
+  
+  // const getToken = () => localStorage.getItem("accessToken");
 
   useEffect(() => {
+
+    const getToken = () => localStorage.getItem("accessToken");
+
     const token = getToken();
 
     if (token && token !== "undefined" && token !== "null" && token !== "") {
@@ -41,7 +49,7 @@ const BillingInformation = () => {
     } else {
       setAccessToken(null); // No valid token, set to false
     }
-  }, [getToken(), dispatch]);
+  }, [dispatch]); //getToken()
 
   const userDetails = [
     {
@@ -219,8 +227,12 @@ const BillingInformation = () => {
       companyName: orderSummary?.companyName || "",
       individualId: orderSummary?.individualId || "",
     },
+
     validationSchema: getValidationSchema(userType),
     onSubmit: async (values, { resetForm }) => {
+
+      console.log("Continue Button Cliked inside onSubmit");
+
       try {
         const orderData = {
           ...orderSummary,
@@ -376,6 +388,7 @@ const BillingInformation = () => {
     }
 
   });
+
   useEffect(() => {
     // Update Formik state with the selected country value
     formik.setFieldValue("country", selectedCountry?.value || "");
@@ -386,6 +399,7 @@ const BillingInformation = () => {
       country: selectedCountry?.value || "",
     }));
   }, [selectedCountry]);
+
   return (
 
     <Layout>
