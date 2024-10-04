@@ -102,7 +102,7 @@ const OrderSummaryMobile = () => {
                   {summaryData?.TargetLanguage?.length > 0 &&
                     summaryData?.SourceLanguage &&
                     summaryData?.TargetLanguage?.map((language, index) => (
-                      <div key = {index} class="inline-block bg-lightgreen text-sm text-black px-2 py-1 rounded my-2 mr-1">
+                      <div key = {index} className="inline-block bg-lightgreen text-sm text-black px-2 py-1 rounded my-2 mr-1">
                         <strong>{language?.targetLanguages}</strong>{" "}
                         <span>+ €{language?.price}/w</span>
                       </div>
