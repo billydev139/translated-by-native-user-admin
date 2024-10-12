@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const icons_Arr = [
   {'id': '1', 'icon': PROOFREADING, 'name': 'PROOFREADING'}, 
-  {'id': '2', 'icon': URGENTORDER, 'name': 'URGENTORDER'}, 
-  {'id': '3', 'icon': SEOOPTIMISATION, 'name': 'SEOOPTIMISATION'}
+  {'id': '2', 'icon': URGENTORDER, 'name': 'URGENT ORDER'}, 
+  {'id': '3', 'icon': SEOOPTIMISATION, 'name': 'SEO OPTIMISATION'}
 ];
 
 const ExtraServices = ({ selectService, setSelectService }) => {

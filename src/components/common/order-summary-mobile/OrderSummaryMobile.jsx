@@ -103,7 +103,7 @@ const OrderSummaryMobile = () => {
                     summaryData?.SourceLanguage &&
                     summaryData?.TargetLanguage?.map((language, index) => (
                       <div key = {index} class="inline-block bg-lightgreen text-sm text-black px-2 py-1 rounded my-2 mr-1">
-                        <strong>{language?.targetLanguages}</strong>{" "}
+                        <strong>{language?.TargetLanguage}</strong>{" "}
                         <span>+ €{language?.price}/w</span>
                       </div>
                     ))}
@@ -123,7 +123,7 @@ const OrderSummaryMobile = () => {
             <div className="border-b border-dotted mb-4 border-primary"></div>
 
             {/* Rate Type */}
-            <div className="flex justify-between mb-8 mt-2 items-center">
+            {/* <div className="flex justify-between mb-8 mt-2 items-center">
               <div className="flex items-center gap-4">
                 <div className="text-primary opacity-65 text-[22px]">
                   <FaMoneyBillWave />
@@ -138,7 +138,7 @@ const OrderSummaryMobile = () => {
                 €{summaryData?.RateType?.charges ? summaryData?.RateType?.charges : "0"}
                 </p>
               </p>
-            </div>
+            </div> */}
             <div className="border-b border-dotted mb-4 border-primary"></div>
 
             {/* Topic */}
