@@ -64,8 +64,8 @@ const OrderSummaryComponent = () => {
                 {summaryData?.TargetLanguage?.length > 0 &&
                   summaryData?.SourceLanguage &&
                   summaryData?.TargetLanguage?.map((language, index) => (
-                    <div key = {index} className="inline-block mt-0.5 bg-lightgreen text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-black px-2 py-1 rounded mr-1">
-                      <strong>{language?.targetLanguages}</strong>{" "}
+                    <div key = {index} class="inline-block mt-0.5 bg-lightgreen text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-black px-2 py-1 rounded mr-1">
+                      <strong>{language?.TargetLanguage}</strong>{" "}
                       <span>+ €{language?.price}/w</span>
                     </div>
                   ))}
@@ -100,8 +100,8 @@ const OrderSummaryComponent = () => {
                 €{summaryData?.RateType?.charges ? summaryData?.RateType?.charges?.toFixed(2) : "0"}
               </p>
             </p>
-          </div>
-          <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div> */}
+          </div> */}
+          <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div>
 
           {/* Topic */}
           <div className="flex justify-between mt-4 2xl:mt-6 items-center">
@@ -162,7 +162,7 @@ const OrderSummaryComponent = () => {
               </div>
               <div>
                 <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-lg text-textgray">
-                  €{summaryData?.total ? summaryData?.total.toFixed(2) : "0"}
+                  €{summaryData?.total ? summaryData?.total?.toFixed(2) : "0"}
                 </p>
               </div>
             </div>
@@ -180,7 +180,7 @@ const OrderSummaryComponent = () => {
               </div>
               <div>
                 <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-lg font-bold text-textgray">
-                  €{summaryData?.total ? summaryData?.total.toFixed(2) : "0"}
+                  €{summaryData?.total ? summaryData?.total?.toFixed(2) : "0"}
                 </p>
               </div>
             </div>

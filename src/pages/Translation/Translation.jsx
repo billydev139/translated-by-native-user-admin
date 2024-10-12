@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import RateSelector from "../../components/RateSelector/RateSelector";
 import ExtraServices from "../../components/extra-services/ExtraServices";
 import Upload from "../../components/upload/Upload";
+import { languagesData } from "../../utils/Languages";
 
 const Translation = () => {
   const navigate = useNavigate();
@@ -29,10 +30,10 @@ const Translation = () => {
 
   const Languages = useSelector((state) => state?.targetLanguage?.languages) || [];
   const targetLanguage = useSelector(
-      (state) => state?.targetLanguage?.targetLanguages?.targetLanguages
-    ) || [];
-  
-    const topics = useSelector((state) => state?.topic?.topics?.topics?.topics) || [];
+    (state) => state?.targetLanguage?.targetLanguages?.targetLanguages
+  ) || [];
+
+  const topics = useSelector((state) => state?.topic?.topics?.topics?.topics) || [];
 
   const [files, setFiles] = useState([]);
   const [wordCount, setWordCount] = useState(orderSummary?.WordCount || 0);
@@ -41,10 +42,13 @@ const Translation = () => {
   const [selectedTargetLanguageList, setSelectedTargetLanguageList] = useState(orderSummary?.TargetLanguage || []);
   const [selectedSourceLanguages, setSelectedSourceLanguages] = useState(orderSummary?.SourceLanguage || "");
   const [choosePlan, setChoosePlan] = useState(orderSummary?.Plan || "");
-  const [selectService, setSelectService] = useState( orderSummary?.extras?.label || []);
+  const [selectService, setSelectService] = useState(orderSummary?.extras?.label || []);
   const [selectedTopic, setSelectedTopic] = useState(orderSummary?.topic || "");
   const [selectedTargetId, setSelectedTargetId] = useState([]);
   const [OrderSummary, setOrderSummary] = useState({});
+  // Extract categories, rates, and translation rates from the data
+  const { categories, rates } = languagesData;
+
   const translationServices = [
     {
       id: "SourceLanguage",
@@ -76,9 +80,6 @@ const Translation = () => {
   const handleLanguageSelection = (languages) => {
     setSelectedTargetLanguageList(languages);
     // get id and save in array
-    const targetLanguage = languages.map((lang) => lang.targetLanguages);
-    const targetLanguageId = languages.map((lang) => lang._id);
-    setSelectedTargetId(targetLanguageId);
     setSelectedTargetLanguages(languages);
     setIsModalOpen(false);
   };
@@ -89,7 +90,7 @@ const Translation = () => {
       .then(() => dispatch(getTargetLanguages()))
       .then(() => dispatch(getTopics()));
   }, [dispatch]);
-  
+
   // Define a summary data object based on your form inputs
   useEffect(() => {
     // Calculate rate charges and extra services
@@ -101,32 +102,63 @@ const Translation = () => {
         wordCount ? acc + curr.price * wordCount : 0,
       0
     );
-    // Total target languages price
-    const targetLanguagesPrice = selectedTargetLanguageList?.reduce(
-      (acc, curr) => wordCount ? acc + curr.price * wordCount : 0,
+
+    // Utility function to get the category of a language
+    const getCategory = (language) => {
+      for (const category of languagesData.categories) {
+        // Check if the language is in the current category's languages
+        if (category.languages.includes(language)) {
+          // Return the category name without " Languages"
+          return category.name.replace(' Languages', '');
+        }
+      }
+      return 'Unknown Category';
+    };
+
+    // Generate combinations
+    const LanguagesCombination = selectedTargetLanguages.map((targetLanguage) => {
+      // Get categories for source and target languages
+      const sourceCategory = getCategory(selectedSourceLanguages);
+
+      const targetCategory = getCategory(targetLanguage);
+
+      // Calculate the price based on categories
+      const price = languagesData.rates[`${sourceCategory} + ${targetCategory}`] || 0;
+
+      return {
+        SourceLanguage: selectedSourceLanguages,
+        TargetLanguage: targetLanguage,
+        combination: `${sourceCategory} + ${targetCategory}`,
+        price: price,
+      };
+    });
+    // ore succinctly
+    const targetLanguagesPrice = LanguagesCombination?.reduce(
+      (acc, curr) => wordCount ? acc + curr.price * wordCount : acc,
       0
-    );
+    ) || 0; // Fallback to 0 if the array is empty
+
     // Calculate total cost
-    const total =  targetLanguagesPrice;
+    const total = targetLanguagesPrice + extraServicesCharges;
 
     // Create summary data object
     const summaryData = {
       serviceType: "Translations",
       SourceLanguage: selectedSourceLanguages,
-      TargetLanguage: selectedTargetLanguageList,
+      TargetLanguage: LanguagesCombination,
       RateType: choosePlan
         ? {
-            label: choosePlan.planType,
-            charges: rateCharges+targetLanguagesPrice,
-          }
+          label: choosePlan.planType,
+          charges: rateCharges + targetLanguagesPrice,
+        }
         : 0,
-      Plan : choosePlan,
+      Plan: choosePlan,
       WordCount: wordCount,
       extras: selectService
         ? {
-            label: selectService,
-            charges: extraServicesCharges,
-          }
+          label: selectService,
+          charges: extraServicesCharges,
+        }
         : "",
       topic: selectedTopic,
       total: total,
@@ -145,25 +177,25 @@ const Translation = () => {
     ) {
       dispatch(setCurrentCreateOrder({
         steps: {
-         ...orderSummary.steps,
+          ...orderSummary.steps,
           step_1: true,
         }
       }));
     }
-   else {
-     dispatch(setCurrentCreateOrder({
-      steps: {
-        ...orderSummary.steps,
-        step_1: false,
-      }
-    }));
-   }
+    else {
+      dispatch(setCurrentCreateOrder({
+        steps: {
+          ...orderSummary.steps,
+          step_1: false,
+        }
+      }));
+    }
   }, [
     selectedTopic,
     selectedSourceLanguages,
     selectedTargetLanguages,
     // choosePlan,
-    // selectService,
+    selectService,
     wordCount,
 
     dispatch,
@@ -193,20 +225,20 @@ const Translation = () => {
       });
       return;
     }
-// Ensure step_1 is being updated
-const updatedOrderSummary = {
-  ...orderSummary,
-  steps: {
-    ...orderSummary.steps,
-    step_1: true,
-  }
-};
+    // Ensure step_1 is being updated
+    const updatedOrderSummary = {
+      ...orderSummary,
+      steps: {
+        ...orderSummary.steps,
+        step_1: true,
+      }
+    };
 
-// Dispatch action with updated summary data
-dispatch(setCurrentCreateOrder(updatedOrderSummary));
+    // Dispatch action with updated summary data
+    dispatch(setCurrentCreateOrder(updatedOrderSummary));
     // Dispatch action with formData
     navigate("/billing-information");
-};
+  };
 
   const handleSelectChange = (e, fieldId) => {
     const selectedValue = e.target.value;
@@ -257,8 +289,8 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
                 >
                   {selectedTargetLanguages.length > 0
                     ? selectedTargetLanguages
-                        .map((selected) => selected.targetLanguages)
-                        .join(", ")
+                      .map((selected) => selected)
+                      .join(", ")
                     : "Select Target Languages"}
                 </button>
               ) : field.type === "select" && field.id === "target-language" ? (
@@ -273,8 +305,8 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
                       {field.placeholder || "Select an option"}
                     </option>
                     {field.options.map((option, index) => (
-                      <option key={index} value={option?._id} >
-                        {option?.targetLanguages}
+                      <option key={index} value={option} >
+                        {option}
                       </option>
                     ))}
                   </select>
@@ -375,8 +407,9 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             <div className="bg-white p-6 rounded-lg shadow-xl w-[1000px]">
               <LanguageSelector
                 onSelect={handleLanguageSelection}
-                initialSelection={orderSummary?.TargetLanguage}
+                initialSelection={selectedTargetLanguages}
                 setIsModalOpen={setIsModalOpen}
+                categories={categories}  // Passing categories to LanguageSelector
               />
             </div>
           </div>
@@ -418,7 +451,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             createOrder={OrderSummary}
           />
         </div>
-
+*/}
         <div className="mt-14">
           <h1 className="text-base 2xl:text-[20px] font-semibold text-textgray pl-3 mb-8">
             Select extra services <span className="text-[#B5B5C3] text-xs">(optional)</span>
@@ -427,7 +460,7 @@ dispatch(setCurrentCreateOrder(updatedOrderSummary));
             selectService={selectService}
             setSelectService={setSelectService}
           />
-        </div> */}
+        </div> 
 
         <hr className="my-12 2xl:my-16" />
 

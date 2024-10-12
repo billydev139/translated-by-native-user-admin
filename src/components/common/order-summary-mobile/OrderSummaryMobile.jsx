@@ -102,8 +102,8 @@ const OrderSummaryMobile = () => {
                   {summaryData?.TargetLanguage?.length > 0 &&
                     summaryData?.SourceLanguage &&
                     summaryData?.TargetLanguage?.map((language, index) => (
-                      <div key = {index} className="inline-block bg-lightgreen text-sm text-black px-2 py-1 rounded my-2 mr-1">
-                        <strong>{language?.targetLanguages}</strong>{" "}
+                      <div key = {index} class="inline-block bg-lightgreen text-sm text-black px-2 py-1 rounded my-2 mr-1">
+                        <strong>{language?.TargetLanguage}</strong>{" "}
                         <span>+ €{language?.price}/w</span>
                       </div>
                     ))}
@@ -138,8 +138,8 @@ const OrderSummaryMobile = () => {
                 €{summaryData?.RateType?.charges ? summaryData?.RateType?.charges : "0"}
                 </p>
               </p>
-            </div>
-            <div className="border-b border-dotted mb-4 border-primary"></div> */}
+            </div> */}
+            <div className="border-b border-dotted mb-4 border-primary"></div>
 
             {/* Topic */}
             <div className="flex justify-between mb-8 mt-2 items-center">
