@@ -36,8 +36,10 @@ export default function LanguageSelector({
 
   return (
     <div className="p-4 min-h-60">
-      {/* Search Bar */}
-      <div className="w-full p-2 mb-4 border border-terchary flex justify-center items-center gap-3 rounded">
+      <div className="text-base text-gray-950">
+        Add Target Languages
+      </div>
+      <div className="w-full p-2 mb-4 mt-4 border border-terchary flex justify-center items-center gap-3 rounded">
         <IoIosSearch className="text-terchary text-xl font-extrabold" />
         <input
           type="text"

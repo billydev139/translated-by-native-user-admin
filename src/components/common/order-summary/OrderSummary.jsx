@@ -132,7 +132,7 @@ const OrderSummaryComponent = () => {
           <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div>
 
           {/* Extras */}
-          <div className="flex justify-between mt-4 2xl:mt-6 items-center">
+          {/* <div className="flex justify-between mt-4 2xl:mt-6 items-center">
             <div className="flex items-center gap-4">
               <div className="text-primary opacity-65 text-base xl:text-lg 2xl:text-xl">
                 <CiStar />
@@ -152,7 +152,7 @@ const OrderSummaryComponent = () => {
               </div>
             </p>
           </div>
-          <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div>
+          <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div> */}
 
           {/* Subtotal, VAT, and Order Total */}
           <div>

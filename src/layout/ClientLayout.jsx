@@ -92,7 +92,7 @@ const ClientLayout = ({ children }) => {
           <Header />
           
           {isSmallScreen && (
-            <div style={{ display: "block" }}>
+            <div style={{ display: "block", marginTop: '16px' }}>
               <OrderSummaryMobile className="w-full max-w-xs mx-auto" />
             </div>
           )}

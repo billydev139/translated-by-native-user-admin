@@ -3,7 +3,7 @@ const accessToken = localStorage.getItem("accessToken") || null;
 
 
 // Register schema to concaitnate if not acessToken
-const registerSchema = yup.object().shape({
+export const registerSchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email").required("Required"),
   password: yup
     .string()
@@ -29,9 +29,7 @@ export const billingBase = yup.object().shape({
 });
 
 // Conditionally concatenate schemas
-export const billingSchema = accessToken
-  ? billingBase
-  : billingBase.concat(registerSchema);
+export const billingSchema = billingBase
 
 // Schemas for specific types
 export const companySchema = billingSchema.concat(

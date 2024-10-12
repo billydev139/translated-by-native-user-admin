@@ -7,7 +7,7 @@ const CustomStepper = ({ steps, currentStep, setCurrentStep }) => {
     <div className="flex lg:flex-row md:flex-row sm:flex-col flex-col justify-between gap-6 lg:items-center items-stretch mb-8">
       {steps?.map((step, index) => (
         <div key={step.id} className="flex-1 text-center cursor-pointer">
-          <Link key={step?.id} to={step?.href} passHref>
+          <Link key={step?.id} to={step?.href}> {/* passHref */}
             <div className="flex gap-2 items-center">
               <div
                 className={`text-sm xl:text-base 2xl:text-xl ${
@@ -34,7 +34,6 @@ const CustomStepper = ({ steps, currentStep, setCurrentStep }) => {
                   ? "border-terchary"
                   : "border-gray"
               }`}
-              terchary
             ></div>
           </Link>
         </div>

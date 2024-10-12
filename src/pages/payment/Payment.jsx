@@ -16,9 +16,12 @@ const Payment = () => {
   const [termsAccepted, setTermsAccepted] = useState(false); // Track if terms are accepted
   const [accessToken, setAccessToken] = useState(false);
 
-  const getToken = () => localStorage.getItem("accessToken");
+  // const getToken = () => localStorage.getItem("accessToken");
 
   useEffect(() => {
+
+    const getToken = () => localStorage.getItem("accessToken");
+
     const token = getToken();
 
     if (token && token !== "undefined" && token !== "null" && token !== "") {
@@ -26,7 +29,8 @@ const Payment = () => {
     } else {
       setAccessToken(null); // No valid token, set to false
     }
-  }, [getToken(), dispatch]);
+  }, [dispatch]); // getToken()
+
   // Handle payment method selection
   const handlePaymentMethodSelect = (method) => {
     setSelectedPaymentMethod(method);
@@ -104,13 +108,11 @@ const Payment = () => {
               )}
             </div> */}
 
-            <div>
+            {/* <div>
               <p
                 className="cursor-pointer text-xs xl:text-sm 2xl:text-base text-[#2E8F96]"
                 onClick={() => setShowEmailInput(!showEmailInput)}
               >
-                {/* Do you want to send the confirmation email to a different email
-                address to that of your account? */}
                 Do you want to send the confirmation email to a different email address than your account's?
               </p>
               {showEmailInput && (
@@ -120,12 +122,11 @@ const Payment = () => {
                     name="confirmationEmail"
                     type="email"
                     placeholder="Email"
-                    //text-[#B5B5C3]
                     className="p-3 bg-[#F3F6F9] text-[#464E5F] rounded-md w-72 focus:outline-none"
                   />
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
 
           <hr className="my-10" />
@@ -149,8 +150,8 @@ const Payment = () => {
                 </a>
               </label>
             </div>
-
-            <style jsx>{`
+            {/* <style jsx> */}
+            <style>{`
   input[type="checkbox"]:checked {
     background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M5.333 10.2l-2.866-2.867a.733.733 0 00-1.033 1.034l3.4 3.4a.733.733 0 001.033 0l7.4-7.4a.733.733 0 00-1.034-1.033L5.333 10.2z" fill="%23FFF"/%3E%3C/svg%3E');
     background-size: 70%;

@@ -13,35 +13,41 @@ import { setCartData, setCurrentCreateOrder } from "../../redux/feature/order/or
 import { Link, useNavigate } from "react-router-dom";
 import { IoMailOutline } from "react-icons/io5";
 import CountrySelect from "../../utils/CountrySelect";
+import {registerSchema} from "../../schema/user.schema";
 
 const BillingInformation = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const orderLoading = useSelector((state) => {
-    const { loading } = state;
-    const createOrderLoading = loading[createOrder.typePrefix] || false;
-    const authRegisterLoading = loading[authRegister.typePrefix] || false;
-
-    return createOrderLoading || authRegisterLoading || false;
-  });
+  
+  const authRegisterLoading = useSelector((state) => state.loading[authRegister.typePrefix] || false)
   const orderSummary = useSelector((state) => state?.order?.orderSummary);
-  const [accessToken, setAccessToken] = useState(false);
+  
+  const [accessToken, setAccessToken] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   
   // Function to handle the change of selected country
   const handleCountryChange = (selectedOption) => {
     setSelectedCountry(selectedOption); // Update the selected country state
-  }; const getToken = () => localStorage.getItem("accessToken");
+  }; 
+  
+  const getToken = () => localStorage.getItem("accessToken");
+  // const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
+
+    // const getToken = () => localStorage.getItem("accessToken");
+
     const token = getToken();
+    
 
     if (token && token !== "undefined" && token !== "null" && token !== "") {
       setAccessToken(token); // Token is valid, set to true
     } else {
       setAccessToken(null); // No valid token, set to false
     }
-  }, [getToken(), dispatch]);
+  }, [dispatch]); //getToken(), dispatch
+
 
   const userDetails = [
     {
@@ -153,7 +159,6 @@ const BillingInformation = () => {
   ];
 
   const selfEmployedDetails = [
-
     {
       id: "address",
       type: "text",
@@ -181,13 +186,12 @@ const BillingInformation = () => {
   ];
 
   const [userType, setUserType] = useState("INDIVIDUAL");
+
   // Determine which array to display based on selected type
   const whatAreYouDetails =
-    userType === "COMPANY"
-      ? companyDetails
-      : userType === "INDIVIDUAL"
-        ? individualDetails
-        : selfEmployedDetails;
+    userType === "COMPANY" ? companyDetails
+    : userType === "INDIVIDUAL" ? individualDetails
+    : selfEmployedDetails;
 
   // Function to get the schema based on selected type
   const getValidationSchema = (userType) => {
@@ -205,6 +209,7 @@ const BillingInformation = () => {
 
   // Inside your component
   const formik = useFormik({
+
     initialValues: {
       email: "",
       password: "",
@@ -219,22 +224,24 @@ const BillingInformation = () => {
       companyName: orderSummary?.companyName || "",
       individualId: orderSummary?.individualId || "",
     },
-    validationSchema: getValidationSchema(userType),
+
+    validationSchema: accessToken ? getValidationSchema(userType) : getValidationSchema(userType).concat(registerSchema) ,
+
     onSubmit: async (values, { resetForm }) => {
+
       try {
+
         const orderData = {
           ...orderSummary,
           ...values,
         };
-
-        // Log values to ensure they are set correctly
-        console.log('Order Data:', orderData);
 
         // Update order in the Redux store
         dispatch(setCurrentCreateOrder(values));
 
         // Prepare billing data
         const billData = {
+
           name: orderData.name || "",
           surname: orderData.surname || "",
           phone: orderData.phone || "",
@@ -256,6 +263,7 @@ const BillingInformation = () => {
 
         // Iterate through orderData and construct the payload for createOrder
         for (const key in orderData) {
+
           if (excludeKeys.includes(key)) continue; // Skip excluded keys
 
           if (orderData.hasOwnProperty(key)) {
@@ -357,34 +365,42 @@ const BillingInformation = () => {
               ...orderSummary.steps,
               step_2: true,
             }
-          };          // Token exists, proceed with order creation
+          };       
+          
+          // Token exists, proceed with order creation
           dispatch(setCurrentCreateOrder(updatedOrderSummary));
           dispatch(setCartData(orderPayloadData));
           console.log('Navigating to payment page...');
           navigate("/payment");
         }
+
       } catch (error) {
-        console.error('Error in order submission:', error);
-        Swal.fire({
-          title: 'Error',
-          text: error?.response?.data?.message || 'Registration failed',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-      }
+          console.error('Error in order submission:', error);
+          Swal.fire({
+            title: 'Error',
+            text: error?.response?.data?.message || 'Registration failed',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        }
     }
 
   });
+
+
   useEffect(() => {
-    // Update Formik state with the selected country value
-    formik.setFieldValue("country", selectedCountry?.value || "");
-  
-    // Dispatch the action to update the order summary
-    dispatch(setCurrentCreateOrder({
-      ...orderSummary,
-      country: selectedCountry?.value || "",
-    }));
+    if (selectedCountry?.value !== formik.values.country) {
+      // Update Formik state with the selected country value
+      formik.setFieldValue("country", selectedCountry?.value || "");
+    
+      // Dispatch the action to update the order summary
+      dispatch(setCurrentCreateOrder({
+        ...orderSummary,
+        country: selectedCountry?.value || "",
+      }));
+    }
   }, [selectedCountry]);
+
   return (
 
     <Layout>
@@ -478,7 +494,7 @@ const BillingInformation = () => {
               What are You?
             </h2>
             <div className="flex items-center">
-              <div className="flex items-center mr-4 text-[#464E5F] text-[10px] xl:text-xs 2xl:text-sm font-regular">
+              <div className="flex items-center mr-4 text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
                 <input
                   type="radio"
                   name="type"
@@ -587,6 +603,8 @@ const BillingInformation = () => {
             </div>
           </div>
 
+          <hr className="my-12 2xl:my-16" />
+
           <div className="flex items-center justify-end gap-4">
             {/* <button className="text-[#2E8F96] bg-[#F3F6F9] text-xs 2xl:text-sm flex justify-center gap-2 items-center px-4 py-3 rounded-md font-semibold">
               <IoMailOutline className="text-sm 2xl:text-base font-semibold" />
@@ -595,10 +613,10 @@ const BillingInformation = () => {
 
             <button
               type="submit"
-              disabled={orderLoading}
+              // disabled={authRegisterLoading}
               className="px-5 xl:px-6 2xl:px-8 py-3 text-white text-xs font-semibold 2xl:text-sm bg-[#FD8C04] rounded-md hover:bg-[#e69500] focus:outline-none"
             >
-              {orderLoading ? "Please wait..." : "Continue"}
+              {authRegisterLoading ? "Please wait..." : "Continue"}
             </button>
 
 
