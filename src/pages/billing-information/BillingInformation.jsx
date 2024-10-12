@@ -268,8 +268,7 @@ const BillingInformation = () => {
 
             // Handle specific keys like TargetLanguage, SourceLanguage, extras, and Plan
             if (key === "TargetLanguage") {
-              const targetLanguagesId = orderData[key]?.map((targetLanguage) => targetLanguage._id);
-              orderPayload.targetLanguageId = targetLanguagesId;
+              orderPayload.targetLanguageId = orderData[key];
               continue;
             }
 
