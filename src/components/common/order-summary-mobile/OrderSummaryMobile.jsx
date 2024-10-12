@@ -139,7 +139,7 @@ const OrderSummaryMobile = () => {
                 </p>
               </p>
             </div> */}
-            <div className="border-b border-dotted mb-4 border-primary"></div>
+            {/* <div className="border-b border-dotted mb-4 border-primary"></div> */}
 
             {/* Topic */}
             <div className="flex justify-between mb-8 mt-2 items-center">

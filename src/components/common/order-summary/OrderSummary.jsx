@@ -101,7 +101,7 @@ const OrderSummaryComponent = () => {
               </p>
             </p>
           </div> */}
-          <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div>
+          {/* <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div> */}
 
           {/* Topic */}
           <div className="flex justify-between mt-4 2xl:mt-6 items-center">
