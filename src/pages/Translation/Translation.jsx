@@ -161,8 +161,6 @@ const Translation = () => {
         price: price,
       };
     }).filter(Boolean); // Filter out null values in case of invalid combinations
-
-    console.log("🚀 ~ LanguagesCombination ~ LanguagesCombination:", LanguagesCombination)
     // setSelectedTargetLanguages(LanguagesCombination)
     // ore succinctly
     const targetLanguagesPrice = LanguagesCombination?.reduce(
@@ -246,8 +244,8 @@ const Translation = () => {
       !selectedSourceLanguages ||
       // !choosePlan?._id ||
       !selectedTopic ||
-      orderSummary?.file?.length < 1
-      // !orderSummary?.file
+      orderSummary?.file?.length < 1 ||
+      !orderSummary?.file
 
     ) {
       Swal.fire({
