@@ -17,8 +17,6 @@ const ExtraServices = ({ selectService, setSelectService }) => {
 
   const packages = useSelector((state) => state?.service?.services) || [];
   const orderSummary = useSelector((state) => state?.order?.orderSummary) || {};
-
-  console.log("packages: ", packages)
   
   useEffect(() => {
     dispatch(getServices());

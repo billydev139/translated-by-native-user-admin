@@ -201,7 +201,7 @@ export default function Upload({wordCount, setWordCount}) {
           </div>
 
         {/* Notice Section */}
-        {orderFiles.length > 0 && !loading && (
+        {/* {orderFiles.length > 0 && !loading && (
           <>
             <div className="mt-10 py-4 2xl:py-6 px-8 bg-[#D5E9FA] rounded-md flex gap-10 2xl:gap-12 items-center">
               <div>
@@ -226,7 +226,7 @@ export default function Upload({wordCount, setWordCount}) {
               </div>
             </div>
           </>
-        )}
+        )} */}
 
         {/* Error Handling */}
         {/* {error && (

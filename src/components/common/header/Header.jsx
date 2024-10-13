@@ -30,7 +30,7 @@ const Header = () => {
         <div className="flex flex-col justify-start items-center">
           <p className="text-[#696969] text-xs xl:text-sm 2xl:text-base font-bold">Contact</p>
           <span className="text-terchary cursor-pointer text-xs xl:text-sm 2xl:text-base font-normal">
-            +3428390783
+          <a href="tel:+393533169825">+393533169825</a>
           </span>
         </div>
       </div>
