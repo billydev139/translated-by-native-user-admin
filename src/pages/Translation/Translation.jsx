@@ -45,6 +45,7 @@ const Translation = () => {
   const [selectService, setSelectService] = useState(orderSummary?.extras?.label || []);
   const [selectedTopic, setSelectedTopic] = useState(orderSummary?.topic || "");
   const [selectedTargetId, setSelectedTargetId] = useState([]);
+  const [tempLanguageCombination, setTempLanguageCombination] = useState([]);
   const [OrderSummary, setOrderSummary] = useState({});
   // Extract categories, rates, and translation rates from the data
   const { categories, rates } = languagesData;
@@ -161,7 +162,7 @@ const Translation = () => {
         price: price,
       };
     }).filter(Boolean); // Filter out null values in case of invalid combinations
-    // setSelectedTargetLanguages(LanguagesCombination)
+    setTempLanguageCombination(LanguagesCombination)
     // ore succinctly
     const targetLanguagesPrice = LanguagesCombination?.reduce(
       (acc, curr) => wordCount ? acc + curr.price * wordCount : acc,
@@ -437,7 +438,7 @@ const Translation = () => {
             <div className="bg-white p-6 rounded-lg shadow-xl w-[1000px]">
               <LanguageSelector
                 onSelect={handleLanguageSelection}
-                initialSelection={selectedTargetLanguages}
+                initialSelection={tempLanguageCombination}
                 setIsModalOpen={setIsModalOpen}
                 categories={categories}  // Passing categories to LanguageSelector
               />
