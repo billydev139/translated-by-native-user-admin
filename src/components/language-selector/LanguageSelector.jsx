@@ -7,7 +7,10 @@ export default function LanguageSelector({
   setIsModalOpen,
   categories,
 }) {
-  const [selectedLanguages, setSelectedLanguages] = useState(initialSelection);
+  const [selectedLanguages, setSelectedLanguages] = useState(
+    initialSelection.map((language) => language?.TargetLanguage)
+  
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   const toggleLanguage = (lang) => {

@@ -78,11 +78,26 @@ const Translation = () => {
   };
 
   const handleLanguageSelection = (languages) => {
-    setSelectedTargetLanguageList(languages);
-    // get id and save in array
+
+    // Set the selected target language list, converting language objects to strings if necessary
+    setSelectedTargetLanguageList(
+      languages.map((language) => {
+        if (typeof language === 'string') {
+          return language; // If it's already a string, return it
+        } else if (language && language.TargetLanguage) {
+          return language.TargetLanguage; // If it's an object, return the TargetLanguage property
+        }
+        return language; // Return the language object as is if it doesn't match either case
+      })
+    );
+
+    // Set the entire languages array (including any objects) to another state
     setSelectedTargetLanguages(languages);
+
+    // Close the modal after selection
     setIsModalOpen(false);
   };
+
 
   useEffect(() => {
     dispatch(getLanguages())
@@ -117,21 +132,38 @@ const Translation = () => {
 
     // Generate combinations
     const LanguagesCombination = selectedTargetLanguages.map((targetLanguage) => {
-      // Get categories for source and target languages
-      const sourceCategory = getCategory(selectedSourceLanguages);
+      let sourceCategory, targetCategory, targetLang;
 
-      const targetCategory = getCategory(targetLanguage);
+      // Check if targetLanguage is a string or an object
+      if (typeof targetLanguage === 'string') {
+        // If it's a string, process as normal
+        targetLang = targetLanguage;
+      } else if (targetLanguage && targetLanguage.TargetLanguage) {
+        // If it's an object, extract the TargetLanguage property
+        targetLang = targetLanguage.TargetLanguage;
+      } else {
+        // Skip invalid targetLanguage entries
+        return null;
+      }
+
+      // Get categories for source and target languages
+      sourceCategory = getCategory(selectedSourceLanguages);
+      targetCategory = getCategory(targetLang);
 
       // Calculate the price based on categories
       const price = languagesData.rates[`${sourceCategory} + ${targetCategory}`] || 0;
 
+      // Return the combination object
       return {
         SourceLanguage: selectedSourceLanguages,
-        TargetLanguage: targetLanguage,
+        TargetLanguage: targetLang, // Use the extracted targetLang
         combination: `${sourceCategory} + ${targetCategory}`,
         price: price,
       };
-    });
+    }).filter(Boolean); // Filter out null values in case of invalid combinations
+
+    console.log("🚀 ~ LanguagesCombination ~ LanguagesCombination:", LanguagesCombination)
+    // setSelectedTargetLanguages(LanguagesCombination)
     // ore succinctly
     const targetLanguagesPrice = LanguagesCombination?.reduce(
       (acc, curr) => wordCount ? acc + curr.price * wordCount : acc,
@@ -214,8 +246,8 @@ const Translation = () => {
       !selectedSourceLanguages ||
       // !choosePlan?._id ||
       !selectedTopic ||
-      orderSummary?.file?.length < 1 ||
-      !orderSummary?.file
+      orderSummary?.file?.length < 1
+      // !orderSummary?.file
 
     ) {
       Swal.fire({
@@ -287,9 +319,9 @@ const Translation = () => {
                   onClick={() => handleModalOpen(field.id)}
                   className="p-2 xl:p-3 text-xs 2xl:text-base 4xl:text-sm bg-[#F3F6F9] text-[#3F4254] rounded-md w-full text-left focus:outline-none"
                 >
-                  {selectedTargetLanguages.length > 0
-                    ? selectedTargetLanguages
-                      .map((selected) => selected)
+                  {orderSummary?.TargetLanguage?.length > 0
+                    ? orderSummary?.TargetLanguage
+                      .map((selected) => selected?.TargetLanguage)
                       .join(", ")
                     : "Select Target Languages"}
                 </button>
@@ -460,7 +492,7 @@ const Translation = () => {
             selectService={selectService}
             setSelectService={setSelectService}
           />
-        </div> 
+        </div>
 
         <hr className="my-12 2xl:my-16" />
 
