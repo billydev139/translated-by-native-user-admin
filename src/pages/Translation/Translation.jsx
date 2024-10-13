@@ -240,7 +240,7 @@ const Translation = () => {
 
     // show swal for empty fields
     if (
-      !selectedTargetId ||
+      selectedTargetLanguages.length < 1 ||
       !selectedSourceLanguages ||
       // !choosePlan?._id ||
       !selectedTopic ||
