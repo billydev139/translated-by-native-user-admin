@@ -115,7 +115,7 @@ const Dashboard = () => {
   </div>
 </div>
 <div className='grid grid-cols-[2fr_1fr] mt-6'>   
-<div className='bg-white shadow-md mt-6  px-4 py-4'>
+{/* <div className='bg-white shadow-md mt-6  px-4 py-4'>
 <h1 className='font-bold font-bold flex px-6 py-6 text-[#464e5f] text-[20px]  justify-start'>Video tutorials on how to use the platform
 </h1>
 <div className="video-container">
@@ -126,7 +126,7 @@ const Dashboard = () => {
             controls
         />
     </div>
-  </div>
+  </div> */}
   {/* <div className="bg-[#add0d4] shadow-md mt-6 px-4 py-4 flex flex-col justify-between relative min-h-[200px]">
   <div className="flex flex-col items-start">
     <span className="text-white text-[28px] font-bold">Place a new order</span>
