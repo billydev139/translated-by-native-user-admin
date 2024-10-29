@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IoIosSearch } from "react-icons/io";
 
 export default function LanguageSelector({
@@ -7,6 +8,7 @@ export default function LanguageSelector({
   setIsModalOpen,
   categories,
 }) {
+  const { t } = useTranslation();
   const [selectedLanguages, setSelectedLanguages] = useState(
     initialSelection.map((language) => language?.TargetLanguage)
   
@@ -40,7 +42,7 @@ export default function LanguageSelector({
   return (
     <div className="p-4 min-h-60">
       <div className="text-base text-gray-950">
-        Add Target Languages
+        {t("Add Target Languages")}
       </div>
       <div className="w-full p-2 mb-4 mt-4 border border-terchary flex justify-center items-center gap-3 rounded">
         <IoIosSearch className="text-terchary text-xl font-extrabold" />
@@ -108,13 +110,13 @@ export default function LanguageSelector({
           onClick={() => setIsModalOpen(false)}
           className="mt-4 bg-lightgray text-black text-[14px] font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
         >
-          Close
+          {t("Close")}
         </button>
         <button
           onClick={handleSelection}
           className="mt-4 bg-[#FD8C04] text-white text-[14px] font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
         >
-          Confirm Selection
+          {t("Confirm Selection")}
         </button>
       </div>
     </div>

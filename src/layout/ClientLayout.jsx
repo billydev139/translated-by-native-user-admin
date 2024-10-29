@@ -1,7 +1,4 @@
 // src/app/layout/Layout.js
-
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import CustomStepper from "../components/common/custom-stepper/CustomStepper";
@@ -10,18 +7,11 @@ import OrderSummaryComponent from "../components/common/order-summary/OrderSumma
 import OrderSummaryMobile from "../components/common/order-summary-mobile/OrderSummaryMobile";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2"; 
-
-const steps = [
-  { id: 1, title: "Project Information", href: "/", field: "step_1" },
-  { id: 2, title: "Billing Information", href: "/billing-information", field: "step_2" },
-  { id: 3, title: "Payment", href: "/payment", field: "step_3" },
-  // You can have more steps here...
-  // { id: 4, title: "Review", href: "/review", field: "step_4" },
-  // ...
-];
+import { useTranslation } from "react-i18next";
 
 const ClientLayout = ({ children }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { pathname } = useLocation(); // Destructure pathname
   const stepState = useSelector((state) => state?.order?.orderSummary?.steps); // Assuming this holds the step completion status
   const [currentStep, setCurrentStep] = useState(1);
@@ -67,8 +57,8 @@ const ClientLayout = ({ children }) => {
           // Show alert and redirect only once
           Swal.fire({
             icon: "warning",
-            title: "Incomplete Step",
-            text: `Please complete ${steps[i].title} before proceeding to ${steps[currentStep - 1].title}.`,
+            title: t("Incomplete Step"),
+            text: `${t("Please complete")} ${steps[i].title} ${t("before proceeding to")} ${steps[currentStep - 1].title}.`,
           }).then(() => {
             navigate(steps[i].href); // Redirect back to the incomplete step
           });
@@ -83,7 +73,13 @@ const ClientLayout = ({ children }) => {
       }
     }
   }, [currentStep, stepState, navigate]);
-
+  const steps = [
+    { id: 1, title: t("Project Information"), href: "/", field: "step_1" },
+    { id: 2, title: t("Billing Information"), href: "/billing-information", field: "step_2" },
+    { id: 3, title: t("Payment"), href: "/payment", field: "step_3" },
+    // Additional steps with translations
+  ];
+  
   return (
     <div className="mx-auto my-auto">
       <div className="flex flex-col gap-4">

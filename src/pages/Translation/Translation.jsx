@@ -14,15 +14,17 @@ import { getTopics } from "../../redux/feature/topic/topic.service";
 import { createOrder } from "../../redux/feature/order/order.service";
 import Swal from "sweetalert2";
 import { setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
-
+import "../../Language"; // Ensure this import is at the top of the file
 import './index.css'
 import { useNavigate } from "react-router-dom";
 import RateSelector from "../../components/RateSelector/RateSelector";
 import ExtraServices from "../../components/extra-services/ExtraServices";
 import Upload from "../../components/upload/Upload";
 import { languagesData } from "../../utils/Languages";
+import { useTranslation } from "react-i18next";
 
 const Translation = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const orderCreateloader = useSelector((state) => state.loading[createOrder.typePrefix])
@@ -54,22 +56,23 @@ const Translation = () => {
     {
       id: "SourceLanguage",
       type: "select",
-      label: "Source Language",
-      placeholder: "Choose source",
+      label: t("Source Language"),
+      placeholder: t("Choose source"),
       options: Languages,
     },
     {
       id: "target-language",
-      label: "Target Languages",
+      label: t("Target Languages"),
       options: targetLanguage,
     },
     {
       id: "topic",
       type: "select",
-      label: "Topic",
-      placeholder: "Choose an option",
+      label: t("Topic"),
+      placeholder: t("Choose an option"),
       options: topics,
     },
+    
   ];
 
   const handleModalOpen = (fieldId) => {
@@ -251,7 +254,7 @@ const Translation = () => {
     ) {
       Swal.fire({
         title: "Error",
-        text: "Please fill out all required fields",
+        text: t("Please fill out all required fields"),
         icon: "error",
       });
       return;
@@ -301,7 +304,7 @@ const Translation = () => {
     <Layout>
       <div className="py-2">
         <h1 className="text-textgray text-base 2xl:text-xl mb-8 font-semibold">
-          Translation service
+          {t("Translation service")}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 2xl:mt-8 mb-6">
           {translationServices.map((field) => (
@@ -322,7 +325,7 @@ const Translation = () => {
                     ? orderSummary?.TargetLanguage
                       .map((selected) => selected?.TargetLanguage)
                       .join(", ")
-                    : "Select Target Languages"}
+                    : t("Select Target Languages")}
                 </button>
               ) : field.type === "select" && field.id === "target-language" ? (
                 <div className="relative inline-block w-full">
@@ -485,7 +488,7 @@ const Translation = () => {
 */}
         <div className="mt-14">
           <h1 className="text-base 2xl:text-[20px] font-semibold text-textgray pl-3 mb-8">
-            Select extra services <span className="text-[#B5B5C3] text-xs">(optional)</span>
+            {t("Select extra services")} <span className="text-[#B5B5C3] text-xs">({t("optional")})</span>
           </h1>
           <ExtraServices
             selectService={selectService}
@@ -512,7 +515,7 @@ const Translation = () => {
               onClick={handleSubmit}
               className="bg-[#FD8C04] text-white text-xs font-semibold px-5 py-3 xl:px-6 2xl:px-8 2xl:text-sm rounded-md hover:bg-[#e69500]"
             >
-              Continue
+              {t("Continue")}
             </button>
           </div>
         </div>

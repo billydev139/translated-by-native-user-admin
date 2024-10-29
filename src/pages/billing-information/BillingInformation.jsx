@@ -14,9 +14,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMailOutline } from "react-icons/io5";
 import CountrySelect from "../../utils/CountrySelect";
 import {registerSchema} from "../../schema/user.schema";
+import { useTranslation } from "react-i18next";
 
 const BillingInformation = () => {
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -53,143 +54,143 @@ const BillingInformation = () => {
     {
       id: "email",
       type: "email",
-      label: "Email",
-      placeholder: "Email",
+      label: t("Email"),
+      placeholder: t("Email"),
     },
     {
       id: "password",
       type: "password",
-      label: "Password",
-      placeholder: "Password",
+      label: t("Password"),
+      placeholder: t("Password"),
     },
     {
-      id: "repeat_password", // Change to match the schema field name
+      id: "repeat_password",
       type: "password",
-      label: "Repeat password",
-      placeholder: "Repeat password",
+      label: t("Repeat password"),
+      placeholder: t("Repeat password"),
     },
   ];
-
+  
   const billingDetails = [
     {
       id: "name",
       type: "text",
-      label: "Name",
-      placeholder: "Name",
+      label: t("Name"),
+      placeholder: t("Name"),
     },
     {
       id: "surname",
       type: "text",
-      label: "Surname",
-      placeholder: "Surname",
+      label: t("Surname"),
+      placeholder: t("Surname"),
     },
     {
-      id: "phone", // Change to a camelCase name
+      id: "phone",
       type: "text",
-      label: "Phone",
-      placeholder: "Enter Phone Number",
+      label: t("Phone"),
+      placeholder: t("Enter Phone Number"),
     },
   ];
-
+  
   const companyDetails = [
     {
       id: "companyName",
       type: "text",
-      label: "Company Name",
-      placeholder: "Company Name",
+      label: t("Company Name"),
+      placeholder: t("Company Name"),
     },
     {
       id: "address",
       type: "text",
-      label: "Company Address",
-      placeholder: "Company Address",
+      label: t("Company Address"),
+      placeholder: t("Company Address"),
     },
     {
       id: "VAT",
       type: "text",
-      label: "VAT",
-      placeholder: "VAT",
+      label: t("VAT"),
+      placeholder: t("VAT"),
     },
     {
       id: "country",
       type: "select",
-      label: "Country",
-      options: []
+      label: t("Country"),
+      options: [],
     },
     {
       id: "municipality",
       type: "text",
-      label: "Municipality",
-      placeholder: "Municipality",
+      label: t("Municipality"),
+      placeholder: t("Municipality"),
     },
     {
       id: "postcode",
       type: "text",
-      label: "Postcode",
-      placeholder: "Postcode",
+      label: t("Postcode"),
+      placeholder: t("Postcode"),
     },
   ];
-
+  
   const individualDetails = [
     {
       id: "individualId",
       type: "text",
-      label: "Individual ID",
-      placeholder: "Individual ID",
+      label: t("Individual ID"),
+      placeholder: t("Individual ID"),
     },
     {
       id: "country",
       type: "select",
-      label: "Country",
-      options: [
-      ],
+      label: t("Country"),
+      options: [],
     },
     {
       id: "address",
       type: "text",
-      label: "Address",
-      placeholder: "Address",
+      label: t("Address"),
+      placeholder: t("Address"),
     },
     {
       id: "municipality",
       type: "text",
-      label: "Municipality",
-      placeholder: "Municipality",
+      label: t("Municipality"),
+      placeholder: t("Municipality"),
     },
     {
       id: "postcode",
       type: "text",
-      label: "Postcode",
-      placeholder: "Postcode",
+      label: t("Postcode"),
+      placeholder: t("Postcode"),
     },
   ];
-
+  
   const selfEmployedDetails = [
     {
       id: "address",
       type: "text",
-      label: "Address",
-      placeholder: "Address",
+      label: t("Address"),
+      placeholder: t("Address"),
     },
     {
       id: "municipality",
       type: "text",
-      label: "Municipality",
-      placeholder: "Municipality",
+      label: t("Municipality"),
+      placeholder: t("Municipality"),
     },
     {
       id: "postcode",
       type: "text",
-      label: "Postcode",
-      placeholder: "Postcode",
+      label: t("Postcode"),
+      placeholder: t("Postcode"),
     },
     {
       id: "country",
       type: "select",
-      label: "Country",
-      options: []
+      label: t("Country"),
+      options: [],
     },
   ];
+  
 
   const [userType, setUserType] = useState("INDIVIDUAL");
 
@@ -460,7 +461,7 @@ const BillingInformation = () => {
 
           <div className="mt-10">
             <h2 className="text-base xl:text-lg 2xl:text-xl text-[#464E5F] font-semibold">
-              Billing details
+              {t("Billing details")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
               {billingDetails.map((field) => (
@@ -506,7 +507,7 @@ const BillingInformation = () => {
                   checked={userType === "COMPANY"}
                   onChange={() => setUserType("COMPANY")}
                 />
-                <p> Im company </p>
+                <p> {t("I'm a company")} </p>
               </div>
               <div className="flex items-center mr-4 text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
                 <input
@@ -517,7 +518,7 @@ const BillingInformation = () => {
                   checked={userType === "INDIVIDUAL"}
                   onChange={() => setUserType("INDIVIDUAL")}
                 />
-                <p> Im individual </p>
+                <p> {t("I'm an individual")} </p>
               </div>
               <div className="flex items-center text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
                 <input
@@ -528,7 +529,7 @@ const BillingInformation = () => {
                   checked={userType === "SELF_EMPLOYED"}
                   onChange={() => setUserType("SELF_EMPLOYED")}
                 />
-                <p> Im self-employed </p>
+                <p> {t("I'm self-employed")} </p>
               </div>
             </div>
 
@@ -545,7 +546,7 @@ const BillingInformation = () => {
                     <div className="relative inline-block w-full">
                       <CountrySelect
                         label="Country"
-                        placeholder="Select a country"
+                        placeholder={t("Select Country")}
                         onChange={handleCountryChange} // Pass the change handler
                         value={selectedCountry ? selectedCountry.value : null} // Pass the selected country value
                       />
@@ -619,7 +620,7 @@ const BillingInformation = () => {
               // disabled={authRegisterLoading}
               className="px-5 xl:px-6 2xl:px-8 py-3 text-white text-xs font-semibold 2xl:text-sm bg-[#FD8C04] rounded-md hover:bg-[#e69500] focus:outline-none"
             >
-              {authRegisterLoading ? "Please wait..." : "Continue"}
+              {authRegisterLoading ? t("Please wait...") : t("Continue")} 
             </button>
 
 

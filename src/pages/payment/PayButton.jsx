@@ -4,8 +4,11 @@ import { config } from "../../utils/EndPoints";
 import Swal from "sweetalert2";
 import api from "../../utils/Api";
 import { useState } from "react";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const PayButton = ({ cartItems, paymentMethod, termsAccepted }) => {
+  const { t } = useTranslation();
 const orderSummary = useSelector(state => state?.order?.orderSummary);
 const User = useSelector((state) => state?.auth?.user);
 
@@ -56,7 +59,7 @@ cartItems = {
     if (!termsAccepted) {
       Swal.fire({
         title: "Error",
-        text: "You must accept the terms and conditions before proceeding!",
+        text: t("You must accept the terms and conditions before proceeding!"),
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -84,7 +87,8 @@ cartItems = {
         onClick={handleCheckout} // Use the updated checkout handler
         className="bg-[#FD8C04] text-white text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base font-semibold px-5 py-2 rounded-md hover:bg-[#e69500]"
       >
-        {isLoading ? "Processing..." : "Checkout"}
+        {isLoading ? t("Processing...") : t("Checkout")}
+        
       </button>
     </>
   );

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { PROOFREADING, SEOOPTIMISATION, URGENTORDER } from "../../assets/images";
 import { setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
 import { getServices } from "../../redux/feature/services/service.service";
@@ -5,14 +6,8 @@ import { getServices } from "../../redux/feature/services/service.service";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const icons_Arr = [
-  {'id': '1', 'icon': PROOFREADING, 'name': 'PROOF READING'}, 
-  {'id': '2', 'icon': URGENTORDER, 'name': 'URGENT ORDER'}, 
-  {'id': '3', 'icon': SEOOPTIMISATION, 'name': 'SEO OPTIMISATION'}
-];
-
 const ExtraServices = ({ selectService, setSelectService }) => {
-  
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const packages = useSelector((state) => state?.service?.services) || [];
@@ -21,6 +16,12 @@ const ExtraServices = ({ selectService, setSelectService }) => {
   useEffect(() => {
     dispatch(getServices());
   }, [dispatch]);
+// Define the icons array
+const icons_Arr = [
+  { id: '1', icon: PROOFREADING, name: t('PROOF READING') }, 
+  { id: '2', icon: URGENTORDER, name: t('URGENT ORDER') }, 
+  { id: '3', icon: SEOOPTIMISATION, name: t('SEO OPTIMISATION') }
+];
 
   const handleSelectService = (pkg) => {
     // Check if the service is already selected
@@ -98,7 +99,7 @@ const ExtraServices = ({ selectService, setSelectService }) => {
                     pkg.popular ? "text-sm text-[#464E5F]" : "text-sm text-[#464E5F]"
                   }`}
                 >
-                  {pkg.servicesName}
+                  {t(pkg.servicesName)}
                 </h2>
              </div>
 

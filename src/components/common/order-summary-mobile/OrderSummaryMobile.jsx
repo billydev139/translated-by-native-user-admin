@@ -7,8 +7,10 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { MdOutlineTopic } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
+import { useTranslation } from "react-i18next";
 
 const OrderSummaryMobile = () => {
+  const { t } = useTranslation();
   const summaryData = useSelector((state) => state?.order?.orderSummary);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +40,7 @@ const OrderSummaryMobile = () => {
         className="w-full flex justify-between items-center p-4 bg-gray-100 rounded-t-md"
       >
         <span className="font-bold">
-          {isOpen ? "Hide Order Summary" : "Show Order Summary"}
+          {isOpen ? t("Hide Order Summary") : t("Show Order Summary")}
         </span>
         {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </button>
@@ -50,7 +52,7 @@ const OrderSummaryMobile = () => {
       >
         <div className="p-4 bg-lightgray">
           <h1 className="text-textgray text-[16px] mb-8 font-bold">
-            ORDER SUMMARY
+            {t("ORDER SUMMARY")}
           </h1>
           <div className="border-b border-dotted mb-4 border-primary"></div>
           <div>
@@ -60,7 +62,7 @@ const OrderSummaryMobile = () => {
                 <div className="text-primary opacity-65 text-[22px]">
                   <FaLanguage />
                 </div>
-                <p className="text-textgray opacity-75">Service Type</p>
+                <p className="text-textgray opacity-75">{t("Service Type")}</p>
               </div>
               <p className="text-[14px] text-primary">
                 {summaryData?.serviceType}
@@ -97,7 +99,7 @@ const OrderSummaryMobile = () => {
                       From <strong>{summaryData?.SourceLanguage}</strong> to:
                     </p>
                   ) : (
-                    <p className="text-gray text-sm opacity-75">Languages</p>
+                    <p className="text-gray text-sm opacity-75">{t("Languages")}</p>
                   )}
                   {summaryData?.TargetLanguage?.length > 0 &&
                     summaryData?.SourceLanguage &&
@@ -114,8 +116,8 @@ const OrderSummaryMobile = () => {
                 summaryData?.SourceLanguage
                   ? `${summaryData?.TargetLanguage?.length} ${
                       summaryData?.TargetLanguage.length > 1
-                        ? "Languages"
-                        : "Language"
+                        ? t("Languages")
+                        : t("Language")
                     }`
                   : "-"}
               </p>
@@ -147,7 +149,7 @@ const OrderSummaryMobile = () => {
                 <div className="text-primary opacity-65 text-[22px]">
                   <MdOutlineTopic />
                 </div>
-                <p className="text-textgray opacity-75">Topic</p>
+                <p className="text-textgray opacity-75">{t("Topic")}</p>
               </div>
               <p className="text-[14px] text-primary">
                 {summaryData?.topic ? summaryData?.topic : "-"}
@@ -161,7 +163,7 @@ const OrderSummaryMobile = () => {
                 <div className="text-primary opacity-65 text-[22px]">
                   <FaRegFileWord />
                 </div>
-                <p className="text-textgray opacity-75">Words count</p>
+                <p className="text-textgray opacity-75">{t("Words count")}</p>
               </div>
               <p className="text-[14px] text-primary">
                 {summaryData?.WordCount ? summaryData?.WordCount : "-"}
@@ -175,7 +177,7 @@ const OrderSummaryMobile = () => {
                 <div className="text-primary opacity-65 text-[22px]">
                   <CiStar />
                 </div>
-                <p className="text-textgray opacity-75">Extras</p>
+                <p className="text-textgray opacity-75">{t("Extras")}</p>
               </div>
               <p className="text-[14px] text-primary">
                 <div>
@@ -196,7 +198,7 @@ const OrderSummaryMobile = () => {
             <div>
               <div className="flex justify-between mb-8 mt-2 items-center">
                 <div>
-                  <p className="text-textgray opacity-75">Subtotal</p>
+                  <p className="text-textgray opacity-75">{t("Subtotal")}</p>
                 </div>
                 <div>
                   <p className="text-[16px] text-textgray">
@@ -206,7 +208,7 @@ const OrderSummaryMobile = () => {
               </div>
               <div className="flex justify-between mb-8 mt-2 items-center">
                 <div>
-                  <p className="text-textgray">VAT</p>
+                  <p className="text-textgray">{t("VAT")}</p>
                 </div>
                 <div>
                   <p className="text-[16px] text-textgray">-</p>
@@ -214,7 +216,7 @@ const OrderSummaryMobile = () => {
               </div>
               <div className="flex justify-between mb-8 mt-2 items-center">
                 <div>
-                  <p className="text-textgray font-bold">ORDER TOTAL</p>
+                  <p className="text-textgray font-bold">{t("ORDER TOTAL")}</p>
                 </div>
                 <div>
                   <p className="text-[16px] font-bold text-textgray">

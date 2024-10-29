@@ -4,8 +4,10 @@ import Layout from "../../layout/ClientLayout";
 import { useDispatch, useSelector } from "react-redux";
 import PayButton from "./PayButton";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Payment = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state?.order?.CartData);
@@ -41,7 +43,7 @@ const Payment = () => {
       <Layout>
         <div className="px-8 py-4">
           <h2 className="text-base xl:text-lg 2xl:text-xl 3xl:text-2xl text-[#464E5F] font-semibold ">
-            Select payment method
+            {t("Select payment method")}
           </h2>
 
           {/* Stripe Payment Option */}
@@ -58,8 +60,7 @@ const Payment = () => {
                 Stripe
               </p>
               <p className="text-[10px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-[#464E5F] font-regular">
-                When you confirm, you will be redirected to the payment gateway
-                to make the payment by bank card and finalize the order.
+                {t("When you confirm, you will be redirected to the payment gateway to make the payment by bank card and finalize the order.")}
               </p>
             </div>
           </div>
@@ -144,9 +145,9 @@ const Payment = () => {
                 htmlFor="terms"
                 className="ml-2 text-xs xl:text-sm 2xl:text-base text-[#464E5F]"
               >
-                I have read and accept the{" "}
+                {t("I have read and accept the")}
                 <a href="#" className="text-[#2E8F96] hover:underline">
-                  Terms and conditions of sale
+                {t("Terms and conditions of sale")}
                 </a>
               </label>
             </div>
@@ -167,7 +168,7 @@ const Payment = () => {
                 className="cart-login"
                 onClick={() => navigate("/auth/login")}
               >
-                Login to Check out
+                {t("Login to Check out")}
               </button>
             )}
           </div>

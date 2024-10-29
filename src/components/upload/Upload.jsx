@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 export default function Upload({wordCount, setWordCount}) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const orderSummary =  useSelector((state) => state?.order?.orderSummary) || [];
   const orderFiles = orderSummary?.file || [];
@@ -121,15 +123,14 @@ export default function Upload({wordCount, setWordCount}) {
                   className="hidden"
                 />
                 {isDragging ? (
-                  <p className="text-blue-500">Drop the files here ...</p>
+                  <p className="text-blue-500">{t("Drop the files here ...")}</p>
                 ) : (
                   <>
                     <p className="text-textgray text-xs 2xl:text-sm font-semibold">
-                      Drag and drop files here or click to upload
+                      {t("Drag and drop files here or click to upload")}
                     </p>
                     <p className="mt-1 text-start text-[#7E8299] text-[10px] 2xl:text-xs">
-                      The following file types are permitted: .doc, .docx, .pdf,
-                      .txt, .xls, .xlsx, .html, .pptx, .ods, .odt, .odp
+                      {t("The following file types are permitted: .doc, .docx, .pdf, .txt, .xls, .xlsx, .html, .pptx, .ods, .odt, .odp")}
                     </p>
                   </>
                 )}
@@ -197,7 +198,7 @@ export default function Upload({wordCount, setWordCount}) {
 
         {/* Total number of words to translate section */}
           <div className="text-[#464E5F] text-xs 2xl:text-sm font-normal mt-3">
-            Total number of words to translate: {wordCount}
+            {t("Total number of words to translate")}: {wordCount}
           </div>
 
         {/* Notice Section */}
