@@ -64,6 +64,8 @@
   "Please complete": "请完成",
   "before proceeding to": "然后继续",
   "Drop the files here ...": "将文件拖到这里...",
+  "Already have an account?": "已经有一个账户？",
+  "Log in": "登录",
   "Drag and drop files here or click to upload": "拖放文件到这里或单击以上传",
   "The following file types are permitted: .doc, .docx, .pdf, .txt, .xls, .xlsx, .html, .pptx, .ods, .odt, .odp": "允许以下文件类型：.doc，.docx，.pdf，.txt，.xls，.xlsx，.html，.pptx，.ods，.odt，.odp",
   "Please fill out all required fields": "请填写所有必填字段",
