@@ -52,35 +52,35 @@
     ],
     rates: {
       // European Languages
-        'European + European': 0.17,
-        'European + Asian': 0.23,
-        'European + Nordic': 0.27,
-        'European + African': 0.25,
-        'European + Afro-Asian': 0.19,
-        // Asian Languages
-        'Asian + Asian': 0.23,
-        'Asian + Nordic': 0.39,
-        'Asian + African': 0.35,
-        'Asian + Afro-Asian': 0.38,
-        'Asian + European': 0.23,
-        // Nordic Languages
-        'Nordic + African': 0.45,
-        'Nordic + Afro-Asian': 0.39,
-        'Nordic + European': 0.27,
-        'Nordic + Asian': 0.39,
-        'Nordic + Nordic': 0.27,
-        // African Languages
-        'African + African': 0.25,
-        'African + Afro-Asian': 0.43,
-        'African + European': 0.25,
-        'African + Asian': 0.35,
-        'African + Nordic': 0.45,
-        // Afro-Asian Languages
-        'Afro-Asian + Afro-Asian': 0.39,
-        'Afro-Asian + European': 0.19,
-        'Afro-Asian + Asian': 0.38,
-        'Afro-Asian + Nordic': 0.39,
-        'Afro-Asian + African': 0.43,
+      'European + European': 0.12,
+      'European + Asian': 0.18,
+      'European + Nordic': 0.22,
+      'European + African': 0.20,
+      'European + Afro-Asian': 0.14,
+      // Asian Languages
+      'Asian + Asian': 0.18,
+      'Asian + Nordic': 0.34,
+      'Asian + African': 0.30,
+      'Asian + Afro-Asian': 0.33,
+      'Asian + European': 0.18,
+      // Nordic Languages
+      'Nordic + African': 0.40,
+      'Nordic + Afro-Asian': 0.34,
+      'Nordic + European': 0.22,
+      'Nordic + Asian': 0.34,
+      'Nordic + Nordic': 0.22,
+      // African Languages
+      'African + African': 0.20,
+      'African + Afro-Asian': 0.38,
+      'African + European': 0.20,
+      'African + Asian': 0.30,
+      'African + Nordic': 0.40,
+      // Afro-Asian Languages
+      'Afro-Asian + Afro-Asian': 0.34,
+      'Afro-Asian + European': 0.14,
+      'Afro-Asian + Asian': 0.33,
+      'Afro-Asian + Nordic': 0.34,
+      'Afro-Asian + African': 0.38  
       },
   };
   

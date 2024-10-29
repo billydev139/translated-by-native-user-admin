@@ -36,6 +36,13 @@ export const companySchema = billingSchema.concat(
   yup.object().shape({
     companyName: yup.string().required("Company Name is required"), 
     address: yup.string().required("Company Address is required"),
+    VAT: yup
+    .string()
+    .matches(
+      /^((AT)?U[0-9]{8}|(BE)?0[0-9]{9}|(BG)?[0-9]{9,10}|(CY)?[0-9]{8}L|(CZ)?[0-9]{8,10}|(DE)?[0-9]{9}|(DK)?[0-9]{8}|(EE)?[0-9]{9}|(EL|GR)?[0-9]{9}|(ES)?[A-Z0-9][0-9]{7}[A-Z0-9]|(FI)?[0-9]{8}|(FR)?[A-Z0-9]{2}[0-9]{9}|(HR)?[0-9]{11}|(HU)?[0-9]{8}|(IE)?[0-9]{7}[A-Z0-9]{1,2}|(IT)?[0-9]{11}|(LT)?([0-9]{9}|[0-9]{12})|(LU)?[0-9]{8}|(LV)?[0-9]{11}|(MT)?[0-9]{8}|(NL)?[0-9]{9}B[0-9]{2}|(PL)?[0-9]{10}|(PT)?[0-9]{9}|(RO)?[0-9]{2,10}|(SE)?[0-9]{12}|(SI)?[0-9]{8}|(SK)?[0-9]{10})$/,
+      "Enter a valid European VAT number"
+    )
+    .required("VAT is required"),
     postcode: yup
     .string()
     .matches(/^\d{5}(-\d{4})?$/, "Please enter a valid postcode")

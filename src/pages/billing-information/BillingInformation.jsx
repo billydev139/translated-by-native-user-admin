@@ -105,6 +105,12 @@ const BillingInformation = () => {
       placeholder: "Company Address",
     },
     {
+      id: "VAT",
+      type: "text",
+      label: "VAT",
+      placeholder: "VAT",
+    },
+    {
       id: "country",
       type: "select",
       label: "Country",
@@ -320,9 +326,6 @@ const BillingInformation = () => {
           password: orderData.password || "",
           repeat_password: orderData.repeat_password || "",
         };
-
-        console.log('Final Order Payload Data:', orderPayloadData);
-
         // Check accessToken status
         if (!accessToken) {
           console.log('No access token found, registering user...');
