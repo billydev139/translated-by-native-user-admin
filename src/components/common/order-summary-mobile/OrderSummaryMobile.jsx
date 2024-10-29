@@ -183,7 +183,7 @@ const OrderSummaryMobile = () => {
                 <div>
                   {summaryData?.extras?.label?.map((item, index) => (
                     <p key = {index} className="text-[14px] text-primary">
-                      {item?.servicesName}
+                      {t(item?.servicesName)}
                     </p>
                   ))}
                   <p className="text-[14px] text-primary">

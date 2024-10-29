@@ -133,7 +133,7 @@ const OrderSummaryComponent = () => {
             <div>
               {summaryData?.extras?.label?.map((item, index) => (
                 <p key={index} className="text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-base text-primary">
-                  {item?.servicesName}
+                  {t(item?.servicesName)}
                 </p>
               ))}
               <p className="text-[10px] xl:text-xs 2xl:text-sm 3xl:text-lg text-primary">

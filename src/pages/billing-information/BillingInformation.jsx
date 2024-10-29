@@ -164,41 +164,13 @@ const BillingInformation = () => {
     },
   ];
   
-  const selfEmployedDetails = [
-    {
-      id: "address",
-      type: "text",
-      label: t("Address"),
-      placeholder: t("Address"),
-    },
-    {
-      id: "municipality",
-      type: "text",
-      label: t("Municipality"),
-      placeholder: t("Municipality"),
-    },
-    {
-      id: "postcode",
-      type: "text",
-      label: t("Postcode"),
-      placeholder: t("Postcode"),
-    },
-    {
-      id: "country",
-      type: "select",
-      label: t("Country"),
-      options: [],
-    },
-  ];
-  
-
   const [userType, setUserType] = useState("INDIVIDUAL");
 
   // Determine which array to display based on selected type
   const whatAreYouDetails =
     userType === "COMPANY" ? companyDetails
     : userType === "INDIVIDUAL" ? individualDetails
-    : selfEmployedDetails;
+    : null;
 
   // Function to get the schema based on selected type
   const getValidationSchema = (userType) => {
@@ -520,7 +492,7 @@ const BillingInformation = () => {
                 />
                 <p> {t("I'm an individual")} </p>
               </div>
-              <div className="flex items-center text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
+              {/* <div className="flex items-center text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
                 <input
                   type="radio"
                   name="type"
@@ -530,7 +502,7 @@ const BillingInformation = () => {
                   onChange={() => setUserType("SELF_EMPLOYED")}
                 />
                 <p> {t("I'm self-employed")} </p>
-              </div>
+              </div> */}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-9 mb-6">
