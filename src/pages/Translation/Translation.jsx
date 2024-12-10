@@ -410,7 +410,7 @@ const Translation = () => {
                     </option>
                     {field.options.map((option, index) => (
                       <option key={index} value={option}>
-                        {option}
+                        {t(option)}
                       </option>
                     ))}
                   </select>

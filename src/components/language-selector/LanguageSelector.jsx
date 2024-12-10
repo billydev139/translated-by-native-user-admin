@@ -63,7 +63,7 @@ export default function LanguageSelector({
           <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 md:grid-cols-3 gap-4">
             {filteredLanguages.map((category) => (
               <div key={category.name}>
-                <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
+                <h3 className="font-semibold text-lg mb-2">{t(category.name)}</h3>
                 {category.languages.map((lang) => (
                   <div
                     key={lang} // Use lang directly as key
@@ -74,7 +74,7 @@ export default function LanguageSelector({
                     }`}
                     onClick={() => toggleLanguage(lang)}
                   >
-                    <span>{lang}</span>
+                    <span>{t(lang)}</span>
                     {selectedLanguages.includes(lang) ? (
                       <svg
                         className="w-6 h-6 text-white transition-colors duration-200"
