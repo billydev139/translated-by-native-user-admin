@@ -22,6 +22,7 @@ import ExtraServices from "../../components/extra-services/ExtraServices";
 import Upload from "../../components/upload/Upload";
 import { languagesData } from "../../utils/Languages";
 import { useTranslation } from "react-i18next";
+import SearchSelect from "../../utils/SearchSelect";
 
 const Translation = () => {
   const { t } = useTranslation();
@@ -360,6 +361,17 @@ const Translation = () => {
                       ></path>
                     </svg>
                   </div>
+                </div>
+              ) : 
+              field.type === "select" && field.id === "SourceLanguage" ? (
+                <div className="relative inline-block w-full">
+                  <SearchSelect
+                    type="source"  // Or set the type to "source" if you want source options
+                    placeholder={field.placeholder}
+                    onChange={(selectedValue) => setSelectedSourceLanguages(selectedValue.value)}
+                    value={selectedSourceLanguages}
+                    data = {Languages}
+                  />
                 </div>
               ) : field.type === "select" && field.id === "topic" ? (
                 <div className="relative inline-block w-full">

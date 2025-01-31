@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import { setCartData, setCurrentCreateOrder } from "../../redux/feature/order/order.slice";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMailOutline } from "react-icons/io5";
-import CountrySelect from "../../utils/CountrySelect";
+import SearchSelect from "../../utils/SearchSelect";
 import {registerSchema} from "../../schema/user.schema";
 import { useTranslation } from "react-i18next";
 
@@ -516,7 +516,7 @@ const BillingInformation = () => {
                   </label>
                   {(field.type === "select" && field.id === "country") ? (
                     <div className="relative inline-block w-full">
-                      <CountrySelect
+                      <SearchSelect
                         label="Country"
                         placeholder={t("Select Country")}
                         onChange={handleCountryChange} // Pass the change handler
