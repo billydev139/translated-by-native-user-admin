@@ -25,7 +25,7 @@ const SearchSelect = ({ type = "country", data = [], placeholder, onChange, valu
     } else if (type === "topic") {
       return data.map((item) => ({
         label: item.topic,  // Use the 'topic' field for the label
-        value: item._id,    // Use the '_id' field for the value
+        value: item.topic,    // Use the '_id' field for the value
       }));
     } else {
       return data.map((item) => ({
@@ -93,7 +93,7 @@ const SearchSelect = ({ type = "country", data = [], placeholder, onChange, valu
         options={options}
         placeholder={placeholder}
         onChange={onChange}
-        value={selectedValue} // Pass the entire selectedValue object, not just the label
+        value={ selectedValue}
         isMulti={isMulti}
       />
     </div>

@@ -103,6 +103,7 @@ const Translation = () => {
     setIsModalOpen(false);
   };
 
+  console.log(selectedSourceLanguages)
 
   useEffect(() => {
     dispatch(getLanguages())
@@ -110,7 +111,6 @@ const Translation = () => {
       .then(() => dispatch(getTargetLanguages()))
       .then(() => dispatch(getTopics()));
   }, [dispatch]);
-
   // Define a summary data object based on your form inputs
   useEffect(() => {
     // Calculate rate charges and extra services
@@ -362,8 +362,17 @@ const Translation = () => {
                     </svg>
                   </div>
                 </div>
-              ) : 
-              field.type === "select" && field.id === "SourceLanguage" ? (
+              ) : field.type === "select" && field.id === "topic" ? (
+                <div className="relative inline-block w-full">
+                  <SearchSelect
+                    type="topic"  // Or set the type to "source" if you want source options
+                    placeholder={field.placeholder}
+                    onChange={(selectedValue) => setSelectedTopic(selectedValue.value)}
+                    value={selectedTopic}
+                    data = {topics}
+                  />
+                </div>
+              ) : field.type === "select" && field.id === "SourceLanguage" ? (
                 <div className="relative inline-block w-full">
                   <SearchSelect
                     type="source"  // Or set the type to "source" if you want source options
@@ -373,42 +382,7 @@ const Translation = () => {
                     data = {Languages}
                   />
                 </div>
-              ) : field.type === "select" && field.id === "topic" ? (
-                <div className="relative inline-block w-full">
-                  <select
-                    onChange={(e) => setSelectedTopic(e.target.value)}
-                    id={field.id}
-                    value={orderSummary?.topic}
-                    className="custom-select p-3 pr-8 bg-[#F3F6F9] text-[#3F4254] rounded-md w-full focus:outline-none appearance-none"
-                    placeholder={field.placeholder}
-                  >
-                    <option value="" disabled > {/* selected */}
-                      {field.placeholder || "Select an option"}
-                    </option>
-                    {field.options.map((option, index) => (
-                      <option key={index} value={option?.topic}>
-                        {option?.topic}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                    <svg
-                      className="w-4 h-4 text-[#B5B5C3]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-              ) : field.type === "select" ? (
+              ): field.type === "select" ? (
                 <div className="relative inline-block w-full">
                   <select
                     id={field.id}
