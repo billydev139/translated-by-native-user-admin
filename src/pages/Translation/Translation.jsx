@@ -103,8 +103,6 @@ const Translation = () => {
     setIsModalOpen(false);
   };
 
-  console.log(selectedSourceLanguages)
-
   useEffect(() => {
     dispatch(getLanguages())
       .unwrap()

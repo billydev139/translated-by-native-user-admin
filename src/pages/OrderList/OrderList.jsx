@@ -32,7 +32,6 @@ const OrderList = () => {
   
   const totalPages = useSelector((state) => state?.order?.myOrder?.orders?.pages);
   const totalRecords = useSelector((state) => state?.order?.myOrder?.orders?.total);
-  console.log("totalPages: ", totalPages + "\ntotalRecords: ", totalRecords);
 
   //Table Columns
   const columns = [
