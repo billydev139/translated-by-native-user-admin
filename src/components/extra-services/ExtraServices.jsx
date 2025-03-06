@@ -104,7 +104,7 @@ const icons_Arr = [
              </div>
 
               <p className="text-end text-xs 2xl:text-sm font-bold text-[#2E8F96]">
-                € {pkg.price}<span className="text-xs text-[#ADD0D4] font-normal"> {"/ per word"} </span>
+                € {pkg.price}<span className="text-xs text-[#ADD0D4] font-normal"> {t("/ per word")} </span>
                 {/* <span className="text-sm text-[#ADD0D4] ml-1">{pkg.unit}</span> */}
               </p>
             </div>

@@ -1,39 +1,35 @@
 import React from "react";
 import Select from "react-select";
 import { getNames } from "country-list";
-
-// Example source options
-const sourceOptions = [
-  { label: "Source 1", value: "source1" },
-  { label: "Source 2", value: "source2" },
-  { label: "Source 3", value: "source3" },
-];
+import { useTranslation } from "react-i18next";
 
 const SearchSelect = ({ type = "country", data = [], placeholder, onChange, value, isMulti = false }) => {
+  const { t } = useTranslation();
+  
   // Determine the options to use based on the type
   const options = React.useMemo(() => {
     if (type === "country") {
       return getNames().map((country) => ({
-        label: country,
+        label: t(country), // Translate country names
         value: country,
       }));
     } else if (type === "source") {
       return data.map((item) => ({
-        label: item,  // Use the item itself for the label
-        value: item,  // Use the item itself for the value
+        label: t(item), // Translate source items 
+        value: item,
       }));
     } else if (type === "topic") {
       return data.map((item) => ({
-        label: item.topic,  // Use the 'topic' field for the label
-        value: item.topic,    // Use the '_id' field for the value
+        label: t(item.topic), // Translate topic items
+        value: item.topic,
       }));
     } else {
       return data.map((item) => ({
-        label: item,
+        label: t(item), // Translate other items
         value: item,
       }));
     }
-  }, [type, data]);
+  }, [type, data, t]); // Add t to dependencies
 
   // Custom styles for react-select
   const customStyles = {
@@ -91,9 +87,9 @@ const SearchSelect = ({ type = "country", data = [], placeholder, onChange, valu
       <Select
         styles={customStyles}
         options={options}
-        placeholder={placeholder}
+        placeholder={t(placeholder)} // Translate placeholder
         onChange={onChange}
-        value={ selectedValue}
+        value={selectedValue}
         isMulti={isMulti}
       />
     </div>

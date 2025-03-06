@@ -29,7 +29,7 @@ const OrderSummaryComponent = () => {
             </p>
           </div>
           <p className="text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-base text-primary">
-            {summaryData?.serviceType}
+            {t(summaryData?.serviceType)}
           </p>
         </div>
 
