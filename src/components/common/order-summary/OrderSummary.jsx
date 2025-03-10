@@ -44,7 +44,7 @@ const OrderSummaryComponent = () => {
             <div>
               {summaryData?.TargetLanguage?.length > 0 && summaryData?.SourceLanguage ? (
                 <p className="text-gray text-xs opacity-75 2xl:text-sm">
-                  {t("From")} <strong>{summaryData?.SourceLanguage}</strong> {t("to")}: 
+                  {t("From")} <strong>{t(summaryData?.SourceLanguage)}</strong> {t("to")}: 
                 </p>
               ) : (
                 <p className="text-textgray opacity-75 text-[10px] xl:text-xs 2xl:text-sm 3xl:text-base">
@@ -55,7 +55,7 @@ const OrderSummaryComponent = () => {
                 summaryData?.SourceLanguage &&
                 summaryData?.TargetLanguage?.map((language, index) => (
                   <div key={index} className="inline-block mt-0.5 bg-lightgreen text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-sm text-black px-2 py-1 rounded mr-1">
-                    <strong>{language?.TargetLanguage}</strong>{" "}
+                    <strong>{t(language?.TargetLanguage)}</strong>{" "}
                     <span>+ €{language?.price}/w</span>
                   </div>
                 ))}
@@ -98,7 +98,7 @@ const OrderSummaryComponent = () => {
             </p>
           </div>
           <p className="text-[8px] xl:text-[10px] 2xl:text-xs 3xl:text-base text-primary">
-            {summaryData?.topic ? summaryData?.topic : "-"}
+            {summaryData?.topic ? t(summaryData?.topic) : "-"}
           </p>
         </div>
         <div className="border-b border-dotted mt-2 lg:mt-1 xl:mt-2 border-primary"></div>

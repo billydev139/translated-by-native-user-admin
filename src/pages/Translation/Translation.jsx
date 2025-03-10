@@ -322,7 +322,7 @@ const Translation = () => {
                 >
                   {orderSummary?.TargetLanguage?.length > 0
                     ? orderSummary?.TargetLanguage
-                      .map((selected) => selected?.TargetLanguage)
+                      .map((selected) => t(selected?.TargetLanguage))
                       .join(", ")
                     : t("Select Target Languages")}
                 </button>
@@ -338,8 +338,8 @@ const Translation = () => {
                       {field.placeholder || "Select an option"}
                     </option>
                     {field.options.map((option, index) => (
-                      <option key={index} value={option} >
-                        {option}
+                      <option key={index} value={t(option)}>
+                        {t(option)}
                       </option>
                     ))}
                   </select>

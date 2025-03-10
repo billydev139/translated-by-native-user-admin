@@ -399,7 +399,7 @@ const BillingInformation = () => {
           {!accessToken &&
             <div className="mt-10">
               <h2 className="text-base xl:text-lg 2xl:text-xl text-[#464E5F] font-semibold">
-                User details
+                {t("User details")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                 {userDetails.map((field) => (
@@ -467,7 +467,7 @@ const BillingInformation = () => {
 
           <div className="mt-10">
             <h2 className="text-base xl:text-lg 2xl:text-xl text-[#464E5F] font-semibold mb-4">
-              What are You?
+              {t("What are You?")}
             </h2>
             <div className="flex items-center">
               <div className="flex items-center mr-4 text-[#464E5F] xl:text-xs 2xl:text-sm font-regular">
