@@ -9,6 +9,7 @@ import jaTranslation from './ja/translation.json';
 import zhTranslation from './zh/translation.json';
 import arTranslation from './ar/translation.json';
 import spTranslation from './sp/translation.json';
+import deTranslation from './de/translation.json';
 
 // Initialize i18next
 i18n
@@ -22,6 +23,7 @@ i18n
       ja: { translation: jaTranslation },
       zh: { translation: zhTranslation },
       ar: { translation: arTranslation },
+      de: { translation: deTranslation },
     },
     lng: 'it', // Default language
     fallbackLng: 'en', // Use English if the chosen language is not available

@@ -10,6 +10,7 @@ import itFlag from "../../assets/flags/it.png";
 import jaFlag from "../../assets/flags/ja.svg";
 import zhFlag from "../../assets/flags/zh.svg";
 import arFlag from "../../assets/flags/ar.svg";
+import deFlag from "../../assets/flags/de.jpg";
 
 const LanguageIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,7 @@ const LanguageIcon = () => {
     { value: "ja", name: "Japanese", flag: jaFlag },
     { value: "zh", name: "Chinese", flag: zhFlag },
     { value: "ar", name: "Arabic", flag: arFlag },
+    { value: "de", name: "German", flag: deFlag },
   ];
 
   return (
